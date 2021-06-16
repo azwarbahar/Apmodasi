@@ -1,340 +1,515 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_menu"
+    android:gravity="bottom"
+    sothree:umanoDragView="@+id/rv_sliding_up_akun"
+    sothree:umanoOverlay="true"
+    sothree:umanoPanelHeight="0dp"
+    sothree:umanoShadowHeight="0dp"
     tools:context=".ui.activity.DetailBayiActivity">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/cities_detail_appbar"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/cities_detail_collapsing_toolbar"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/cities_detail_appbar"
                 android:layout_width="match_parent"
-                android:layout_height="260dp"
+                android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleGravity="bottom"
-                app:expandedTitleMarginEnd="16dp"
-                app:expandedTitleMarginStart="16dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-                <LinearLayout
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/cities_detail_collapsing_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="260dp"
+                    android:fitsSystemWindows="true"
+                    app:contentScrim="?attr/colorPrimary"
+                    app:expandedTitleGravity="bottom"
+                    app:expandedTitleMarginEnd="16dp"
+                    app:expandedTitleMarginStart="16dp"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                    <ImageView
-                        android:id="@+id/img_foto"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@null"
-                        android:fitsSystemWindows="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/img_baby" />
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/img_foto"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@null"
+                            android:fitsSystemWindows="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/img_baby" />
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat"
-                    app:theme="@style/ToolbarTheme2"
-                    app:title="Detail Bayi"
-                    app:titleTextColor="@color/purple_200" />
+                    </LinearLayout>
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:layout_collapseMode="pin"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat"
+                        app:theme="@style/ToolbarTheme2"
+                        app:title="Detail Bayi"
+                        app:titleTextColor="@color/purple_200" />
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
 
-            <androidx.core.widget.NestedScrollView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <RelativeLayout
+
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
-                        android:id="@+id/rl_qr_code"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="25dp"
-                        android:background="@drawable/bg_stroke_radius_primary"
-                        android:elevation="8dp">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_marginVertical="10dp"
-                            android:src="@drawable/icon_qr_code" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginHorizontal="16dp"
-                            android:fontFamily="casual"
-                            android:text="QR Code"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cv1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/rl_qr_code"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="16dp"
-                        app:cardCornerRadius="10dp">
+                        android:layout_height="wrap_content">
 
                         <RelativeLayout
+                            android:id="@+id/rl_qr_code"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/tv_nama_bayi"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="20dp"
-                                android:fontFamily="casual"
-                                android:text="Nama Bayi"
-                                android:textColor="@color/black"
-                                android:textSize="16dp"
-                                android:textStyle="bold" />
-
-
-                            <TextView
-                                android:id="@+id/tv_usia"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/tv_nama_bayi"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="5dp"
-                                android:fontFamily="casual"
-                                android:text="10 Bulan" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="25dp"
+                            android:background="@drawable/bg_stroke_radius_primary"
+                            android:elevation="8dp">
 
                             <ImageView
-                                android:id="@+id/img_edit"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="16dp"
-                                android:src="@drawable/ic_baseline_edit_24" />
+                                android:layout_marginVertical="10dp"
+                                android:src="@drawable/icon_qr_code" />
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="16dp"
+                                android:fontFamily="casual"
+                                android:text="QR Code"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/rl_qr_code"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="16dp"
+                            app:cardCornerRadius="10dp">
 
                             <RelativeLayout
-                                android:id="@+id/rl_container_biodata"
                                 android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:layout_below="@id/tv_usia"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@color/grey">
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/tv_nama_bayi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="16dp"
+                                    android:layout_marginTop="20dp"
+                                    android:fontFamily="casual"
+                                    android:text="Nama Bayi"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+
+                                <TextView
+                                    android:id="@+id/tv_usia"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tv_nama_bayi"
+                                    android:layout_marginHorizontal="16dp"
+                                    android:fontFamily="casual"
+                                    android:text="10 Bulan" />
+
+                                <ImageView
+                                    android:id="@+id/img_edit"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginHorizontal="16dp"
+                                    android:layout_marginTop="16dp"
+                                    android:src="@drawable/ic_baseline_edit_24" />
+
+                                <View
+                                    android:id="@+id/view1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/tv_usia"
+                                    android:layout_marginHorizontal="10dp"
+                                    android:layout_marginTop="3dp"
+                                    android:background="@color/white3" />
+
+                                <TextView
+                                    android:id="@+id/tv6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/view1"
+                                    android:layout_marginHorizontal="16dp"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="casual"
+                                    android:text="Jenis Kelamin"
+                                    android:textColor="@color/grey" />
+
+                                <TextView
+                                    android:id="@+id/tv_jenis_kelamin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/view1"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginHorizontal="16dp"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="casual"
+                                    android:text="Laki - laki"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
+
+                                <View
+                                    android:id="@+id/view2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/tv_jenis_kelamin"
+                                    android:layout_marginHorizontal="10dp"
+                                    android:layout_marginTop="3dp"
+                                    android:background="@color/white3" />
+
+                                <TextView
+                                    android:id="@+id/tv7"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/view2"
+                                    android:layout_marginHorizontal="16dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="@dimen/dimen_20dp"
+                                    android:fontFamily="casual"
+                                    android:text="Tanggal Lahir"
+                                    android:textColor="@color/grey" />
+
+                                <TextView
+                                    android:id="@+id/tv_tanggal_lahir"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/view2"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginHorizontal="16dp"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="casual"
+                                    android:text="1 Januari 2021"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
 
 
                             </RelativeLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/rl_container_biodata"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="@dimen/dimen_20dp"
-                                android:layout_marginBottom="16dp"
-                                android:text="Lihat"
-                                android:textColor="@color/grey"
-                                android:textSize="12sp"
-                                android:textStyle="italic" />
+                        </androidx.cardview.widget.CardView>
 
-
-                        </RelativeLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:id="@+id/tv2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/cv1"
-                        android:layout_marginHorizontal="22dp"
-                        android:layout_marginTop="22dp"
-                        android:fontFamily="casual"
-                        android:text="Jadwal Imunisasi"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/tv2"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginHorizontal="20dp"
-                        android:fontFamily="casual"
-                        android:text="Lainnya"
-                        android:textColor="@color/purple_200"
-                        android:textSize="12sp"
-                        android:textStyle="italic" />
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cv2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv2"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="10dp"
-                        app:cardCornerRadius="10dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_stroke_radius_primary"
-                            android:paddingHorizontal="16dp"
-                            android:paddingVertical="10dp">
-
-                            <TextView
-                                android:id="@+id/tv3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:fontFamily="casual"
-                                android:text="Imunisasi" />
-
-                            <TextView
-                                android:id="@+id/tv_imunisasi"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="12dp"
-                                android:layout_toLeftOf="@id/tv_tanggal_imunisasi"
-                                android:layout_toRightOf="@id/tv3"
-                                android:ellipsize="end"
-                                android:fontFamily="casual"
-                                android:maxLines="1"
-                                android:text="HB-0"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_tanggal_imunisasi"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:fontFamily="casual"
-                                android:text="1 Januari 2021"
-                                android:textColor="@color/purple_200"
-                                android:textSize="16dp"
-                                android:textStyle="bold" />
-
-                        </RelativeLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:id="@+id/tv4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/cv2"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="22dp"
-                        android:fontFamily="casual"
-                        android:text="Grafik"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv4"
-                        android:layout_marginBottom="100dp">
-
-                        <ScrollView
+                        <TextView
+                            android:id="@+id/tv2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:scrollbars="horizontal">
+                            android:layout_below="@id/cv1"
+                            android:layout_marginHorizontal="22dp"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="casual"
+                            android:text="Jadwal Imunisasi"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
 
-                            <LinearLayout
-                                android:paddingVertical="10dp"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@id/tv2"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginHorizontal="20dp"
+                            android:fontFamily="casual"
+                            android:text="Lainnya"
+                            android:textColor="@color/purple_200"
+                            android:textSize="12sp"
+                            android:textStyle="italic" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv2"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_stroke_radius_primary"
+                                android:paddingHorizontal="16dp"
+                                android:paddingVertical="10dp">
 
-                                <androidx.cardview.widget.CardView
-                                    app:cardElevation="6dp"
-                                    android:layout_width="300dp"
-                                    android:layout_marginVertical="8dp"
+                                <TextView
+                                    android:id="@+id/tv3"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp"
-                                    app:cardCornerRadius="10dp">
+                                    android:layout_centerVertical="true"
+                                    android:fontFamily="casual"
+                                    android:text="Imunisasi" />
 
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="200dp"
-                                        android:background="@color/white">
-
-                                    </RelativeLayout>
-
-                                </androidx.cardview.widget.CardView>
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="300dp"
-                                    app:cardElevation="6dp"
-                                    android:layout_marginVertical="8dp"
+                                <TextView
+                                    android:id="@+id/tv_imunisasi"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
                                     android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp"
-                                    app:cardCornerRadius="10dp">
+                                    android:layout_marginRight="12dp"
+                                    android:layout_toLeftOf="@id/tv_tanggal_imunisasi"
+                                    android:layout_toRightOf="@id/tv3"
+                                    android:ellipsize="end"
+                                    android:fontFamily="casual"
+                                    android:maxLines="1"
+                                    android:text="HB-0"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
 
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="200dp"
-                                        android:background="@color/white">
+                                <TextView
+                                    android:id="@+id/tv_tanggal_imunisasi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:fontFamily="casual"
+                                    android:text="1 Januari 2021"
+                                    android:textColor="@color/purple_200"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
 
-                                    </RelativeLayout>
+                            </RelativeLayout>
 
-                                </androidx.cardview.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
-                            </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/cv2"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="24dp"
+                            android:fontFamily="casual"
+                            android:text="Grafik"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                        </ScrollView>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_bb"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv4"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="6dp">
 
-                    </HorizontalScrollView>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="220dp"
+                                android:background="@color/white"
+                                android:padding="14dp">
 
-                </RelativeLayout>
+                                <TextView
+                                    android:id="@+id/tv_bb"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="casual"
+                                    android:text="Berat Badan (Kg)"
+                                    android:textColor="@color/purple_200"
+                                    android:textSize="12sp" />
 
-            </androidx.core.widget.NestedScrollView>
+                                <lecho.lib.hellocharts.view.LineChartView
+                                    android:id="@+id/chart_bb"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@id/tv_bb"
+                                    android:layout_marginTop="15dp" />
 
-        </RelativeLayout>
+                            </RelativeLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                        </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_tb"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/cv_bb"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="6dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="220dp"
+                                android:background="@color/white"
+                                android:padding="14dp">
+
+                                <TextView
+                                    android:id="@+id/tv_tb"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="casual"
+                                    android:text="Berat Badan (Kg)"
+                                    android:textColor="@color/purple_200"
+                                    android:textSize="12sp" />
+
+                                <lecho.lib.hellocharts.view.LineChartView
+                                    android:id="@+id/chart_tb"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@id/tv_tb"
+                                    android:layout_marginTop="15dp" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/cv_tb"
+                            android:layout_marginHorizontal="@dimen/dimen_20dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginBottom="50dp"
+                            app:cardCornerRadius="10dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_gradien_primary">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:fontFamily="casual"
+                                    android:paddingVertical="10dp"
+                                    android:text="Riwayat"
+                                    android:textColor="@color/white"
+                                    android:textSize="14dp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </RelativeLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rv_sliding_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_pannel_radius_top">
+
+        <View
+            android:id="@+id/view_panel1"
+            android:layout_width="40dp"
+            android:layout_height="3dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/grey" />
+
+        <View
+            android:id="@+id/view_panel2"
+            android:layout_width="40dp"
+            android:layout_height="3dp"
+            android:layout_below="@id/view_panel1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:id="@+id/tv8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_panel2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:fontFamily="casual"
+            android:text="Scan disini"
+            android:textColor="@color/purple_200"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_qr"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/tv8"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/icon_qr_code" />
+
+        <TextView
+            android:id="@+id/tv_kode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_qr"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:fontFamily="casual"
+            android:text="098721"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_kode"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="casual"
+            android:text="Nama Bayi"
+            android:textColor="@color/purple_200"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

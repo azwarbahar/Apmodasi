@@ -75,4 +75,6 @@ dependencies {
     implementation 'com.github.yalantis:ucrop:2.2.2'
 
     implementation 'com.github.ismaeltoe:flowlayout:1.0'
+
+    implementation 'com.github.lecho:hellocharts-android:v1.5.8'
 }
