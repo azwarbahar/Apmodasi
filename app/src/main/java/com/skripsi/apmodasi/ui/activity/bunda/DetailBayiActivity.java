@@ -1,8 +1,10 @@
-package com.skripsi.apmodasi.ui.activity;
+package com.skripsi.apmodasi.ui.activity.bunda;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -27,9 +29,13 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class DetailBayiActivity extends AppCompatActivity {
 
+    private ImageView img_edit;
+
     private RelativeLayout rl_qr_code;
     // sliding pannel
     private SlidingUpPanelLayout sliding_layout;
+
+
 
     private LineChartView chart_tb;
     private LineChartView chart_bb;
@@ -49,6 +55,10 @@ public class DetailBayiActivity extends AppCompatActivity {
 
         // sliding pannel
         sliding_layout = findViewById(R.id.sliding_layout);
+
+
+        img_edit = findViewById(R.id.img_edit);
+        img_edit.setOnClickListener(this::clickEdit);
 
 
         chart_tb = (LineChartView) findViewById(R.id.chart_tb);
@@ -127,6 +137,12 @@ public class DetailBayiActivity extends AppCompatActivity {
                 showPanel();
             }
         });
+
+    }
+
+    private void clickEdit(View view) {
+
+        startActivity(new Intent(DetailBayiActivity.this, EditBayiActivity.class));
 
     }
 

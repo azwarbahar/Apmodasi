@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.skripsi.apmodasi.R;
-import com.skripsi.apmodasi.ui.activity.DetailBayiActivity;
+import com.skripsi.apmodasi.ui.activity.bunda.DetailBayiActivity;
 
 public class BayiAdapter extends RecyclerView.Adapter<BayiAdapter.MyHolderView> {
 

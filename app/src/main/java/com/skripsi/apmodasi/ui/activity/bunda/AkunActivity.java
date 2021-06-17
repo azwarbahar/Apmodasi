@@ -1,4 +1,4 @@
-package com.skripsi.apmodasi.ui.activity;
+package com.skripsi.apmodasi.ui.activity.bunda;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

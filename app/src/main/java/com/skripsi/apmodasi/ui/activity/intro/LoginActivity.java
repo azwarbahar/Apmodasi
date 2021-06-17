@@ -1,4 +1,4 @@
-package com.skripsi.apmodasi.ui.activity;
+package com.skripsi.apmodasi.ui.activity.intro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.skripsi.apmodasi.R;
+import com.skripsi.apmodasi.ui.activity.bunda.MenuActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

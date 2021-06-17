@@ -1,4 +1,4 @@
-package com.skripsi.apmodasi.ui.activity;
+package com.skripsi.apmodasi.ui.activity.intro;
 
 import androidx.appcompat.app.AppCompatActivity;
 

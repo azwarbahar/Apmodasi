@@ -12,7 +12,7 @@
     sothree:umanoOverlay="true"
     sothree:umanoPanelHeight="0dp"
     sothree:umanoShadowHeight="0dp"
-    tools:context=".ui.activity.DetailBayiActivity">
+    tools:context=".ui.activity.bunda.DetailBayiActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
