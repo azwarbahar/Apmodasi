@@ -14,6 +14,14 @@
         android:background="@drawable/img_top" />
 
     <ImageView
+        android:id="@+id/img_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/img_bottom" />
+
+    <ImageView
         android:id="@+id/img_icon"
         android:src="@drawable/icon_children"
         android:layout_width="150dp"
@@ -92,21 +100,35 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="casual"
-            android:text="Login"
+            android:text="Test Login Bunda"
             android:textColor="@color/white"
             android:textSize="16dp"
             android:textStyle="bold" />
 
     </RelativeLayout>
 
-
-    <ImageView
-        android:id="@+id/img_bottom"
+    <RelativeLayout
+        android:id="@+id/rl_login_kader"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/img_bottom" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_login"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_gradien_primary"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="casual"
+            android:text="Test Login Kader"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
 
 
 </RelativeLayout>
