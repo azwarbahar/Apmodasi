@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Apmodasi">
-        <activity android:name=".ui.activity.kader.AkunKaderActivity"></activity>
+        <activity android:name=".ui.activity.kader.HistoryKaderActivity"></activity>
+        <activity android:name=".ui.activity.kader.AkunKaderActivity" />
         <activity android:name=".ui.activity.kader.DataIbuActivity" />
         <activity android:name=".ui.activity.kader.DataBayiActivity" />
-        <activity android:name=".ui.activity.kader.MenuKaderActivity">
-        </activity>
+        <activity android:name=".ui.activity.kader.MenuKaderActivity"></activity>
         <activity android:name=".ui.activity.bunda.EditBayiActivity" />
         <activity android:name=".ui.activity.bunda.DetailBayiActivity" />
-        <activity android:name=".ui.activity.intro.SplashScreenActivity" >
+        <activity android:name=".ui.activity.intro.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -13,6 +13,7 @@ import com.skripsi.apmodasi.R;
 
 public class MenuKaderActivity extends AppCompatActivity {
 
+    private CardView cv_history;
     private CardView cv_bayi;
     private CardView cv_ibu;
     private ImageView img_user;
@@ -32,9 +33,15 @@ public class MenuKaderActivity extends AppCompatActivity {
 
         cv_ibu = findViewById(R.id.cv_ibu);
         cv_bayi = findViewById(R.id.cv_bayi);
+        cv_history = findViewById(R.id.cv_history);
+        cv_history.setOnClickListener(this::clickHistory);
         cv_bayi.setOnClickListener(this::clickBayi);
         cv_ibu.setOnClickListener(this::clickIbu);
 
+    }
+
+    private void clickHistory(View view) {
+        startActivity(new Intent(MenuKaderActivity.this, HistoryKaderActivity.class));
     }
 
     private void clickIbu(View view) {
