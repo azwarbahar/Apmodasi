@@ -281,6 +281,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/img_qr_code"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignTop="@id/ll_nav_bottom"

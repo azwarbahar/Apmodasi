@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg_menu"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.kader.InputDataBayiActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_batal"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/img_chevron"
+            android:src="@drawable/ic_baseline_chevron_left_24"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            app:tint="@color/purple_200" />
+
+        <TextView
+            android:textColor="@color/purple_200"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/dimen_20dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/img_chevron"
+            android:text="Batal"
+            android:fontFamily="casual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_foto_bayi"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:layout_below="@id/rl_batal"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="30dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/foto_bayi"
+                android:src="@drawable/img_baby"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_nama_bayi"
+        android:textColor="@color/purple_200"
+        android:textSize="@dimen/dimen_20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/cv_foto_bayi"
+        android:text="Nama Bayi"
+        android:maxLines="2"
+        android:paddingHorizontal="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_usia"
+        android:fontFamily="casual"
+        android:layout_below="@id/tv_nama_bayi"
+        android:layout_centerHorizontal="true"
+        android:text="6 Bulan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

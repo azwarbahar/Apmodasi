@@ -35,7 +35,7 @@ public class BayiAdapter extends RecyclerView.Adapter<BayiAdapter.MyHolderView> 
     @Override
     public void onBindViewHolder(@NonNull BayiAdapter.MyHolderView holder, int position) {
 
-        if (position==2){
+        if (position==1){
             holder.rl_container.setBackground(ContextCompat.getDrawable(context, R.color.white3));
             holder.rl_imunisasi.setVisibility(View.GONE);
             holder.rl_menunggu.setVisibility(View.VISIBLE);
@@ -56,7 +56,7 @@ public class BayiAdapter extends RecyclerView.Adapter<BayiAdapter.MyHolderView> 
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 2;
     }
 
     public class MyHolderView extends RecyclerView.ViewHolder {

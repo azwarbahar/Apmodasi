@@ -23,6 +23,7 @@ import java.util.Calendar;
 
 import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
+import com.skripsi.apmodasi.ui.activity.kader.InputDataBayiActivity;
 import com.skripsi.apmodasi.ui.adapter.BayiAdapter;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
@@ -133,6 +134,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void clickPhoto(View view) {
-        startActivity(new Intent(MenuActivity.this, ImageViewActivity.class));
+        Intent intent = new Intent(MenuActivity.this, ImageViewActivity.class);
+        intent.putExtra("data_image", "Bunda");
+        startActivity(intent);
     }
 }
