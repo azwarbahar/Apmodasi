@@ -13,7 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Apmodasi">
-        <activity android:name=".ui.activity.kader.InputDataBayiActivity"></activity>
+        <activity android:name=".ui.activity.kader.InputDataBayiActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.kader.ScanActivity" />
         <activity android:name=".ui.activity.kader.HistoryKaderActivity" />
         <activity android:name=".ui.activity.kader.AkunKaderActivity" />
@@ -23,11 +29,6 @@
         <activity android:name=".ui.activity.bunda.EditBayiActivity" />
         <activity android:name=".ui.activity.bunda.DetailBayiActivity" />
         <activity android:name=".ui.activity.intro.SplashScreenActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.bunda.AkunActivity" />
         <activity android:name=".ui.activity.ImageViewActivity" />
