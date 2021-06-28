@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg_menu"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.kader.DetailBundaActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.AppCompat.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:elevation="6dp"
+        app:theme="@style/ToolbarTheme"
+        app:title="Detail Bunda"
+        app:titleTextColor="@color/purple_200" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_foto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/foto_profil"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/adinda" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/cv_foto"
+                android:fontFamily="casual"
+                android:text="@string/indah"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_telpon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nama"
+                android:layout_toRightOf="@id/cv_foto"
+                android:fontFamily="casual"
+                android:text="08230987657"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_toRightOf="@id/cv_foto"
+                android:layout_below="@id/tv_telpon"
+                android:text="Jalan Sultan Alauddin No 21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="casual"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_below="@id/cv_profile"
+        android:text="List Bayi"
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_bayi"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/tv1"
+        tools:listitem="@layout/item_bayi_kader"
+        android:layout_width="match_parent"
+        android:paddingBottom="15dp"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

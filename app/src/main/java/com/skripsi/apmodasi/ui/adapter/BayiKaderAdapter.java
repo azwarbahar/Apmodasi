@@ -1,6 +1,7 @@
 package com.skripsi.apmodasi.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.skripsi.apmodasi.R;
+import com.skripsi.apmodasi.ui.activity.kader.DetailBayiKaderActivity;
 
 public class BayiKaderAdapter extends RecyclerView.Adapter<BayiKaderAdapter.MyHolderView> {
 
@@ -30,6 +32,13 @@ public class BayiKaderAdapter extends RecyclerView.Adapter<BayiKaderAdapter.MyHo
 
     @Override
     public void onBindViewHolder(@NonNull BayiKaderAdapter.MyHolderView holder, int position) {
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, DetailBayiKaderActivity.class));
+            }
+        });
 
     }
 

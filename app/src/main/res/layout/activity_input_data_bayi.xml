@@ -83,11 +83,28 @@
         android:fontFamily="casual"
         android:text="6 Bulan" />
 
+    <TextView
+        android:id="@+id/tv_nama_bunda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_usia"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:maxLines="2"
+        android:paddingHorizontal="16dp"
+        android:text="Nama Ibu"
+        android:fontFamily="casual"
+        android:textColor="@color/purple_200"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
     <RelativeLayout
         android:id="@+id/rl_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_usia"
+        android:layout_below="@id/tv_nama_bunda"
         android:layout_marginHorizontal="@dimen/dimen_20dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/bg_info_radius"
