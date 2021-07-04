@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
@@ -16,6 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.skripsi.apmodasi.R;
+import com.skripsi.apmodasi.app.network.ApiClient;
+import com.skripsi.apmodasi.app.network.ApiInterface;
+import com.skripsi.apmodasi.app.response.ResponseBayi;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
@@ -26,6 +30,9 @@ import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailBayiActivity extends AppCompatActivity {
 
@@ -36,9 +43,10 @@ public class DetailBayiActivity extends AppCompatActivity {
     private SlidingUpPanelLayout sliding_layout;
 
 
-
     private LineChartView chart_tb;
     private LineChartView chart_bb;
+
+    private String id_bayi_intent;
 
     String[] axisData = {"Jan", "Feb", "Mar", "Apr", "Mey", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"};
     int[] yAxisData = {50, 30, 60, 50, 70, 75, 80, 78, 85, 90, 89, 91};
@@ -53,6 +61,9 @@ public class DetailBayiActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
+        id_bayi_intent = getIntent().getStringExtra("id_bayi");
+
         // sliding pannel
         sliding_layout = findViewById(R.id.sliding_layout);
 
@@ -63,6 +74,8 @@ public class DetailBayiActivity extends AppCompatActivity {
 
         chart_tb = (LineChartView) findViewById(R.id.chart_tb);
         chart_bb = (LineChartView) findViewById(R.id.chart_bb);
+
+
 
         List yAxisValues = new ArrayList();
         List axisValues = new ArrayList();
@@ -135,6 +148,37 @@ public class DetailBayiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showPanel();
+            }
+        });
+
+        loadDataBayi(id_bayi_intent);
+
+    }
+
+    private void loadDataBayi(String id_bayi_intent) {
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(DetailBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseBayi> responseBayiCall = apiInterface.getBayiId(id_bayi_intent);
+        responseBayiCall.enqueue(new Callback<ResponseBayi>() {
+            @Override
+            public void onResponse(Call<ResponseBayi> call, Response<ResponseBayi> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()){
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBayi> call, Throwable t) {
+                pDialog.dismiss();
+
             }
         });
 

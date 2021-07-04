@@ -55,7 +55,7 @@
             android:layout_below="@id/tv_nama_bayi"
             android:layout_toRightOf="@id/cv_foto"
             android:text="10 Bulan"
-            android:textSize="12dp" />
+            android:textSize="11dp" />
 
         <RelativeLayout
             android:id="@+id/rl_imunisasi"
