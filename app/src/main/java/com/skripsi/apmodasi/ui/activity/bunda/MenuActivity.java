@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -21,11 +23,23 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import com.bumptech.glide.Glide;
 import com.skripsi.apmodasi.R;
+import com.skripsi.apmodasi.app.network.ApiClient;
+import com.skripsi.apmodasi.app.network.ApiInterface;
+import com.skripsi.apmodasi.app.response.ResponseBunda;
+import com.skripsi.apmodasi.app.util.Constanta;
+import com.skripsi.apmodasi.data.model.Bunda;
 import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
+import com.skripsi.apmodasi.ui.activity.intro.LoginActivity;
 import com.skripsi.apmodasi.ui.activity.kader.InputDataBayiActivity;
 import com.skripsi.apmodasi.ui.adapter.BayiAdapter;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -34,6 +48,9 @@ public class MenuActivity extends AppCompatActivity {
     private CardView cv_foto;
     private CardView cv_profile;
     private TextView tv_tambah_anak;
+    private TextView tv_nama;
+    private TextView tv_telpon;
+    private ImageView foto_profil;
 
     private DatePickerDialog datePickerDialog;
 
@@ -45,6 +62,9 @@ public class MenuActivity extends AppCompatActivity {
     private RadioButton radio_perempuan;
     private TextView et_tanggal_lahir;
     private RelativeLayout rl_simpan;
+
+    private String user_id;
+    private Bunda bunda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +79,11 @@ public class MenuActivity extends AppCompatActivity {
         radio_perempuan = findViewById(R.id.radio_perempuan);
         et_tanggal_lahir = findViewById(R.id.et_tanggal_lahir);
         rl_simpan = findViewById(R.id.rl_simpan);
+
+        tv_nama = findViewById(R.id.tv_nama);
+        tv_telpon = findViewById(R.id.tv_telpon);
+        foto_profil = findViewById(R.id.foto_profil);
+
 
         rv_bayi = findViewById(R.id.rv_bayi);
         tv_tambah_anak = findViewById(R.id.tv_tambah_anak);
@@ -76,10 +101,59 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void loadDataBayi() {
-        Toast.makeText(this, "Load Data Bayi", Toast.LENGTH_SHORT).show();
+
         rv_bayi.setLayoutManager(new LinearLayoutManager(this));
         bayiAdapter = new BayiAdapter(this);
         rv_bayi.setAdapter(bayiAdapter);
+    }
+
+    private void loadDataBunda(String user_id){
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseBunda> responseBundaCall = apiInterface.getBundaId(user_id);
+        responseBundaCall.enqueue(new Callback<ResponseBunda>() {
+            @Override
+            public void onResponse(Call<ResponseBunda> call, Response<ResponseBunda> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()){
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")){
+                        initDataBunda(response.body().getBunda());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBunda> call, Throwable t) {
+                pDialog.dismiss();
+
+            }
+        });
+
+
+    }
+
+    private void initDataBunda(Bunda bunda) {
+        String id_bunda = bunda.getIdBunda();
+        String nama_bunda = bunda.getNamaBunda();
+        String kontak_bunda = bunda.getKontakBunda();
+        String alamat_bunda = bunda.getAlamatBunda();
+        String foto_bunda = bunda.getFotoBunda();
+
+        tv_nama.setText(nama_bunda);
+        tv_telpon.setText(kontak_bunda);
+        Glide.with(this)
+                .load(Constanta.URL_IMG_BUNDA + foto_bunda)
+                .into(foto_profil);
+
+
     }
 
 

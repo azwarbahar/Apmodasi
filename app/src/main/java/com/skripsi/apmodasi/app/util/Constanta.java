@@ -8,6 +8,9 @@ public class Constanta {
     // URL API
     public static final String BASE_URL = "http://" + IP + "/apmodasi/api/";
 
+    public static final String URL_IMG_BUNDA = "http://" + IP + "/apmodasi/assets/" +
+            "dist/img/bunda/";
+
 
     // Shared Preferences
     public static final String MY_SHARED_PREFERENCES = "my_shared_preferences";

@@ -1,6 +1,7 @@
 package com.skripsi.apmodasi.app.network;
 
 import com.skripsi.apmodasi.app.response.ResponseAuth;
+import com.skripsi.apmodasi.app.response.ResponseBunda;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -10,5 +11,10 @@ public interface ApiInterface {
 
     @GET("login/auth.php")
     Call<ResponseAuth> authLogin(@Query("username") String username,
-                                      @Query("password") String password);
+                                 @Query("password") String password);
+
+
+    // BUNDA
+    @GET("bunda/getBundaId.php")
+    Call<ResponseBunda> getBundaId(@Query("id_bunda") String id_bunda);
 }
