@@ -73,25 +73,27 @@ public class MenuKaderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Dexter.withContext(getApplicationContext())
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
-                            @Override
-                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                                Intent intent = new Intent(MenuKaderActivity.this, QrCodeActivity.class);
-                                startActivityForResult(intent, REQUEST_CODE_QR_SCAN);
-                            }
+                startActivity(new Intent(MenuKaderActivity.this, InputDataBayiActivity.class));
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
-                                permissionDeniedResponse.getRequestedPermission();
-                            }
-
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                                permissionToken.continuePermissionRequest();
-                            }
-                        }).check();
+//                Dexter.withContext(getApplicationContext())
+//                        .withPermission(Manifest.permission.CAMERA)
+//                        .withListener(new PermissionListener() {
+//                            @Override
+//                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+//                                Intent intent = new Intent(MenuKaderActivity.this, QrCodeActivity.class);
+//                                startActivityForResult(intent, REQUEST_CODE_QR_SCAN);
+//                            }
+//
+//                            @Override
+//                            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+//                                permissionDeniedResponse.getRequestedPermission();
+//                            }
+//
+//                            @Override
+//                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+//                                permissionToken.continuePermissionRequest();
+//                            }
+//                        }).check();
 
 //                startActivity(new Intent(MenuKaderActivity.this, ScanActivity.class));
             }
