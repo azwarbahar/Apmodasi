@@ -109,7 +109,6 @@ public class MenuActivity extends AppCompatActivity {
         cv_profile.setOnClickListener(this::clickProfile);
         cv_foto.setOnClickListener(this::clickPhoto);
         rl_simpan.setOnClickListener(this::clickSimpan);
-        rl_simpan.setOnClickListener(this::clickSimpan);
 
         loadDataBayi(user_id);
         loadDataBunda(user_id);
@@ -223,7 +222,15 @@ public class MenuActivity extends AppCompatActivity {
 
 
     private void clickSimpan(View view) {
-        showPanel();
+
+        String nama_lenglap = tv_nama.getText().toString();
+        String jenis_kelamin;
+        if (radio_laki.isChecked()){
+            jenis_kelamin = radio_laki.getText().toString();
+        } else {
+            jenis_kelamin = radio_perempuan.getText().toString();
+        }
+
         resetInputTambahBayi();
         loadDataBayi(user_id);
     }
@@ -231,7 +238,7 @@ public class MenuActivity extends AppCompatActivity {
     private void resetInputTambahBayi() {
 
         et_nama_lengkap.setText("");
-        et_tanggal_lahir.setText("Lengkapi");
+        et_tanggal_lahir.setText("");
 
     }
 
