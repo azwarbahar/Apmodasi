@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.data.model.Bayi;
 import com.skripsi.apmodasi.ui.activity.bunda.DetailBayiActivity;
+import com.skripsi.apmodasi.ui.activity.bunda.MenuActivity;
 import com.skripsi.apmodasi.ui.activity.kader.InputDataBayiActivity;
 import com.skripsi.apmodasi.ui.activity.kader.MenuKaderActivity;
 
@@ -23,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class BayiAdapter extends RecyclerView.Adapter<BayiAdapter.MyHolderView> {
 
@@ -89,9 +92,16 @@ public class BayiAdapter extends RecyclerView.Adapter<BayiAdapter.MyHolderView> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DetailBayiActivity.class);
-                intent.putExtra("id_bayi", id_bayi);
-                context.startActivity(intent);
+                if (status_bayi.equals("Menunggu")) {
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Profil belum tersedia")
+                            .setContentText("Menunggi Konfirmasi dari admin imunisasi.")
+                            .show();
+                } else {
+                    Intent intent = new Intent(context, DetailBayiActivity.class);
+                    intent.putExtra("id_bayi", id_bayi);
+                    context.startActivity(intent);
+                }
             }
         });
     }

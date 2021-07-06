@@ -5,7 +5,10 @@ import com.skripsi.apmodasi.app.response.ResponseBayi;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -21,11 +24,25 @@ public interface ApiInterface {
 
 
     // BAYI
+    @FormUrlEncoded
+    @POST("bayi/addBayi.php")
+    Call<ResponseBayi> addBayi(@Field("nomor_bayi") String nomor_bayi,
+                               @Field("nama_bayi") String nama_bayi,
+                               @Field("tanggal_lahir_bayi") String tanggal_lahir_bayi,
+                               @Field("jenis_kelamin_bayi") String jenis_kelamin_bayi,
+                               @Field("gambar_qr_bayi") String gambar_qr_bayi,
+                               @Field("foto_bayi") String foto_bayi,
+                               @Field("status_bayi") String status_bayi,
+                               @Field("bunda_id") String bunda_id);
+
     @GET("bayi/getBayiBunda.php")
     Call<ResponseBayi> getBayiBunda(@Query("bunda_id") String bunda_id);
 
     @GET("bayi/getBayiId.php")
     Call<ResponseBayi> getBayiId(@Query("id_bayi") String id_bayi);
+
+    @GET("bayi/getBayiNomor.php")
+    Call<ResponseBayi> getBayiNomor(@Query("nomor_bayi") String nomor_bayi);
 
 
 }

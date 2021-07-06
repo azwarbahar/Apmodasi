@@ -153,10 +153,21 @@ public class LoginActivity extends AppCompatActivity {
         String user_id = authResult.getUserId();
         String role = authResult.getRole();
 
-        if (status.equals("Active")){
-            startSession(id_auth, user_id, role);
-            startActivity(new Intent(LoginActivity.this, MenuActivity.class));
-            finish();
+        if (status.equals("Active")) {
+            if (!role.isEmpty()) {
+                switch (role) {
+                    case "Bunda":
+                        startSession(id_auth, user_id, role);
+                        startActivity(new Intent(this, MenuActivity.class));
+                        finish();
+                        break;
+                    case "Kader":
+                        startSession(id_auth, user_id, role);
+                        startActivity(new Intent(this, MenuKaderActivity.class));
+                        finish();
+                        break;
+                }
+            }
         } else {
             SweetAlertDialog sweetAlertDialogError = new SweetAlertDialog(LoginActivity.this,
                     SweetAlertDialog.ERROR_TYPE);

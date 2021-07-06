@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -70,6 +71,10 @@ public class MenuActivity extends AppCompatActivity {
     private RadioButton radio_perempuan;
     private TextView et_tanggal_lahir;
     private RelativeLayout rl_simpan;
+    private String tanggal_lahir_send;
+    private String tahun;
+    private String bulan;
+    private String hari;
 
     private String user_id;
     private Bunda bunda;
@@ -138,9 +143,9 @@ public class MenuActivity extends AppCompatActivity {
                 pDialog.dismiss();
                 if (response.isSuccessful()) {
                     String kode = response.body().getKode();
-                    if (kode.equals("1")){
+                    if (kode.equals("1")) {
                         bayiArrayList = (ArrayList<Bayi>) response.body().getBayiData();
-                        if (bayiArrayList == null || bayiArrayList.size() <= 0 || bayiArrayList.isEmpty()){
+                        if (bayiArrayList == null || bayiArrayList.size() <= 0 || bayiArrayList.isEmpty()) {
                             tv_bayi_kosong.setVisibility(View.VISIBLE);
                             rv_bayi.setVisibility(View.GONE);
                         } else {
@@ -171,7 +176,7 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
-    private void loadDataBunda(String user_id){
+    private void loadDataBunda(String user_id) {
 
         SweetAlertDialog pDialog = new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -185,9 +190,9 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBunda> call, Response<ResponseBunda> response) {
                 pDialog.dismiss();
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     String kode = response.body().getKode();
-                    if (kode.equals("1")){
+                    if (kode.equals("1")) {
                         initDataBunda(response.body().getBunda());
                     }
                 }
@@ -216,29 +221,134 @@ public class MenuActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(Constanta.URL_IMG_BUNDA + foto_bunda)
                 .into(foto_profil);
-
-
     }
 
 
     private void clickSimpan(View view) {
 
-        String nama_lenglap = tv_nama.getText().toString();
+        String nama_lenglap = et_nama_lengkap.getText().toString();
+        String tanggal_lahir = tanggal_lahir_send;
         String jenis_kelamin;
-        if (radio_laki.isChecked()){
+        if (radio_laki.isChecked()) {
             jenis_kelamin = radio_laki.getText().toString();
         } else {
             jenis_kelamin = radio_perempuan.getText().toString();
         }
+        String gambar_qr = "-";
+        String foto_bayi = "img_baby.png";
+        String status_bayi = "Menunggu";
+        String bunda_id = user_id;
+        String nomor_bayi = "00" + bunda_id + hari + bulan + tahun + "0" + (bayiArrayList.size() + 1);
 
-        resetInputTambahBayi();
-        loadDataBayi(user_id);
+        if (nama_lenglap.equals("")) {
+            new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Opss..")
+                    .setContentText("Nama lengkap tidak boleh kosong")
+                    .show();
+        } else if (tanggal_lahir.equals("")) {
+            new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Opss..")
+                    .setContentText("Tanggal lahir tidak boleh kosong")
+                    .show();
+        } else if (jenis_kelamin.equals("")) {
+            new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Opss..")
+                    .setContentText("Jenis kelamin tidak boleh kosong")
+                    .show();
+        } else {
+            sendDataBayi(nomor_bayi, nama_lenglap, tanggal_lahir, jenis_kelamin, gambar_qr, foto_bayi,
+                    status_bayi, bunda_id);
+        }
+
+    }
+
+    private void sendDataBayi(String nomor_bayi, String nama_lenglap, String tanggal_lahir,
+                              String jenis_kelamin, String gambar_qr, String foto_bayi,
+                              String status_bayi, String bunda_id) {
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading..");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseBayi> responseBayiCall = apiInterface.addBayi(nomor_bayi, nama_lenglap,
+                tanggal_lahir, jenis_kelamin, gambar_qr, foto_bayi, status_bayi, bunda_id);
+        responseBayiCall.enqueue(new Callback<ResponseBayi>() {
+            @Override
+            public void onResponse(Call<ResponseBayi> call, Response<ResponseBayi> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()) {
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")) {
+                        new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Success..")
+                                .setContentText("Berhasil menambahkan data bayi..")
+                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                        configIntent();
+                                    }
+                                })
+                                .show();
+                    } else {
+                        new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Gagal..")
+                                .setContentText("Terjadi kesalahan!, Kode : " + kode)
+                                .show();
+                    }
+                } else {
+                    new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Gagal..")
+                            .setContentText("Terjadi kesalahan!")
+                            .show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBayi> call, Throwable t) {
+                pDialog.dismiss();
+                new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Gagal..")
+                        .setContentText("Terjadi kesalahan Sistem!")
+                        .show();
+            }
+        });
+
+
+    }
+
+    private void configIntent() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                SweetAlertDialog pDialog = new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                pDialog.setTitleText("Menyimpan Data..");
+                pDialog.setCancelable(true);
+                pDialog.show();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        pDialog.dismiss();
+                        showPanel();
+                        resetInputTambahBayi();
+                        loadDataBayi(user_id);
+                    }
+                }, 2500);
+            }
+        }, 400);
     }
 
     private void resetInputTambahBayi() {
 
         et_nama_lengkap.setText("");
-        et_tanggal_lahir.setText("");
+        et_tanggal_lahir.setText("Lengkapi");
 
     }
 
@@ -253,7 +363,11 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void clickTanggalLahir(View view) {
-        final DateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+        final DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
+        final DateFormat dateFormatSend = new SimpleDateFormat("yyyy-MM-dd");
+        final DateFormat dateFormatDay = new SimpleDateFormat("dd");
+        final DateFormat dateFormatMonth = new SimpleDateFormat("MM");
+        final DateFormat dateFormatYear = new SimpleDateFormat("yy");
         Calendar newCalendar = Calendar.getInstance();
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -264,7 +378,10 @@ public class MenuActivity extends AppCompatActivity {
                 newDate.set(year, month, dayOfMonth);
 
                 et_tanggal_lahir.setText(dateFormat.format(newDate.getTime()));
-
+                tanggal_lahir_send = dateFormatSend.format(newDate.getTime());
+                hari = dateFormatDay.format(newDate.getTime());
+                bulan = dateFormatMonth.format(newDate.getTime());
+                tahun = dateFormatYear.format(newDate.getTime());
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
