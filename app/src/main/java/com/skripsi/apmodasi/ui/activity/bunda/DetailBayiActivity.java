@@ -27,8 +27,10 @@ import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.app.network.ApiClient;
 import com.skripsi.apmodasi.app.network.ApiInterface;
 import com.skripsi.apmodasi.app.response.ResponseBayi;
+import com.skripsi.apmodasi.app.response.ResponseImunisasi;
 import com.skripsi.apmodasi.app.util.Constanta;
 import com.skripsi.apmodasi.data.model.Bayi;
+import com.skripsi.apmodasi.data.model.Imunisasi;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.text.ParseException;
@@ -50,8 +52,8 @@ import retrofit2.Response;
 public class DetailBayiActivity extends AppCompatActivity {
 
     private Bayi bayi;
+    private ArrayList<Imunisasi> imunisasis;
     private String qr_code_bayi;
-
 
     private ImageView img_edit;
     private TextView tv_nama_bayi;
@@ -166,18 +168,6 @@ public class DetailBayiActivity extends AppCompatActivity {
         chart_bb.setMaximumViewport(viewport_bb);
         chart_bb.setCurrentViewport(viewport_bb);
 
-
-//        GraphView graphView = findViewById(R.id.graph_bb);
-//        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-//                new DataPoint(0, 1),
-//                new DataPoint(1, 5),
-//                new DataPoint(2, 3),
-//                new DataPoint(3, 2),
-//                new DataPoint(4, 6)
-//        });
-//        graphView.addSeries(series);
-
-
         rl_qr_code = findViewById(R.id.rl_qr_code);
         rl_qr_code.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,6 +177,45 @@ public class DetailBayiActivity extends AppCompatActivity {
         });
 
         loadDataBayi(id_bayi_intent);
+
+    }
+
+    private void loadImunisasiBayi(String bayi_id){
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(DetailBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseImunisasi> responseImunisasiCall = apiInterface.getImunisasiBayi(bayi_id);
+        responseImunisasiCall.enqueue(new Callback<ResponseImunisasi>() {
+            @Override
+            public void onResponse(Call<ResponseImunisasi> call, Response<ResponseImunisasi> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()){
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")){
+                        imunisasis = (ArrayList<Imunisasi>) response.body().getImunisasi_bayi();
+                        initImunisasi(imunisasis);
+                    } else {
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
+                pDialog.dismiss();
+
+            }
+        });
+
+    }
+
+    private void initImunisasi(ArrayList<Imunisasi> imunisasis) {
 
     }
 

@@ -3,6 +3,7 @@ package com.skripsi.apmodasi.app.network;
 import com.skripsi.apmodasi.app.response.ResponseAuth;
 import com.skripsi.apmodasi.app.response.ResponseBayi;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
+import com.skripsi.apmodasi.app.response.ResponseImunisasi;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -45,4 +46,7 @@ public interface ApiInterface {
     Call<ResponseBayi> getBayiNomor(@Query("nomor_bayi") String nomor_bayi);
 
 
+    // IMUNISASI
+    @GET("imunisasi/getImunisasiBayi.php")
+    Call<ResponseImunisasi> getImunisasiBayi(@Query("bayi_id") String bayi_id);
 }

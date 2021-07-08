@@ -237,7 +237,7 @@
                             android:layout_marginHorizontal="22dp"
                             android:layout_marginTop="28dp"
                             android:fontFamily="casual"
-                            android:text="Jadwal Imunisasi"
+                            android:text="Rekomendasi Imunisasi"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
 
@@ -284,7 +284,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="10dp"
                                     android:layout_marginRight="12dp"
-                                    android:layout_toLeftOf="@id/tv_tanggal_imunisasi"
+                                    android:layout_toLeftOf="@id/tv_interval_imunisasi"
                                     android:layout_toRightOf="@id/tv3"
                                     android:ellipsize="end"
                                     android:fontFamily="casual"
@@ -294,13 +294,13 @@
                                     android:textStyle="bold" />
 
                                 <TextView
-                                    android:id="@+id/tv_tanggal_imunisasi"
+                                    android:id="@+id/tv_interval_imunisasi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
                                     android:fontFamily="casual"
-                                    android:text="1 Januari 2021"
+                                    android:text="0 - 11 Bulan"
                                     android:textColor="@color/purple_200"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
