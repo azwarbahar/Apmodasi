@@ -1,7 +1,9 @@
 package com.skripsi.apmodasi.app.response;
 
 import com.google.gson.annotations.SerializedName;
+import com.skripsi.apmodasi.data.model.BeratBadan;
 import com.skripsi.apmodasi.data.model.Imunisasi;
+import com.skripsi.apmodasi.data.model.TinggiBadan;
 
 import java.util.List;
 
@@ -15,6 +17,20 @@ public class ResponseImunisasi {
 
     @SerializedName("imunisasi_bayi")
     private List<Imunisasi> imunisasi_bayi;
+
+    @SerializedName("berat_bayi")
+    private List<BeratBadan> berat_bayi;
+
+    @SerializedName("tinggi_bayi")
+    private List<TinggiBadan> tinggi_bayi;
+
+    public List<TinggiBadan> getTinggi_bayi() {
+        return tinggi_bayi;
+    }
+
+    public List<BeratBadan> getBerat_bayi() {
+        return berat_bayi;
+    }
 
     public String getKode() {
         return kode;

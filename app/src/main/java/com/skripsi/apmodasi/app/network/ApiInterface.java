@@ -49,4 +49,10 @@ public interface ApiInterface {
     // IMUNISASI
     @GET("imunisasi/getImunisasiBayi.php")
     Call<ResponseImunisasi> getImunisasiBayi(@Query("bayi_id") String bayi_id);
+
+    @GET("imunisasi/getBeratBayi.php")
+    Call<ResponseImunisasi> getBeratBayi(@Query("bayi_id") String bayi_id);
+
+    @GET("imunisasi/getTinggiBayi.php")
+    Call<ResponseImunisasi> getTinggiBayi(@Query("bayi_id") String bayi_id);
 }

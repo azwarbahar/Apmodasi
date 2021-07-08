@@ -305,6 +305,17 @@
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
 
+                                <TextView
+                                    android:id="@+id/tv_imunisasi_done"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:fontFamily="casual"
+                                    android:text="Imunisasi Selesai"
+                                    android:textColor="@color/purple_200"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
                             </RelativeLayout>
 
                         </androidx.cardview.widget.CardView>
@@ -385,7 +396,7 @@
                                     android:layout_centerHorizontal="true"
                                     android:layout_marginTop="5dp"
                                     android:fontFamily="casual"
-                                    android:text="Berat Badan (Kg)"
+                                    android:text="Tinggi Badan (Cm)"
                                     android:textColor="@color/purple_200"
                                     android:textSize="12sp" />
 
