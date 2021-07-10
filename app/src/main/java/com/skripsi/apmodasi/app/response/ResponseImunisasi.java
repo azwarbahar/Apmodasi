@@ -24,6 +24,20 @@ public class ResponseImunisasi {
     @SerializedName("tinggi_bayi")
     private List<TinggiBadan> tinggi_bayi;
 
+    @SerializedName("tinggi_bayi_data")
+    private TinggiBadan tinggi_bayi_data;
+
+    @SerializedName("berat_bayi_data")
+    private BeratBadan berat_bayi_data;
+
+    public TinggiBadan getTinggi_bayi_data() {
+        return tinggi_bayi_data;
+    }
+
+    public BeratBadan getBerat_bayi_data() {
+        return berat_bayi_data;
+    }
+
     public List<TinggiBadan> getTinggi_bayi() {
         return tinggi_bayi;
     }

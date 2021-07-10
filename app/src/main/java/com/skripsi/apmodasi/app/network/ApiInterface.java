@@ -49,10 +49,47 @@ public interface ApiInterface {
     // IMUNISASI
     @GET("imunisasi/getImunisasiBayi.php")
     Call<ResponseImunisasi> getImunisasiBayi(@Query("bayi_id") String bayi_id);
+    @GET("imunisasi/getImunisasiStatusBayi.php")
+    Call<ResponseImunisasi> getImunisasiStatusBayi(@Query("bayi_id") String bayi_id,
+                                                   @Query("status_imunisasi") String status_imunisasi);
 
     @GET("imunisasi/getBeratBayi.php")
     Call<ResponseImunisasi> getBeratBayi(@Query("bayi_id") String bayi_id);
 
+    @GET("imunisasi/getBeratBayiToday.php")
+    Call<ResponseImunisasi> getBeratBayiToday(@Query("bayi_id") String bayi_id,
+                                              @Query("tanggal_bb") String tanggal_bb);
+
     @GET("imunisasi/getTinggiBayi.php")
     Call<ResponseImunisasi> getTinggiBayi(@Query("bayi_id") String bayi_id);
+
+    @GET("imunisasi/getTinggiBayiToday.php")
+    Call<ResponseImunisasi> getTinggiBayiToday(@Query("bayi_id") String bayi_id,
+                                               @Query("tanggal_tb") String tanggal_tb);
+
+    @FormUrlEncoded
+    @POST("imunisasi/addBeratBayi.php")
+    Call<ResponseImunisasi> addBeratBayi(@Field("bayi_id") String bayi_id,
+                                         @Field("nilai_bb") String nilai_bb,
+                                         @Field("catatan_bb") String catatan_bb,
+                                         @Field("kader_id") String kader_id,
+                                         @Field("tanggal_bb") String tanggal_bb);
+
+    @FormUrlEncoded
+    @POST("imunisasi/addTinggiBayi.php")
+    Call<ResponseImunisasi> addTinggiBayi(@Field("bayi_id") String bayi_id,
+                                          @Field("nilai_tb") String nilai_tb,
+                                          @Field("catatan_tb") String catatan_tb,
+                                          @Field("kader_id") String kader_id,
+                                          @Field("tanggal_tb") String tanggal_tb);
+
+    @FormUrlEncoded
+    @POST("imunisasi/editImunisasi.php")
+    Call<ResponseImunisasi> editImunisasi(@Field("bayi_id") String bayi_id,
+                                          @Field("no_imunisasi") String no_imunisasi,
+                                          @Field("usia_bayi_imunisasi") String usia_bayi_imunisasi,
+                                          @Field("kader_id") String kader_id,
+                                          @Field("status_imunisasi") String status_imunisasi,
+                                          @Field("catatan_imunisasi") String catatan_imunisasi,
+                                          @Field("tanggal_imunisasi") String tanggal_imunisasi);
 }

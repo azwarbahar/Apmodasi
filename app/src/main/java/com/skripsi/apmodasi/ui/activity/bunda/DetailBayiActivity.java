@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
@@ -142,23 +143,6 @@ public class DetailBayiActivity extends AppCompatActivity {
                 showPanel();
             }
         });
-//        chart_tb.setLineChartData(data);
-//        Viewport viewport = new Viewport(chart_tb.getMaximumViewport());
-//        viewport.top = 110;
-//        chart_tb.setMaximumViewport(viewport);
-//        chart_tb.setCurrentViewport(viewport);
-//        chart_bb.setOnValueTouchListener(new LineChartOnValueSelectListener() {
-//            @Override
-//            public void onValueSelected(int i, int i1, PointValue pointValue) {
-//                Toast.makeText(DetailBayiActivity.this, "Nilai : " + pointValue.getY(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onValueDeselected() {
-//
-//            }
-//        });
-
         loadDataBayi(id_bayi_intent);
         loadImunisasiBayi(id_bayi_intent);
         loadBeratBadanBayi(id_bayi_intent);
@@ -238,11 +222,20 @@ public class DetailBayiActivity extends AppCompatActivity {
         data.setAxisYLeft(yAxis);
 
         chart_tb.setLineChartData(data);
-        Viewport viewport_bb = new Viewport(0, 110, 4, 0);
-        viewport_bb.top = 100;
-        chart_tb.setMaximumViewport(viewport_bb);
-        chart_tb.setCurrentViewport(viewport_bb);
 
+        if (tinggiBadans.size() < 5){
+            Viewport viewport_bb = new Viewport(0, 110, 6, 0);
+            viewport_bb.top = 120;
+            chart_tb.setMaximumViewport(viewport_bb);
+            chart_tb.setCurrentViewport(viewport_bb);
+            chart_tb.setZoomType(ZoomType.HORIZONTAL);
+        } else {
+            Viewport viewport_bb = new Viewport(chart_tb.getMaximumViewport());
+            viewport_bb.top = 120;
+            chart_tb.setMaximumViewport(viewport_bb);
+            chart_tb.setCurrentViewport(viewport_bb);
+            chart_tb.setZoomType(ZoomType.HORIZONTAL);
+        }
         chart_tb.setOnValueTouchListener(new LineChartOnValueSelectListener() {
             @Override
             public void onValueSelected(int i, int i1, PointValue pointValue) {
@@ -329,10 +322,20 @@ public class DetailBayiActivity extends AppCompatActivity {
         data.setAxisYLeft(yAxis);
 
         chart_bb.setLineChartData(data);
-        Viewport viewport_bb = new Viewport(0, 110, 4, 0);
-        viewport_bb.top = 15;
-        chart_bb.setMaximumViewport(viewport_bb);
-        chart_bb.setCurrentViewport(viewport_bb);
+
+        if (beratBadans.size() < 5){
+            Viewport viewport_bb = new Viewport(0, 110, 6, 0);
+            viewport_bb.top = 15;
+            chart_bb.setMaximumViewport(viewport_bb);
+            chart_bb.setCurrentViewport(viewport_bb);
+            chart_bb.setZoomType(ZoomType.HORIZONTAL);
+        } else {
+            Viewport viewport_bb = new Viewport(chart_bb.getMaximumViewport());
+            viewport_bb.top = 15;
+            chart_bb.setMaximumViewport(viewport_bb);
+            chart_bb.setCurrentViewport(viewport_bb);
+            chart_bb.setZoomType(ZoomType.HORIZONTAL);
+        }
 
         chart_bb.setOnValueTouchListener(new LineChartOnValueSelectListener() {
             @Override
@@ -367,10 +370,20 @@ public class DetailBayiActivity extends AppCompatActivity {
                     if (kode.equals("1")) {
                         imunisasis = (ArrayList<Imunisasi>) response.body().getImunisasi_bayi();
                         initImunisasi(imunisasis);
+//                        showSnackbar("Ada imunisasi !");
                     } else {
+                        tv_imunisasi_done.setText("Data Tidak Tersedia");
+                        tv_imunisasi_done.setVisibility(View.VISIBLE);
+                        tv_imunisasi.setVisibility(View.GONE);
+                        tv_interval_imunisasi.setVisibility(View.GONE);
                         showSnackbar("Memanggil Imunisasi Gagal!");
                     }
                 } else {
+
+                    tv_imunisasi_done.setText("Data Tidak Tersedia");
+                    tv_imunisasi_done.setVisibility(View.VISIBLE);
+                    tv_imunisasi.setVisibility(View.GONE);
+                    tv_interval_imunisasi.setVisibility(View.GONE);
                     showSnackbar("Memanggil Imunisasi Gagal!");
                 }
 
@@ -380,6 +393,10 @@ public class DetailBayiActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
                 pDialog.dismiss();
                 showSnackbar("Memanggil Imunisasi Gagal!");
+                tv_imunisasi_done.setText("Data Tidak Tersedia");
+                tv_imunisasi_done.setVisibility(View.VISIBLE);
+                tv_imunisasi.setVisibility(View.GONE);
+                tv_interval_imunisasi.setVisibility(View.GONE);
 
             }
         });
@@ -388,7 +405,7 @@ public class DetailBayiActivity extends AppCompatActivity {
 
     private void initImunisasi(ArrayList<Imunisasi> imunisasis) {
 
-        if (imunisasis.isEmpty() || imunisasis.size() < 1) {
+        if (!imunisasis.isEmpty()) {
 
             for (int a = 0; a < imunisasis.size(); a++) {
                 String status_imunisasi = imunisasis.get(a).getStatus_imunisasi();
@@ -399,6 +416,7 @@ public class DetailBayiActivity extends AppCompatActivity {
                     tv_interval_imunisasi.setVisibility(View.VISIBLE);
                     tv_imunisasi.setText(imunisasis.get(a).getNama_imunisasi());
                     tv_interval_imunisasi.setText(imunisasis.get(a).getInterval_imunisasi());
+//                    showSnackbar("ada data");
                     break;
                 } else {
                     tv_imunisasi_done.setVisibility(View.VISIBLE);
