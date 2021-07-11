@@ -3,7 +3,7 @@ package com.skripsi.apmodasi.app.util;
 public class Constanta {
 
     // IP
-    public static final String IP = "192.168.43.188";
+    public static final String IP = "192.168.1.3";
 
     // URL API
     public static final String BASE_URL = "http://" + IP + "/apmodasi/api/";
@@ -13,6 +13,9 @@ public class Constanta {
 
     public static final String URL_IMG_BAYI = "http://" + IP + "/apmodasi/assets/" +
             "dist/img/bayi/";
+
+    public static final String URL_IMG_KADER = "http://" + IP + "/apmodasi/assets/" +
+            "dist/img/kader/";
 
 
     // Shared Preferences

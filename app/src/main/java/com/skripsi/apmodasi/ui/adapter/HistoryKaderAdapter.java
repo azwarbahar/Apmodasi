@@ -83,7 +83,9 @@ public class HistoryKaderAdapter extends RecyclerView.Adapter<HistoryKaderAdapte
         holder.tv_nama_bayi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, DetailBayiKaderActivity.class));
+                Intent intent = new Intent(context, DetailBayiKaderActivity.class);
+                intent.putExtra("ID_BAYI", bayi_id);
+                context.startActivity(intent);
             }
         });
 

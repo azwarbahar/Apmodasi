@@ -190,40 +190,10 @@
         </androidx.cardview.widget.CardView>
 
         <RelativeLayout
-            android:id="@+id/rl_qr_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cv3"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/bg_stroke_radius_primary"
-            android:elevation="8dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="10dp"
-                android:src="@drawable/icon_qr_code" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginHorizontal="16dp"
-                android:text="QR Code"
-                android:fontFamily="casual"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/rl_edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rl_qr_code"
+            android:layout_below="@id/cv3"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_stroke_radius_primary"

@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/cv_foto"
                 android:fontFamily="casual"
-                android:text="@string/indah"
+                tools:text="@string/indah"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -73,13 +73,14 @@
                 android:layout_below="@id/tv_nama"
                 android:layout_toRightOf="@id/cv_foto"
                 android:fontFamily="casual"
-                android:text="08230987657"
+                tools:text="08230987657"
                 android:textSize="12dp" />
 
             <TextView
+                android:id="@+id/tv_alamat"
                 android:layout_toRightOf="@id/cv_foto"
                 android:layout_below="@id/tv_telpon"
-                android:text="Jalan Sultan Alauddin No 21"
+                tools:text="Jalan Sultan Alauddin No 21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -99,13 +100,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_bayi"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/tv1"
-        tools:listitem="@layout/item_bayi_kader"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_continer"
         android:layout_width="match_parent"
-        android:paddingBottom="15dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv1"
+        android:layout_marginTop="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_bayi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_bayi_kader" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/tv_kosong"
+        android:fontFamily="casual"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/tv1"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/grey"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:text="- Kosong -"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
 </RelativeLayout>

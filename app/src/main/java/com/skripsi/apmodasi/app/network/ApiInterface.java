@@ -24,10 +24,16 @@ public interface ApiInterface {
     @GET("kader/getRiwayatKader.php")
     Call<ResponseKader> getRiwayatKader(@Query("kader_id") String kader_id);
 
+    @GET("kader/getKaderId.php")
+    Call<ResponseKader> getKaderId(@Query("id_kader") String id_kader);
+
 
     // BUNDA
     @GET("bunda/getBundaId.php")
     Call<ResponseBunda> getBundaId(@Query("id_bunda") String id_bunda);
+
+    @GET("bunda/getAllBunda.php")
+    Call<ResponseBunda> getAllBunda();
 
 
     // BAYI
@@ -43,7 +49,8 @@ public interface ApiInterface {
                                @Field("bunda_id") String bunda_id);
 
     @GET("bayi/getBayiBunda.php")
-    Call<ResponseBayi> getBayiBunda(@Query("bunda_id") String bunda_id);
+    Call<ResponseBayi> getBayiBunda(@Query("bunda_id") String bunda_id,
+                                    @Query("status_bayi") String status_bayi);
 
     @GET("bayi/getAllBayi.php")
     Call<ResponseBayi> getAllBayi();

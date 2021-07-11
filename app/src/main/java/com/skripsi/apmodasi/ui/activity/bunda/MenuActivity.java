@@ -136,7 +136,7 @@ public class MenuActivity extends AppCompatActivity {
         pDialog.show();
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponseBayi> responseBayiCall = apiInterface.getBayiBunda(user_id);
+        Call<ResponseBayi> responseBayiCall = apiInterface.getBayiBunda(user_id, "Semua");
         responseBayiCall.enqueue(new Callback<ResponseBayi>() {
             @Override
             public void onResponse(Call<ResponseBayi> call, Response<ResponseBayi> response) {

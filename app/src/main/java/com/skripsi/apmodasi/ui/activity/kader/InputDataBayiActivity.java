@@ -145,7 +145,9 @@ public class InputDataBayiActivity extends AppCompatActivity {
     }
 
     private void clickDetail(View view) {
-        startActivity(new Intent(InputDataBayiActivity.this, DetailBayiKaderActivity.class));
+        Intent intent = new Intent(InputDataBayiActivity.this, DetailBayiKaderActivity.class);
+        intent.putExtra("ID_BAYI", bayi_id);
+        startActivity(intent);
     }
 
     private void loadImunisasiBayiToday(String bayi_id) {

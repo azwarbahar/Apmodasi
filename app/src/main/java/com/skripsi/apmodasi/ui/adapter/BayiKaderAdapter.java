@@ -127,7 +127,9 @@ public class BayiKaderAdapter extends RecyclerView.Adapter<BayiKaderAdapter.MyHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, DetailBayiKaderActivity.class));
+                Intent intent = new Intent(context, DetailBayiKaderActivity.class);
+                intent.putExtra("ID_BAYI", bayis.get(position).getIdBayi());
+                context.startActivity(intent);
             }
         });
 
