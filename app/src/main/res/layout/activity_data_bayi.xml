@@ -74,4 +74,17 @@
             tools:listitem="@layout/item_bayi_kader" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <TextView
+        android:id="@+id/tv_kosong"
+        android:fontFamily="casual"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/cv_search"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/grey"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:text="- Kosong -"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </RelativeLayout>

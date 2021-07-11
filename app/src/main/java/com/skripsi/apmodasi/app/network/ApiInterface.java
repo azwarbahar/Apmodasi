@@ -4,6 +4,7 @@ import com.skripsi.apmodasi.app.response.ResponseAuth;
 import com.skripsi.apmodasi.app.response.ResponseBayi;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
 import com.skripsi.apmodasi.app.response.ResponseImunisasi;
+import com.skripsi.apmodasi.app.response.ResponseKader;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -17,6 +18,11 @@ public interface ApiInterface {
     @GET("login/auth.php")
     Call<ResponseAuth> authLogin(@Query("username") String username,
                                  @Query("password") String password);
+
+
+    // KADER
+    @GET("kader/getRiwayatKader.php")
+    Call<ResponseKader> getRiwayatKader(@Query("kader_id") String kader_id);
 
 
     // BUNDA
@@ -39,6 +45,9 @@ public interface ApiInterface {
     @GET("bayi/getBayiBunda.php")
     Call<ResponseBayi> getBayiBunda(@Query("bunda_id") String bunda_id);
 
+    @GET("bayi/getAllBayi.php")
+    Call<ResponseBayi> getAllBayi();
+
     @GET("bayi/getBayiId.php")
     Call<ResponseBayi> getBayiId(@Query("id_bayi") String id_bayi);
 
@@ -49,6 +58,7 @@ public interface ApiInterface {
     // IMUNISASI
     @GET("imunisasi/getImunisasiBayi.php")
     Call<ResponseImunisasi> getImunisasiBayi(@Query("bayi_id") String bayi_id);
+
     @GET("imunisasi/getImunisasiStatusBayi.php")
     Call<ResponseImunisasi> getImunisasiStatusBayi(@Query("bayi_id") String bayi_id,
                                                    @Query("status_imunisasi") String status_imunisasi);
@@ -66,6 +76,10 @@ public interface ApiInterface {
     @GET("imunisasi/getTinggiBayiToday.php")
     Call<ResponseImunisasi> getTinggiBayiToday(@Query("bayi_id") String bayi_id,
                                                @Query("tanggal_tb") String tanggal_tb);
+
+    @GET("imunisasi/getImunisasiBayiToday.php")
+    Call<ResponseImunisasi> getImunisasiBayiToday(@Query("bayi_id") String bayi_id,
+                                                  @Query("tanggal_imunisasi") String tanggal_imunisasi);
 
     @FormUrlEncoded
     @POST("imunisasi/addBeratBayi.php")

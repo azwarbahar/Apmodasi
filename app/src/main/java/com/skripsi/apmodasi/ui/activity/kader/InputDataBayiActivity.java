@@ -32,7 +32,6 @@ import com.skripsi.apmodasi.data.model.BeratBadan;
 import com.skripsi.apmodasi.data.model.Imunisasi;
 import com.skripsi.apmodasi.data.model.TinggiBadan;
 import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
-import com.skripsi.apmodasi.ui.activity.bunda.DetailBayiActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,6 +52,7 @@ public class InputDataBayiActivity extends AppCompatActivity {
 
     private BeratBadan beratBadan;
     private TinggiBadan tinggiBadan;
+    private Imunisasi imunisasi;
     private ArrayList<Imunisasi> imunisasis;
 
     private Bayi bayi;
@@ -75,6 +75,8 @@ public class InputDataBayiActivity extends AppCompatActivity {
     private RelativeLayout rl_berat_bayi;
     private RelativeLayout rl_batal;
 
+    private CardView cv_detail_bayi;
+
     private boolean berat_is_ready = true;
     private boolean tinggi_is_ready = true;
     private boolean imunisasi_is_ready = true;
@@ -87,6 +89,7 @@ public class InputDataBayiActivity extends AppCompatActivity {
         mPreferences = getSharedPreferences(Constanta.MY_SHARED_PREFERENCES, MODE_PRIVATE);
         user_id = mPreferences.getString(Constanta.SESSION_ID_USER, "");
 
+        cv_detail_bayi = findViewById(R.id.cv_detail_bayi);
         rl_imunisasi_bayi = findViewById(R.id.rl_imunisasi_bayi);
         rl_tinggi_bayi = findViewById(R.id.rl_tinggi_bayi);
         rl_berat_bayi = findViewById(R.id.rl_berat_bayi);
@@ -136,6 +139,97 @@ public class InputDataBayiActivity extends AppCompatActivity {
         rl_imunisasi_bayi.setOnClickListener(this::clickImunisasi);
         rl_tinggi_bayi.setOnClickListener(this::clickTinggi);
         rl_berat_bayi.setOnClickListener(this::clickBerat);
+
+        cv_detail_bayi.setOnClickListener(this::clickDetail);
+
+    }
+
+    private void clickDetail(View view) {
+        startActivity(new Intent(InputDataBayiActivity.this, DetailBayiKaderActivity.class));
+    }
+
+    private void loadImunisasiBayiToday(String bayi_id) {
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        String tanggal_send = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseImunisasi> responseImunisasiCall = apiInterface.getImunisasiBayiToday(bayi_id, tanggal_send);
+        responseImunisasiCall.enqueue(new Callback<ResponseImunisasi>() {
+            @Override
+            public void onResponse(Call<ResponseImunisasi> call, Response<ResponseImunisasi> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()) {
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")) {
+                        imunisasi = response.body().getImunisasi_bayi_data();
+                        if (imunisasi == null) {
+                            Log.e("Imunisasi", " data null");
+                            rl_imunisasi_bayi.setBackground(ContextCompat.getDrawable(
+                                    InputDataBayiActivity.this, R.drawable.bg_radius_stroke_white));
+                            imunisasi_is_ready = true;
+                        } else {
+                            Log.e("Imunisasi", " harusnya ada");
+                            rl_imunisasi_bayi.setBackground(ContextCompat.getDrawable(
+                                    InputDataBayiActivity.this, R.drawable.bg_radius_stroke_grey));
+                            imunisasi_is_ready = false;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
+                pDialog.dismiss();
+            }
+        });
+    }
+
+    private void loadTinggiBadanBayi(String bayi_id) {
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        String tanggal_send = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseImunisasi> responseImunisasiCall = apiInterface.getTinggiBayiToday(bayi_id, tanggal_send);
+        responseImunisasiCall.enqueue(new Callback<ResponseImunisasi>() {
+            @Override
+            public void onResponse(Call<ResponseImunisasi> call, Response<ResponseImunisasi> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()) {
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")) {
+                        tinggiBadan = response.body().getTinggi_bayi_data();
+                        if (tinggiBadan == null) {
+                            Log.e("Tinggi", " data null");
+                            rl_tinggi_bayi.setBackground(ContextCompat.getDrawable(
+                                    InputDataBayiActivity.this, R.drawable.bg_radius_stroke_white));
+                            tinggi_is_ready = true;
+                        } else {
+                            Log.e("Tinggi", " harusnya ada");
+                            rl_tinggi_bayi.setBackground(ContextCompat.getDrawable(
+                                    InputDataBayiActivity.this, R.drawable.bg_radius_stroke_grey));
+                            tinggi_is_ready = false;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
+                pDialog.dismiss();
+            }
+        });
     }
 
     private void loadBeratBadanBayi(String bayi_id) {
@@ -158,7 +252,7 @@ public class InputDataBayiActivity extends AppCompatActivity {
                     String kode = response.body().getKode();
                     if (kode.equals("1")) {
                         beratBadan = response.body().getBerat_bayi_data();
-                        if (beratBadan == null){
+                        if (beratBadan == null) {
                             Log.e("Berat", " data null");
                             rl_berat_bayi.setBackground(ContextCompat.getDrawable(
                                     InputDataBayiActivity.this, R.drawable.bg_radius_stroke_white));
@@ -170,17 +264,17 @@ public class InputDataBayiActivity extends AppCompatActivity {
                             berat_is_ready = false;
                         }
                     } else {
-                        showSnackbar("Memanggil Berat bayi gagal!");
+//                        showSnackbar("Memanggil Berat bayi gagal!");
                     }
                 } else {
-                    showSnackbar("Memanggil Berat bayi gagal!");
+//                    showSnackbar("Memanggil Berat bayi gagal!");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
                 pDialog.dismiss();
-                showSnackbar("Memanggil Berat bayi gagal!");
+//                showSnackbar("Memanggil Berat bayi gagal!");
             }
         });
     }
@@ -211,7 +305,7 @@ public class InputDataBayiActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
                 pDialog.dismiss();
-                showSnackbar("Memanggil Imunisasi Gagal!");
+//                showSnackbar("Memanggil Imunisasi Gagal!");
 
             }
         });
@@ -220,16 +314,27 @@ public class InputDataBayiActivity extends AppCompatActivity {
 
     private void initImunisasi(ArrayList<Imunisasi> imunisasis) {
 
-        if (imunisasis.size() < 1){
+        if (imunisasis.size() < 1) {
             Log.e("Imunisasi", "Kosong");
         }
         no_imunisasiArray = new String[imunisasis.size()];
         nama_imunisasiArray = new String[imunisasis.size()];
-        for (int a = 0; a < imunisasis.size(); a++){
-                no_imunisasiArray[a] = imunisasis.get(a).getNo_imunisasi();
-                nama_imunisasiArray[a] = imunisasis.get(a).getNama_imunisasi();
+        for (int a = 0; a < imunisasis.size(); a++) {
+            no_imunisasiArray[a] = imunisasis.get(a).getNo_imunisasi();
+            nama_imunisasiArray[a] = imunisasis.get(a).getNama_imunisasi();
+        }
 
-            Log.e("Imunisasi", nama_imunisasiArray[a]);
+        for (int i = 0; i < imunisasis.size(); i++) {
+
+            String status_imunisasi = imunisasis.get(i).getStatus_imunisasi();
+            String keterangan_imunisasi = imunisasis.get(i).getKeterangan_imunisasi();
+            if (status_imunisasi.equals("Belum") && keterangan_imunisasi.equals("Wajib")) {
+                tv_imunisasi.setText(imunisasis.get(i).getNama_imunisasi());
+//                    showSnackbar("ada data");
+                break;
+            } else {
+                tv_imunisasi.setText("Imunisasi Selesai");
+            }
         }
 
 
@@ -313,7 +418,9 @@ public class InputDataBayiActivity extends AppCompatActivity {
     private void initDataBayi(Bayi bayi) {
         bayi_id = bayi.getIdBayi();
         loadBeratBadanBayi(bayi_id);
+        loadTinggiBadanBayi(bayi_id);
         loadImunisasiBayi(bayi_id);
+        loadImunisasiBayiToday(bayi_id);
         bunda_id = bayi.getBundaId();
         tv_usia.setText(settingDate(bayi.getTanggalLahirBayi()));
         tv_nama_bayi.setText(bayi.getNamaBayi());
@@ -346,38 +453,46 @@ public class InputDataBayiActivity extends AppCompatActivity {
 
     private void clickImunisasi(View view) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Pilih Imunisasi");
-        builder.setItems(nama_imunisasiArray, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // the user clicked on colors[which]
+        if (imunisasi_is_ready) {
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Pilih Imunisasi");
+            builder.setItems(nama_imunisasiArray, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // the user clicked on colors[which]
 
-                        SweetAlertDialog pDialog = new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-                        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                        pDialog.setTitleText("Loading..");
-                        pDialog.setCancelable(false);
-                        pDialog.show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                pDialog.dismiss();
-                                dialog.dismiss();
-                                sendImunisasi(which);
-                            }
-                        }, 2500);
-                    }
-                }, 400);
+                            SweetAlertDialog pDialog = new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+                            pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                            pDialog.setTitleText("Loading..");
+                            pDialog.setCancelable(false);
+                            pDialog.show();
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    pDialog.dismiss();
+                                    dialog.dismiss();
+                                    sendImunisasi(which);
+                                }
+                            }, 2500);
+                        }
+                    }, 400);
 
 
-            }
-        });
-        builder.show();
+                }
+            });
+            builder.show();
+        } else {
+            new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Sorry")
+                    .setContentText("Bayi sudah imunisasi hari ini.")
+                    .show();
+        }
     }
 
     private void sendImunisasi(int whichImunisasi) {
@@ -387,7 +502,7 @@ public class InputDataBayiActivity extends AppCompatActivity {
         dialogView = inflater.inflate(R.layout.input_dialog_imunisasi_bayi, null);
         dialog.setView(dialogView);
         dialog.setCancelable(false);
-        dialog.setTitle("Berat Bayi");
+        dialog.setTitle("Catatan Bayi");
         dialog.setPositiveButton("Simpan", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -423,6 +538,7 @@ public class InputDataBayiActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                 sweetAlertDialog.dismiss();
+                                                loadImunisasiBayiToday(bayi_id);
                                                 dialog.dismiss();
                                             }
                                         })
@@ -465,7 +581,7 @@ public class InputDataBayiActivity extends AppCompatActivity {
 
     private void clickBerat(View view) {
 
-        if (berat_is_ready){
+        if (berat_is_ready) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(InputDataBayiActivity.this);
             LayoutInflater inflater = getLayoutInflater();
             dialogView = inflater.inflate(R.layout.input_dialog_berat_bayi, null);
@@ -559,88 +675,96 @@ public class InputDataBayiActivity extends AppCompatActivity {
 
     private void clickTinggi(View view) {
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(InputDataBayiActivity.this);
-        LayoutInflater inflater = getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.input_dialog_tinggi_bayi, null);
-        dialog.setView(dialogView);
-        dialog.setCancelable(false);
-        dialog.setTitle("Tinggi Bayi");
-        dialog.setPositiveButton("Simpan", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                EditText et_tinggi = dialogView.findViewById(R.id.et_tinggi);
-                EditText et_catatan_tinggi = dialogView.findViewById(R.id.et_catatan_tinggi);
-                if (et_tinggi.getText().toString().equals("")) {
-                    et_tinggi.setError("Lengkapi");
-                } else {
-                    SweetAlertDialog pDialog = new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-                    pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                    pDialog.setTitleText("Loading");
-                    pDialog.setCancelable(false);
-                    pDialog.show();
+        if (tinggi_is_ready) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(InputDataBayiActivity.this);
+            LayoutInflater inflater = getLayoutInflater();
+            dialogView = inflater.inflate(R.layout.input_dialog_tinggi_bayi, null);
+            dialog.setView(dialogView);
+            dialog.setCancelable(false);
+            dialog.setTitle("Tinggi Bayi");
+            dialog.setPositiveButton("Simpan", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    EditText et_tinggi = dialogView.findViewById(R.id.et_tinggi);
+                    EditText et_catatan_tinggi = dialogView.findViewById(R.id.et_catatan_tinggi);
+                    if (et_tinggi.getText().toString().equals("")) {
+                        et_tinggi.setError("Lengkapi");
+                    } else {
+                        SweetAlertDialog pDialog = new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+                        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                        pDialog.setTitleText("Loading");
+                        pDialog.setCancelable(false);
+                        pDialog.show();
 
-                    String bayi_id_send = bayi_id;
-                    String berat_send = et_tinggi.getText().toString();
-                    String catatan_send = et_catatan_tinggi.getText().toString();
-                    String kader_id_send = user_id;
-                    String tanggal_send = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                        String bayi_id_send = bayi_id;
+                        String berat_send = et_tinggi.getText().toString();
+                        String catatan_send = et_catatan_tinggi.getText().toString();
+                        String kader_id_send = user_id;
+                        String tanggal_send = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-                    ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-                    Call<ResponseImunisasi> responseImunisasiCall = apiInterface.addTinggiBayi(bayi_id_send, berat_send,
-                            catatan_send, kader_id_send, tanggal_send);
-                    responseImunisasiCall.enqueue(new Callback<ResponseImunisasi>() {
-                        @Override
-                        public void onResponse(Call<ResponseImunisasi> call, Response<ResponseImunisasi> response) {
-                            pDialog.dismiss();
-                            if (response.isSuccessful()) {
-                                String kode = response.body().getKode();
-                                if (kode.equals("1")) {
-                                    new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                            .setTitleText("Success..")
-                                            .setContentText("Berhasil Mengisi Tinggi Bayi..")
-                                            .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
-                                                @Override
-                                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                                    sweetAlertDialog.dismiss();
-                                                    dialog.dismiss();
-                                                }
-                                            })
-                                            .show();
+                        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+                        Call<ResponseImunisasi> responseImunisasiCall = apiInterface.addTinggiBayi(bayi_id_send, berat_send,
+                                catatan_send, kader_id_send, tanggal_send);
+                        responseImunisasiCall.enqueue(new Callback<ResponseImunisasi>() {
+                            @Override
+                            public void onResponse(Call<ResponseImunisasi> call, Response<ResponseImunisasi> response) {
+                                pDialog.dismiss();
+                                if (response.isSuccessful()) {
+                                    String kode = response.body().getKode();
+                                    if (kode.equals("1")) {
+                                        new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                                .setTitleText("Success..")
+                                                .setContentText("Berhasil Mengisi Tinggi Bayi..")
+                                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        sweetAlertDialog.dismiss();
+                                                        loadTinggiBadanBayi(bayi_id);
+                                                        dialog.dismiss();
+                                                    }
+                                                })
+                                                .show();
+                                    } else {
+                                        new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                                .setTitleText("Gagal..")
+                                                .setContentText("Terjadi kesalahan!, Kode : " + kode)
+                                                .show();
+                                    }
                                 } else {
                                     new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
                                             .setTitleText("Gagal..")
-                                            .setContentText("Terjadi kesalahan!, Kode : " + kode)
+                                            .setContentText("Terjadi kesalahan!")
                                             .show();
                                 }
-                            } else {
-                                new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                        .setTitleText("Gagal..")
-                                        .setContentText("Terjadi kesalahan!")
-                                        .show();
+
                             }
 
-                        }
+                            @Override
+                            public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
+                                pDialog.dismiss();
+                                new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("Gagal..")
+                                        .setContentText("Terjadi kesalahan Sistem!")
+                                        .show();
 
-                        @Override
-                        public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
-                            pDialog.dismiss();
-                            new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                    .setTitleText("Gagal..")
-                                    .setContentText("Terjadi kesalahan Sistem!")
-                                    .show();
-
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
-            }
-        });
-        dialog.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+            });
+            dialog.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
 
-        dialog.show();
+            dialog.show();
+        } else {
+            new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Sorry")
+                    .setContentText("Tinggi Bayi sudah diinput hari ini.")
+                    .show();
+        }
     }
 }

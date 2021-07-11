@@ -30,6 +30,13 @@ public class ResponseImunisasi {
     @SerializedName("berat_bayi_data")
     private BeratBadan berat_bayi_data;
 
+    @SerializedName("imunisasi_bayi_data")
+    private Imunisasi imunisasi_bayi_data;
+
+    public Imunisasi getImunisasi_bayi_data() {
+        return imunisasi_bayi_data;
+    }
+
     public TinggiBadan getTinggi_bayi_data() {
         return tinggi_bayi_data;
     }

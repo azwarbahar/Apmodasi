@@ -411,7 +411,6 @@
 
                         </androidx.cardview.widget.CardView>
 
-
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -504,8 +503,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dimen_20dp"
             android:fontFamily="casual"
-            tools:text="098721"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="098721" />
 
         <TextView
             android:id="@+id/tv_nama_bayi_pannel"
@@ -516,10 +515,10 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="50dp"
             android:fontFamily="casual"
-            tools:text="Nama Bayi"
             android:textColor="@color/purple_200"
             android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Nama Bayi" />
 
     </RelativeLayout>
 

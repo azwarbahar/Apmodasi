@@ -15,8 +15,15 @@ public class ResponseBayi{
 	@SerializedName("bayi_data")
 	private List<Bayi> bayiData;
 
+	@SerializedName("bayi")
+	private List<Bayi> bayi;
+
 	@SerializedName("result_bayi")
 	private Bayi result_bayi;
+
+	public List<Bayi> getBayi() {
+		return bayi;
+	}
 
 	public Bayi getResult_bayi() {
 		return result_bayi;

@@ -100,13 +100,25 @@
         android:textSize="16dp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_nama_bunda"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="casual"
+        android:text="Rekomendasi Imunisasi"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
     <RelativeLayout
         android:id="@+id/rl_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_nama_bunda"
+        android:layout_below="@id/tv2"
         android:layout_marginHorizontal="@dimen/dimen_20dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/bg_info_radius"
         android:paddingHorizontal="16dp"
         android:paddingVertical="10dp">
@@ -144,6 +156,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_info"
@@ -239,6 +252,35 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_detail_bayi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl1"
+        android:layout_marginHorizontal="@dimen/dimen_20dp"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gradien_primary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:paddingVertical="10dp"
+                android:text="Detail Bayi"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>

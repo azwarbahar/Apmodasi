@@ -29,10 +29,10 @@ public class DetailBundaActivity extends AppCompatActivity {
     }
 
     private void loadDataBayi(){
-        rv_bayi = findViewById(R.id.rv_bayi);
-        bayiKaderAdapter = new BayiKaderAdapter(DetailBundaActivity.this);
-        rv_bayi.setLayoutManager(new LinearLayoutManager(DetailBundaActivity.this));
-        rv_bayi.setAdapter(bayiKaderAdapter);
+//        rv_bayi = findViewById(R.id.rv_bayi);
+//        bayiKaderAdapter = new BayiKaderAdapter(DetailBundaActivity.this);
+//        rv_bayi.setLayoutManager(new LinearLayoutManager(DetailBundaActivity.this));
+//        rv_bayi.setAdapter(bayiKaderAdapter);
     }
 
     @Override
