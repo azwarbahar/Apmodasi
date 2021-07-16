@@ -60,7 +60,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv6"
         android:layout_marginHorizontal="16dp"
-        android:checkedButton="@+id/radio_laki"
         android:orientation="horizontal">
 
         <RadioButton

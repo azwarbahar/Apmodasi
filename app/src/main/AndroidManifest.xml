@@ -13,10 +13,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Apmodasi"
+        android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.kader.DetailBayiKaderActivity"></activity>
+        <activity android:name=".ui.activity.bunda.RiwayatBayiActivity"></activity>
+        <activity android:name=".ui.activity.kader.DetailBayiKaderActivity" />
         <activity android:name=".ui.activity.kader.DetailBundaActivity" />
         <activity android:name=".ui.activity.kader.InputDataBayiActivity" />
         <activity android:name=".ui.activity.kader.ScanActivity" />

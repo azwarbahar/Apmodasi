@@ -20,6 +20,13 @@ public class ResponseKader {
     @SerializedName("riwayat_kader")
     private List<RiwayatKader> riwayat_kader;
 
+    @SerializedName("riwayat_bayi")
+    private List<RiwayatKader> riwayat_bayi;
+
+    public List<RiwayatKader> getRiwayat_bayi() {
+        return riwayat_bayi;
+    }
+
     public String getKode() {
         return kode;
     }

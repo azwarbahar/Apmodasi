@@ -58,8 +58,23 @@ public interface ApiInterface {
     @GET("bayi/getBayiId.php")
     Call<ResponseBayi> getBayiId(@Query("id_bayi") String id_bayi);
 
+    @GET("bayi/getRiwayatBayi.php")
+    Call<ResponseKader> getRiwayatBayi(@Query("bayi_id") String bayi_id);
+
     @GET("bayi/getBayiNomor.php")
     Call<ResponseBayi> getBayiNomor(@Query("nomor_bayi") String nomor_bayi);
+
+    @FormUrlEncoded
+    @POST("bayi/editBayi.php")
+    Call<ResponseBayi> editBayi(@Field("id_bayi") String id_bayi,
+                                @Field("nama_bayi") String nama_bayi,
+                                @Field("tanggal_lahir_bayi") String tanggal_lahir_bayi,
+                                @Field("jenis_kelamin_bayi") String jenis_kelamin_bayi);
+
+    @FormUrlEncoded
+    @POST("bayi/editFotoBayi.php")
+    Call<ResponseBayi> editFotoBayi(@Field("id_bayi") String id_bayi,
+                                    @Field("foto_bayi") String foto_bayi);
 
 
     // IMUNISASI

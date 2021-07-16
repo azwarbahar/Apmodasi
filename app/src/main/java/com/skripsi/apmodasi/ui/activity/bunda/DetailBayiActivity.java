@@ -19,6 +19,7 @@ import lecho.lib.hellocharts.model.AxisValue;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
@@ -72,7 +73,9 @@ public class DetailBayiActivity extends AppCompatActivity {
     private TextView tv_interval_imunisasi;
     private TextView tv_imunisasi_done;
     private ImageView img_foto;
+    private CardView cv_riwayat;
 
+    private boolean first_launc = true;
 
     private RelativeLayout rl_qr_code;
     // sliding pannel
@@ -143,6 +146,17 @@ public class DetailBayiActivity extends AppCompatActivity {
                 showPanel();
             }
         });
+
+        cv_riwayat = findViewById(R.id.cv_riwayat);
+        cv_riwayat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailBayiActivity.this, RiwayatBayiActivity.class);
+                intent.putExtra("id_bayi", id_bayi_intent);
+                startActivity(intent);
+            }
+        });
+
         loadDataBayi(id_bayi_intent);
         loadImunisasiBayi(id_bayi_intent);
         loadBeratBadanBayi(id_bayi_intent);
@@ -573,8 +587,9 @@ public class DetailBayiActivity extends AppCompatActivity {
     }
 
     private void clickEdit(View view) {
-
-        startActivity(new Intent(DetailBayiActivity.this, EditBayiActivity.class));
+        Intent intent = new Intent(DetailBayiActivity.this, EditBayiActivity.class);
+        intent.putExtra("id_bayi", id_bayi_intent);
+        startActivity(intent);
 
     }
 
@@ -586,6 +601,16 @@ public class DetailBayiActivity extends AppCompatActivity {
             sliding_layout.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (first_launc){
+            first_launc = false;
+        } else {
+            loadDataBayi(id_bayi_intent);
+        }
     }
 
     @Override
