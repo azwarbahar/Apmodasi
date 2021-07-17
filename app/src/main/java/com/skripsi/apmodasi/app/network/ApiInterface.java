@@ -35,6 +35,18 @@ public interface ApiInterface {
     @GET("bunda/getAllBunda.php")
     Call<ResponseBunda> getAllBunda();
 
+    @FormUrlEncoded
+    @POST("bunda/editBunda.php")
+    Call<ResponseBunda> editBunda(@Field("id_bunda") String id_bunda,
+                                  @Field("nama_bunda") String nama_bunda,
+                                  @Field("kontak_bunda") String kontak_bunda,
+                                  @Field("alamat_bunda") String alamat_bunda);
+
+    @GET("bunda/editPasswordBunda.php")
+    Call<ResponseBunda> editPasswordBunda(@Query("id_bunda") String id_bunda,
+                                          @Query("password_lama") String password_lama,
+                                          @Query("password_baru") String password_baru);
+
 
     // BAYI
     @FormUrlEncoded

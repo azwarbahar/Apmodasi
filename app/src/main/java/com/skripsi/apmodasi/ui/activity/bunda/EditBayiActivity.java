@@ -85,7 +85,7 @@ public class EditBayiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String tanggal_lahir;
                 String nama_lenglap = et_nama_lengkap.getText().toString();
-                if (tanggal_lahir_send.equals("")){
+                if (tanggal_lahir_send.equals("")) {
                     tanggal_lahir = tanggal_lahir_default;
                 } else {
                     tanggal_lahir = tanggal_lahir_send;

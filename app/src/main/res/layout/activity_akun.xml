@@ -55,6 +55,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv_edit_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cv_foto"
@@ -195,7 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cv3"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/bg_stroke_radius_primary"
             android:elevation="8dp">
 

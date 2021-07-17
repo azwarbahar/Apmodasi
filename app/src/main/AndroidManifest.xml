@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +18,10 @@
         android:theme="@style/Theme.Apmodasi"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.bunda.RiwayatBayiActivity"></activity>
+        <activity android:name=".ui.activity.ImagePickerActivity"></activity>
+        <activity android:name=".ui.activity.bunda.EditPasswordActivity" />
+        <activity android:name=".ui.activity.bunda.EditProfileActivity" />
+        <activity android:name=".ui.activity.bunda.RiwayatBayiActivity" />
         <activity android:name=".ui.activity.kader.DetailBayiKaderActivity" />
         <activity android:name=".ui.activity.kader.DetailBundaActivity" />
         <activity android:name=".ui.activity.kader.InputDataBayiActivity" />
