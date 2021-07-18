@@ -32,6 +32,11 @@ public interface ApiInterface {
     @GET("bunda/getBundaId.php")
     Call<ResponseBunda> getBundaId(@Query("id_bunda") String id_bunda);
 
+    @FormUrlEncoded
+    @POST("bunda/editFotoBunda.php")
+    Call<ResponseBunda> editFotoBunda(@Field("id_bunda") String id_bunda,
+                                      @Field("foto_bunda") String foto_bunda);
+
     @GET("bunda/getAllBunda.php")
     Call<ResponseBunda> getAllBunda();
 

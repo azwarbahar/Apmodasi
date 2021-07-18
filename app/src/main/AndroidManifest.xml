@@ -45,6 +45,23 @@
         <activity android:name=".ui.activity.bunda.MenuActivity" />
         <activity android:name=".ui.activity.intro.LoginActivity" />
         <activity android:name=".MainActivity" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait" />
+        <!-- cache directory file provider paths -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAISwXwMy9RIBS6qnrxkC3fPRL3hfSrJSg" />
     </application>
 
 </manifest>

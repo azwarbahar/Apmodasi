@@ -1,16 +1,22 @@
 package com.skripsi.apmodasi.ui.activity.bunda;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Base64;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +38,8 @@ import com.skripsi.apmodasi.ui.activity.ImagePickerActivity;
 import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
 import com.skripsi.apmodasi.ui.activity.intro.LoginActivity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -55,6 +63,8 @@ public class AkunActivity extends AppCompatActivity {
 
     private RelativeLayout rl_edit_password;
     private RelativeLayout rl_logout;
+
+    private Bitmap bitmap_foto;
 
     private static final String TAG = AkunActivity.class.getSimpleName();
     public static final int REQUEST_IMAGE = 100;
@@ -101,6 +111,86 @@ public class AkunActivity extends AppCompatActivity {
         img_profile.setOnClickListener(this::clickFoto);
 
         loadDataAkun(user_id);
+
+        ImagePickerActivity.clearCache(this);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri uri = data.getParcelableExtra("path");
+                try {
+                    // You can update this bitmap to your server
+                    bitmap_foto = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    startUpdatePhoto(bitmap_foto);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    private void startUpdatePhoto(Bitmap bitmap_foto) {
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap_foto.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgByte = byteArrayOutputStream.toByteArray();
+        String foto_send = Base64.encodeToString(imgByte, Base64.DEFAULT);
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseBunda> responseBundaCall = apiInterface.editFotoBunda(user_id, foto_send);
+        responseBundaCall.enqueue(new Callback<ResponseBunda>() {
+            @Override
+            public void onResponse(Call<ResponseBunda> call, Response<ResponseBunda> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()) {
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")) {
+                        SweetAlertDialog success = new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                        success.setTitleText("Success..");
+                        success.setCancelable(false);
+                        success.setContentText("Edit Foto Berhasil");
+                        success.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                                loadDataAkun(user_id);
+                            }
+                        });
+                        success.show();
+                    } else {
+                        new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Uups..")
+                                .setContentText(response.body().getPesan())
+                                .show();
+                    }
+                } else {
+                    new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Uups..")
+                            .setContentText("Terjadi kesalahan!")
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBunda> call, Throwable t) {
+                pDialog.dismiss();
+                new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Uups..")
+                        .setContentText(t.getLocalizedMessage())
+                        .show();
+            }
+        });
 
     }
 
