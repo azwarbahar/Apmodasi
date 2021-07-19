@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.app.network.ApiClient;
 import com.skripsi.apmodasi.app.network.ApiInterface;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
+import com.skripsi.apmodasi.app.response.ResponsePhoto;
 import com.skripsi.apmodasi.app.util.Constanta;
 import com.skripsi.apmodasi.data.model.Bunda;
 import com.skripsi.apmodasi.ui.activity.ImagePickerActivity;
@@ -39,10 +41,14 @@ import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
 import com.skripsi.apmodasi.ui.activity.intro.LoginActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -125,7 +131,7 @@ public class AkunActivity extends AppCompatActivity {
                 try {
                     // You can update this bitmap to your server
                     bitmap_foto = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                    startUpdatePhoto(bitmap_foto);
+                    startUpdatePhoto(uri);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -134,12 +140,12 @@ public class AkunActivity extends AppCompatActivity {
 
     }
 
-    private void startUpdatePhoto(Bitmap bitmap_foto) {
+    private void startUpdatePhoto(Uri uri) {
 
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap_foto.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] imgByte = byteArrayOutputStream.toByteArray();
-        String foto_send = Base64.encodeToString(imgByte, Base64.DEFAULT);
+//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//        bitmap_foto.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+//        byte[] imgByte = byteArrayOutputStream.toByteArray();
+//        String foto_send = Base64.encodeToString(imgByte, Base64.DEFAULT);
 
         SweetAlertDialog pDialog = new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -147,15 +153,20 @@ public class AkunActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
         pDialog.show();
 
+        File file = new File(uri.getPath());
+        RequestBody foto = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part foto_send = MultipartBody.Part.createFormData("foto_bunda", file.getName(), foto);
+        RequestBody id_bunda = RequestBody.create(MediaType.parse("text/plain"), user_id);
+
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponseBunda> responseBundaCall = apiInterface.editFotoBunda(user_id, foto_send);
-        responseBundaCall.enqueue(new Callback<ResponseBunda>() {
+        Call<ResponsePhoto> responseBundaCall = apiInterface.editFotoBunda(id_bunda, foto_send);
+        responseBundaCall.enqueue(new Callback<ResponsePhoto>() {
             @Override
-            public void onResponse(Call<ResponseBunda> call, Response<ResponseBunda> response) {
+            public void onResponse(Call<ResponsePhoto> call, Response<ResponsePhoto> response) {
                 pDialog.dismiss();
                 if (response.isSuccessful()) {
-                    String kode = response.body().getKode();
-                    if (kode.equals("1")) {
+//                    String kode = response.body().getKode();
+                    if (!response.body().isError()) {
                         SweetAlertDialog success = new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.SUCCESS_TYPE);
                         success.setTitleText("Success..");
                         success.setCancelable(false);
@@ -171,7 +182,7 @@ public class AkunActivity extends AppCompatActivity {
                     } else {
                         new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Uups..")
-                                .setContentText(response.body().getPesan())
+                                .setContentText(response.body().getMessage())
                                 .show();
                     }
                 } else {
@@ -183,12 +194,16 @@ public class AkunActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseBunda> call, Throwable t) {
+            public void onFailure(Call<ResponsePhoto> call, Throwable t) {
                 pDialog.dismiss();
                 new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Uups..")
                         .setContentText(t.getLocalizedMessage())
                         .show();
+
+
+                Log.e("FOTO",  "Locazed : "+t.getLocalizedMessage());
+                Log.e("FOTO", "Nessage : "+t.getMessage());
             }
         });
 
@@ -367,6 +382,8 @@ public class AkunActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mPreferences = getSharedPreferences(Constanta.MY_SHARED_PREFERENCES, MODE_PRIVATE);
+        user_id = mPreferences.getString(Constanta.SESSION_ID_USER, "");
         loadDataAkun(user_id);
     }
 

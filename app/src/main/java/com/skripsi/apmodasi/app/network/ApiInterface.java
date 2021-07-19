@@ -5,12 +5,17 @@ import com.skripsi.apmodasi.app.response.ResponseBayi;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
 import com.skripsi.apmodasi.app.response.ResponseImunisasi;
 import com.skripsi.apmodasi.app.response.ResponseKader;
+import com.skripsi.apmodasi.app.response.ResponsePhoto;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -32,10 +37,10 @@ public interface ApiInterface {
     @GET("bunda/getBundaId.php")
     Call<ResponseBunda> getBundaId(@Query("id_bunda") String id_bunda);
 
-    @FormUrlEncoded
-    @POST("bunda/editFotoBunda.php")
-    Call<ResponseBunda> editFotoBunda(@Field("id_bunda") String id_bunda,
-                                      @Field("foto_bunda") String foto_bunda);
+    @Multipart
+    @POST("bunda/uploadFotoBunda.php")
+    Call<ResponsePhoto> editFotoBunda(@Part("id_bunda") RequestBody id_bunda,
+                                      @Part MultipartBody.Part foto_bunda);
 
     @GET("bunda/getAllBunda.php")
     Call<ResponseBunda> getAllBunda();

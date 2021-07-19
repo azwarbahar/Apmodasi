@@ -7,17 +7,17 @@ import java.util.List;
 
 public class ResponseBunda{
 
-	@SerializedName("result_bunda")
-	private Bunda bunda;
-
-	@SerializedName("bunda_data")
-	private List<Bunda> bunda_data;
-
 	@SerializedName("kode")
 	private String kode;
 
 	@SerializedName("pesan")
 	private String pesan;
+
+	@SerializedName("result_bunda")
+	private Bunda bunda;
+
+	@SerializedName("bunda_data")
+	private List<Bunda> bunda_data;
 
 	public List<Bunda> getBunda_data() {
 		return bunda_data;
