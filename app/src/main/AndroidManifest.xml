@@ -18,7 +18,8 @@
         android:theme="@style/Theme.Apmodasi"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.ImagePickerActivity"></activity>
+        <activity android:name=".ui.activity.bunda.BacaanActivity"></activity>
+        <activity android:name=".ui.activity.ImagePickerActivity" />
         <activity android:name=".ui.activity.bunda.EditPasswordActivity" />
         <activity android:name=".ui.activity.bunda.EditProfileActivity" />
         <activity android:name=".ui.activity.bunda.RiwayatBayiActivity" />
@@ -47,8 +48,7 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait" />
-        <!-- cache directory file provider paths -->
+            android:screenOrientation="portrait" /> <!-- cache directory file provider paths -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

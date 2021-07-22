@@ -60,6 +60,7 @@ public class MenuActivity extends AppCompatActivity {
     private TextView tv_telpon;
     private ImageView foto_profil;
     private ImageView img_refresh;
+    private CardView cv_bacaan;
 
     private DatePickerDialog datePickerDialog;
 
@@ -101,6 +102,7 @@ public class MenuActivity extends AppCompatActivity {
         tv_telpon = findViewById(R.id.tv_telpon);
         foto_profil = findViewById(R.id.foto_profil);
         img_refresh = findViewById(R.id.img_refresh);
+        cv_bacaan = findViewById(R.id.cv_bacaan);
 
 
         rv_bayi = findViewById(R.id.rv_bayi);
@@ -114,6 +116,7 @@ public class MenuActivity extends AppCompatActivity {
         cv_profile.setOnClickListener(this::clickProfile);
         cv_foto.setOnClickListener(this::clickPhoto);
         rl_simpan.setOnClickListener(this::clickSimpan);
+        cv_bacaan.setOnClickListener(this::clickBacaan);
 
         loadDataBayi(user_id);
         loadDataBunda(user_id);
@@ -125,6 +128,10 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void clickBacaan(View view) {
+        startActivity(new Intent(MenuActivity.this, BacaanActivity.class));
     }
 
     private void loadDataBayi(String user_id) {

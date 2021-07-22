@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.bunda.BacaanActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_marginBottom="15dp"
+        style="@style/Widget.AppCompat.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:elevation="6dp"
+        app:theme="@style/ToolbarTheme"
+        app:title="Bacaan"
+        app:titleTextColor="@color/purple_200" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:textSize="16dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_200"
+        android:text="1. Menambah Tinggi Badan Anak Sejak Balita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:textSize="16dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_200"
+        android:text="2. Belajar KMS Tumbuh Kembang Anak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv3"
+        android:textSize="16dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_200"
+        android:text="3. Kenali Berat Badan Ideal Balita 1 Tahun (0-12 bulan ) Agar Anak Tumbuh Optimal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv4"
+        android:textSize="16dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_200"
+        android:text="asa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv5"
+        android:textSize="16dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_200"
+        android:text="asa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv6"
+        android:textSize="16dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_200"
+        android:text="asa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv7"
+        android:textSize="16dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_200"
+        android:text="asa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv8"
+        android:textSize="16dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_200"
+        android:text="asa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

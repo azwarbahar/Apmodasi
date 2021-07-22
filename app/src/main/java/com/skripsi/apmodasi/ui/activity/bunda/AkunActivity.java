@@ -131,7 +131,7 @@ public class AkunActivity extends AppCompatActivity {
                 try {
                     // You can update this bitmap to your server
                     bitmap_foto = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                    startUpdatePhoto(uri);
+                    startUpdatePhoto(bitmap_foto);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -140,12 +140,12 @@ public class AkunActivity extends AppCompatActivity {
 
     }
 
-    private void startUpdatePhoto(Uri uri) {
+    private void startUpdatePhoto(Bitmap bitmap_foto) {
 
-//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//        bitmap_foto.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
-//        byte[] imgByte = byteArrayOutputStream.toByteArray();
-//        String foto_send = Base64.encodeToString(imgByte, Base64.DEFAULT);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap_foto.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] imgByte = byteArrayOutputStream.toByteArray();
+        String foto_send = Base64.encodeToString(imgByte, Base64.DEFAULT);
 
         SweetAlertDialog pDialog = new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -153,20 +153,20 @@ public class AkunActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
         pDialog.show();
 
-        File file = new File(uri.getPath());
-        RequestBody foto = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part foto_send = MultipartBody.Part.createFormData("foto_bunda", file.getName(), foto);
-        RequestBody id_bunda = RequestBody.create(MediaType.parse("text/plain"), user_id);
+//        File file = new File(uri.getPath());
+//        RequestBody foto = RequestBody.create(MediaType.parse("image/*"), file);
+//        MultipartBody.Part foto_send = MultipartBody.Part.createFormData("foto_bunda", file.getName(), foto);
+//        RequestBody id_bunda = RequestBody.create(MediaType.parse("text/plain"), user_id);
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponsePhoto> responseBundaCall = apiInterface.editFotoBunda(id_bunda, foto_send);
-        responseBundaCall.enqueue(new Callback<ResponsePhoto>() {
+        Call<ResponseBunda> responseBundaCall = apiInterface.editFotoBunda(user_id, foto_send);
+        responseBundaCall.enqueue(new Callback<ResponseBunda>() {
             @Override
-            public void onResponse(Call<ResponsePhoto> call, Response<ResponsePhoto> response) {
+            public void onResponse(Call<ResponseBunda> call, Response<ResponseBunda> response) {
                 pDialog.dismiss();
                 if (response.isSuccessful()) {
-//                    String kode = response.body().getKode();
-                    if (!response.body().isError()) {
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")) {
                         SweetAlertDialog success = new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.SUCCESS_TYPE);
                         success.setTitleText("Success..");
                         success.setCancelable(false);
@@ -182,7 +182,7 @@ public class AkunActivity extends AppCompatActivity {
                     } else {
                         new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Uups..")
-                                .setContentText(response.body().getMessage())
+                                .setContentText(response.body().getPesan())
                                 .show();
                     }
                 } else {
@@ -194,7 +194,7 @@ public class AkunActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponsePhoto> call, Throwable t) {
+            public void onFailure(Call<ResponseBunda> call, Throwable t) {
                 pDialog.dismiss();
                 new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Uups..")
