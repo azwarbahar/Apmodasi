@@ -32,15 +32,28 @@ public interface ApiInterface {
     @GET("kader/getKaderId.php")
     Call<ResponseKader> getKaderId(@Query("id_kader") String id_kader);
 
+    @FormUrlEncoded
+    @POST("kader/editFotoKader.php")
+    Call<ResponseKader> editFotoKader(@Field("id_kader") String id_kader,
+                                      @Field("foto_kader") String foto_kader);
+
+    @FormUrlEncoded
+    @POST("kader/editKader.php")
+    Call<ResponseBunda> editKader(@Field("id_kader") String id_kader,
+                                  @Field("nama_kader") String nama_kader,
+                                  @Field("kontak_kader") String kontak_kader,
+                                  @Field("alamat_kader") String alamat_kader);
+
+    @GET("kader/editPasswordKader.php")
+    Call<ResponseBunda> editPasswordKader(@Query("id_kader") String id_kader,
+                                          @Query("password_lama") String password_lama,
+                                          @Query("password_baru") String password_baru);
+
+
 
     // BUNDA
     @GET("bunda/getBundaId.php")
     Call<ResponseBunda> getBundaId(@Query("id_bunda") String id_bunda);
-
-//    @Multipart
-//    @POST("bunda/uploadFotoBunda.php")
-//    Call<ResponsePhoto> editFotoBunda(@Part("id_bunda") RequestBody id_bunda,
-//                                      @Part MultipartBody.Part foto_bunda);
 
     @FormUrlEncoded
     @POST("bunda/editFotoBunda.php")

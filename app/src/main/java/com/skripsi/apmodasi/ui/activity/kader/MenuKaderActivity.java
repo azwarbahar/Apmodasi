@@ -162,7 +162,7 @@ public class MenuKaderActivity extends AppCompatActivity {
 
     private void initKader(Kader kader) {
         tv_nama.setText(kader.getNama_kader());
-        tv_telpon.setText(kader.getKontak_kader());
+        tv_telpon.setText("NIP: "+kader.getNip_kader());
         Glide.with(this)
                 .load(Constanta.URL_IMG_KADER + kader.getFoto_kader())
                 .into(foto_profil);
