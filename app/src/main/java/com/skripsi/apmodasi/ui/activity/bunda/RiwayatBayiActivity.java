@@ -37,7 +37,7 @@ public class RiwayatBayiActivity extends AppCompatActivity implements SwipeRefre
     private ArrayList<RiwayatKader> riwayatKaders;
     private RiwayatBayiAdapter riwayatBayiAdapter;
 
-        private String id_bayi_intent;
+    private String id_bayi_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +84,11 @@ public class RiwayatBayiActivity extends AppCompatActivity implements SwipeRefre
             public void onResponse(Call<ResponseKader> call, Response<ResponseKader> response) {
 
                 pDialog.dismiss();
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     String kode = response.body().getKode();
-                    if (kode.equals("1")){
+                    if (kode.equals("1")) {
                         riwayatKaders = (ArrayList<RiwayatKader>) response.body().getRiwayat_bayi();
-                        if (riwayatKaders.size() < 1){
+                        if (riwayatKaders.size() < 1) {
                             rv_riwayat_bayi.setVisibility(View.GONE);
                             tv_kosong.setVisibility(View.VISIBLE);
                         } else {

@@ -53,7 +53,7 @@
                             android:contentDescription="@null"
                             android:fitsSystemWindows="true"
                             android:scaleType="fitXY"
-                            android:src="@drawable/img_baby" />
+                            tools:src="@drawable/img_baby" />
 
                     </LinearLayout>
 
@@ -242,6 +242,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/tv_imunisasi_lainnya"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignBottom="@id/tv2"

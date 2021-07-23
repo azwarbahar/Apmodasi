@@ -18,7 +18,14 @@
         android:theme="@style/Theme.Apmodasi"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.bunda.BacaanActivity"></activity>
+        <activity android:name=".ui.activity.bunda.DataImunisasiBayiActivity"></activity>
+        <activity android:name=".ui.activity.bunda.bacaan.Bacaan6Activity" />
+        <activity android:name=".ui.activity.bunda.bacaan.Bacaan5Activity" />
+        <activity android:name=".ui.activity.bunda.bacaan.Bacaan4Activity" />
+        <activity android:name=".ui.activity.bunda.bacaan.Bacaan3Activity" />
+        <activity android:name=".ui.activity.bunda.bacaan.Bacaan2Activity" />
+        <activity android:name=".ui.activity.bunda.bacaan.Bacaan1Activity" />
+        <activity android:name=".ui.activity.bunda.BacaanActivity" />
         <activity android:name=".ui.activity.ImagePickerActivity" />
         <activity android:name=".ui.activity.bunda.EditPasswordActivity" />
         <activity android:name=".ui.activity.bunda.EditProfileActivity" />

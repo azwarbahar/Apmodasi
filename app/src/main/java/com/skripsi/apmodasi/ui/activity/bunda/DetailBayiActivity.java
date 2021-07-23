@@ -1,9 +1,15 @@
 package com.skripsi.apmodasi.ui.activity.bunda;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +23,8 @@ import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -27,6 +35,11 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.app.network.ApiClient;
 import com.skripsi.apmodasi.app.network.ApiInterface;
@@ -37,8 +50,12 @@ import com.skripsi.apmodasi.data.model.Bayi;
 import com.skripsi.apmodasi.data.model.BeratBadan;
 import com.skripsi.apmodasi.data.model.Imunisasi;
 import com.skripsi.apmodasi.data.model.TinggiBadan;
+import com.skripsi.apmodasi.ui.activity.ImagePickerActivity;
+import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -72,6 +89,7 @@ public class DetailBayiActivity extends AppCompatActivity {
     private TextView tv_imunisasi;
     private TextView tv_interval_imunisasi;
     private TextView tv_imunisasi_done;
+    private TextView tv_imunisasi_lainnya;
     private ImageView img_foto;
     private CardView cv_riwayat;
 
@@ -89,6 +107,11 @@ public class DetailBayiActivity extends AppCompatActivity {
     private LineChartView chart_bb;
 
     private String id_bayi_intent;
+
+    private Bitmap bitmap_foto;
+
+    private static final String TAG = DetailBayiActivity.class.getSimpleName();
+    public static final int REQUEST_IMAGE = 100;
 
     private List yAxisValuesBerat = new ArrayList();
     private List axisValuesBerat = new ArrayList();
@@ -123,6 +146,7 @@ public class DetailBayiActivity extends AppCompatActivity {
         tv_nomor_bayi_pannel = findViewById(R.id.tv_nomor_bayi_pannel);
         tv_nama_bayi_pannel = findViewById(R.id.tv_nama_bayi_pannel);
 
+        tv_imunisasi_lainnya = findViewById(R.id.tv_imunisasi_lainnya);
         tv_nama_bayi = findViewById(R.id.tv_nama_bayi);
         tv_usia = findViewById(R.id.tv_usia);
         tv_jenis_kelamin = findViewById(R.id.tv_jenis_kelamin);
@@ -130,7 +154,9 @@ public class DetailBayiActivity extends AppCompatActivity {
         tv_imunisasi = findViewById(R.id.tv_imunisasi);
         tv_interval_imunisasi = findViewById(R.id.tv_interval_imunisasi);
         tv_imunisasi_done = findViewById(R.id.tv_imunisasi_done);
+
         img_foto = findViewById(R.id.img_foto);
+        img_foto.setOnClickListener(this::clickFoto);
 
         img_edit = findViewById(R.id.img_edit);
         img_edit.setOnClickListener(this::clickEdit);
@@ -157,11 +183,178 @@ public class DetailBayiActivity extends AppCompatActivity {
             }
         });
 
+        tv_imunisasi_lainnya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailBayiActivity.this, DataImunisasiBayiActivity.class);
+                intent.putExtra("id_bayi", id_bayi_intent);
+                startActivity(intent);
+            }
+        });
+
         loadDataBayi(id_bayi_intent);
         loadImunisasiBayi(id_bayi_intent);
         loadBeratBadanBayi(id_bayi_intent);
         loadTinggiBadanBayi(id_bayi_intent);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri uri = data.getParcelableExtra("path");
+                try {
+                    // You can update this bitmap to your server
+                    bitmap_foto = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    startUpdatePhoto(bitmap_foto);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    private void startUpdatePhoto(Bitmap bitmap_foto) {
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap_foto.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] imgByte = byteArrayOutputStream.toByteArray();
+        String foto_send = Base64.encodeToString(imgByte, Base64.DEFAULT);
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(DetailBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseBayi> responseBayiCall = apiInterface.editFotoBayi(id_bayi_intent, foto_send);
+        responseBayiCall.enqueue(new Callback<ResponseBayi>() {
+            @Override
+            public void onResponse(Call<ResponseBayi> call, Response<ResponseBayi> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()){
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")){
+                        SweetAlertDialog success = new SweetAlertDialog(DetailBayiActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                        success.setTitleText("Success..");
+                        success.setCancelable(false);
+                        success.setContentText("Edit Foto Berhasil");
+                        success.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                                loadDataBayi(id_bayi_intent);
+                            }
+                        });
+                        success.show();
+                    } else {
+                        new SweetAlertDialog(DetailBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Uups..")
+                                .setContentText(response.body().getPesan())
+                                .show();
+                    }
+                } else {
+                    new SweetAlertDialog(DetailBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Uups..")
+                            .setContentText("Terjadi kesalahan!")
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBayi> call, Throwable t) {
+                pDialog.dismiss();
+                new SweetAlertDialog(DetailBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Uups..")
+                        .setContentText(t.getLocalizedMessage())
+                        .show();
+
+
+                Log.e("FOTO",  "Locazed : "+t.getLocalizedMessage());
+                Log.e("FOTO", "Message : "+t.getMessage());
+            }
+        });
+
+    }
+
+    private void clickFoto(View view) {
+        Dexter.withActivity(DetailBayiActivity.this)
+                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            showImagePickerOptions();
+                        }
+
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+    }
+
+    private void showImagePickerOptions() {
+        ImagePickerActivity.showImagePickerOptions(DetailBayiActivity.this, new ImagePickerActivity.PickerOptionListener() {
+            @Override
+            public void onTakeCameraSelected() {
+                launchCameraIntent();
+            }
+
+            @Override
+            public void onChooseGallerySelected() {
+                launchGalleryIntent();
+            }
+
+            @Override
+            public void onViewImage() {
+                launchViewImage();
+            }
+        });
+    }
+
+    private void launchCameraIntent() {
+        Intent intent = new Intent(DetailBayiActivity.this, ImagePickerActivity.class);
+        intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_IMAGE_CAPTURE);
+
+        // setting aspect ratio
+        intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+
+        // setting maximum bitmap width and height
+        intent.putExtra(ImagePickerActivity.INTENT_SET_BITMAP_MAX_WIDTH_HEIGHT, true);
+        intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_WIDTH, 1000);
+        intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_HEIGHT, 1000);
+
+        startActivityForResult(intent, REQUEST_IMAGE);
+    }
+
+    private void launchViewImage() {
+//        Toast.makeText(getActivity(), "Lihat Gambar!!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(DetailBayiActivity.this, ImageViewActivity.class);
+        intent.putExtra("data_image", "Bayi");
+        startActivity(intent);
+    }
+
+    private void launchGalleryIntent() {
+        Intent intent = new Intent(DetailBayiActivity.this, ImagePickerActivity.class);
+        intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_GALLERY_IMAGE);
+
+        // setting aspect ratio
+        intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+        startActivityForResult(intent, REQUEST_IMAGE);
     }
 
     private void loadTinggiBadanBayi(String bayi_id) {
@@ -611,6 +804,32 @@ public class DetailBayiActivity extends AppCompatActivity {
         } else {
             loadDataBayi(id_bayi_intent);
         }
+    }
+
+    /**
+     * Showing Alert Dialog with Settings option
+     * Navigates user to app settings
+     * NOTE: Keep proper title and message depending on your app
+     */
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DetailBayiActivity.this);
+        builder.setTitle(getString(R.string.dialog_permission_title));
+        builder.setMessage(getString(R.string.dialog_permission_message));
+        builder.setPositiveButton(getString(R.string.go_to_settings), (dialog, which) -> {
+            dialog.cancel();
+            openSettings();
+        });
+        builder.setNegativeButton(getString(android.R.string.cancel), (dialog, which) -> dialog.cancel());
+        builder.show();
+
+    }
+
+    // navigating user to app settings
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
     }
 
     @Override

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.bunda.bacaan.Bacaan6Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.AppCompat.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@color/purple_500"
+        android:elevation="6dp"
+        app:theme="@style/ToolbarTheme"
+        app:title="Bacaan"
+        app:titleTextColor="@color/purple_200" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="casual"
+                android:text="Manfaat Kartu Menuju Sehat yang Harus Anda Ketahui"
+                android:textColor="@color/purple_200"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  Kartu menuju sehat atau yang disingkat dengan KMS merupakan gambaran seperti rapor tentang kesehatan balita yang dideskripsikan dengan kurva menggunakan komposisi berat badan terhadap umur anak yang berusia 0 sampai 5 tahun. Banyak sekali manfaat kartu menuju sehat yang harus Anda pahami karena hal ini berkaitan dengan tumbuh kembang dan gizi yang diterima oleh buah tin. Riwayat sejak anak lahir dari mulai ASI, Makanan pendamping setelah ASI, dan riwayat penyakit yang pernah diderita anak menjadi hal yang sangat penting untuk diperhatikan dan semua itu bisa Anda dapatkan di kartu menuju sehat. Pemerintah telah merancang program ini agar mencapai tujuan untuk memudahkan huruf orang tua dalam mengontrol kesehatan anaknya. Mengurangi terjadinya malnutrisi terhadap anak adalah hal yang sangat penting untuk dicegah dan kartu menuju sehat adalah salah satu hal yang bisa membuat hal tersebut berkurang."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Deskripsi Singkat dan Mudah Kesehatan Anak"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  Kartu menuju sehat membuat deskripsi singkat dan mudah untuk dibaca oleh orang tua hal yang berkenaan dengan Kesehatan anak yaitu pertumbuhan, penyakit yang diderita, dan asupan gizi selama ini. Tentu saja hal ini akan membuat orangtua lebih mudah untuk melakukan pencegahan apakah terjadi penyakit yang disebabkan oleh makanan dan yang tergantung oleh pertumbuhan anak. Pemantauan tentang layanan kesehatan apa saja yang sudah diterima anak seperti imunisasi dan vaksin adalah hal yang bisa dibaca dengan mudah melalui kartu menuju sehat. Manfaat kartu menuju sehat yang pertama ini adalah manfaat yang dirasakan oleh orang tua ketika memiliki anak."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Lebih Mudah untuk Memantau Kesehatan Anak"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  Untuk ibu yang hampir 24/7 bersama anak tentu saja KMS adalah alat yang sangat mudah untuk memantau gizi dan makanan yang harus diberikan kepada anak. Laporan setiap bulannya membuat Ibu paham apa saja yang diperbaiki pada gizi anak di bulan-bulan berikutnya. Apabila terjad Perubahan dalam gizi dan kesehatan anak akan jauh lebih mudah menentukan penyebabnya. Semua hal menjadi Juli muda ke depannya apabila kartu menuju sehat digunakan dengan baik."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Deskripsi Singkat dan Mudah Kesehatan AnakPedoman Kesehatan Bagi Lingkungan dan Petugas Kesehatan"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:text="  Tentu saja untuk petugas kesehatan yang akan melaporkan ke atas tentang kesehatan anak di suatu lingkungan hal ini menjadi jauh lebih mudah. Apabila terdapat pertumbuhan yang tidak normal pada anak langsung bisa memutuskan perawatan yang harus dilakukan oleh ibu agar anak menjadi lebih sehat secepat mungkin. Sebuah lingkungan memiliki banyak anak yang tentu saja harus diperhatikan oleh petugas kesehatan jika terjadi keanehan satu lingkungan tersebut yang melibatkan banyak anak Hal ini dapat dicegah dengan cepat di atasi. Tiga manfaat kartu menuju sehat di atas adalah manfaat umum yang dirasakan oleh ibu ketika memiliki anak."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

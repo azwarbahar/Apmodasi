@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.bunda.bacaan.Bacaan2Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.AppCompat.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@color/purple_500"
+        android:elevation="6dp"
+        app:theme="@style/ToolbarTheme"
+        app:title="Bacaan"
+        app:titleTextColor="@color/purple_200" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="casual"
+                android:text="Menambah Tinggi Badan Anak Sejak Balita"
+                android:textColor="@color/purple_200"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  KMS atau Kartu Menuju Sehat merupakan senjata para ibu. Ibu bisa memantau pertumbuhan anak melalui KMS. KMS ini diperuntukkan bagi seluruh bayi di Indonesia hingga usia 2 tahun. Jadi, idealnya, para ibu harus memantau dengan teliti pertumbuhan anak setiap bulannya dari usia 0 hingga 2 tahun.  Dan terus dilanjutkan hingga anak tumbuh besar."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Mengenal KMS"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  Bagi para ibu yang belum mengetahui apa itu kms tumbuh kembang anak, maka sebaiknya ibu mulai belajar. KMS bisa dibilang adalah pegangan para ibu dari jaman old hingga jaman now. Bukan tanpa alasan, karena KMS telah dibagikan kepada seluruh bayi Indonesia sejak tahun 1970-an. KMS berisi grafik pertumbuhan anak. \n   Selain kms tumbuh kembang anak, ada alat lainnya yang bisa digunakan untuk memantau pertumbuhan anak yaitu aplikasi PrimaKu dan KI atau buku kesehatan ibu dan anak. Ketiganya bisa digunakan untuk memantau pertumbuhan anak usia 0 – 6 bulan. Namun terdapat juga informasi yang bisa digunakan sebagai pedoman hingga usia anak 2 tahun."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Kegunaan KMS"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:layout_marginBottom="50dp"
+                android:text="  KMS atau kartu menuju sehat tentunya memiliki banyak sekali fungsi. Terdapat berbagai informasi penting yang bisa ibu dapatkan. Selain untuk mengetahui apakah bayi tumbuh dalam tahap normal, KMS juga memberi informasi seputar perkembangan bayi hingga usia 2 tahun. Ibu bisa mengetahui apakah bayi ibu berkembang secara baik atau tidak sesuai dengan tahapan usia. \n Selain itu, pada KMS juga terdapat informasi tentang jadwal imunisasi. Sehingga ibu tidak akan terlewatkan apa saja imunisasi wajib yang dicanangkan pemerintah untuk seluruh anak Indonesia. Ibu juga akan diberikan informasi seputar makanan yang cocok sesuai usia si kecil hingga pertolongan pertama yang bisa ibu lakukan jika si kecil sakit seperti diare dan demam. \n    Meski kms tumbuh kembang anak umumnya dikenal sebagai panduan ibu atau buku sakti untuk memantau pertumbuhan dan perkembangan si kecil, KMS juga sebenarnya memberi informasi mengenai ibu juga. Mulai dari masa kehamilan hingga masa nifas. Semua informasi bisa didapatkan oleh ibu melalui KMS dan KIA. Karena begitu pentingnya manfaat dari KMS ini, maka sebaiknya ibu rutin membawa KMS saat pergi ke posyandu atau ke puskesmas serta dokter spesialis anak. Dengan demikian setiap perkembangan dan pertumbuhan yang terjadi pada si kecil bisa tercatat dengan baik. Ibu juga harus membawa KMS atau KIA setiap kali melakukan imunisasi. Tujuannya agar ibu tidak ketinggalan jadwal imunisasi."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

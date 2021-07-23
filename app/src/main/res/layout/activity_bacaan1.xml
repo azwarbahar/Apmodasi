@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.bunda.bacaan.Bacaan1Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.AppCompat.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@color/purple_500"
+        android:elevation="6dp"
+        app:theme="@style/ToolbarTheme"
+        app:title="Bacaan"
+        app:titleTextColor="@color/purple_200" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="casual"
+                android:text="Menambah Tinggi Badan Anak Sejak Balita"
+                android:textColor="@color/purple_200"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="casual"
+                android:lineSpacingExtra="5dp"
+                android:text="  Tinggi badan memang kerap menghantui masa pertumbuhan anak. Hal ini menjadikan orang tua patut was-was apabila ada tanda-tanda penghambat pertumbuhan tinggi badan anak terutama saat anak masih di bawah usia lima tahun (balita). Selain faktor genetik, ada beberapa faktor eksternal yang dapat menyebabkan terhambatnya perkembangan tinggi badan seorang anak. Maka dari itu, orang tua wajib mengukur pertambahan tinggi badan sang buah hati setiap bulannya. Di kesempatan kali ini kami akan membagikan beberapa tips menambah tinggi badan balita yang dapat Anda terapkan. Simak tips-tips berikut!"
+                android:textColor="@color/black2"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Perkembangan Tinggi Badan Balita"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  Secara biologis, anak akan terus mengalami pertumbuhan, terutama bagian fisik. Hal ini dapat dilihat dari pertambahan tinggi badan dan berat badan sang anak. Penting bagi orang tua untuk terus memantau perkembangan tersebut sedari dini. Hal ini dapat diukur dari berat badan dan tinggi badan ideal balita. Dimasa inilah Anda wajib mengelola keaktifan dan waktu buah hati Anda sebelum menginjak masa perhentian pertumbuhan tulang, biasanya pada usia 16 tahun untuk perempuan dan antara 14-19 tahun untuk anak laki-laki."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Mengonsumsi Makanan Seimbang"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="Tips menambah tinggi badan balita yang pertama adalah Anda wajib memberikan makanan seimbang. Anda harus memastikan nutrisi dan gizi buah hati Anda terpenuhi dari setiap makanan yang dikonsumsi. Contoh, memastikan anak dari lahir sampai usia 2 tahun mendapatkan ASI yang cukup dari Ibu. Selain itu, setiap harinya berikan makanan dengan porsi seimbang antara karbohidrat, lemak, vitamin dan mineral. Anda juga dapat menambahkan susu formula yang dilengkapi kandungan kalsium dan fosfor untuk membantu pertumbuhan tulang anak."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Mengajak Berolahraga"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="Meski pun anak masih di usia balita, Anda dapat mengajak anak Anda melakukan olahraga kecil seperti mengajarkan cara berjalan. Berenang juga dapat menjadi alternatif pengenalan olahraga sedari kecil untuk balita. Namun, perlu Anda pastikan keamanannya, pastikan Anda melengkapi buah hati dengan pelampung dan menjaga setiap gerakan buah hati saat berada di dalam air."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Berikan Istirahat Cukup"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="Tidak dapat dipungkiri bahwa dengan istirahat atau waktu tidur yang cukup dapat membantu buah hati Anda bertambah tinggi. Hal ini dikarenakan saat tertidur organ pencernaan buah hati akan memproses setiap nutrisi dari makanan dan minuman yang telah dikonsumsi. Proses tersebut membuat vitamin, mineral dan zat-zat yang berguna bagi pertumbuhan tulang tersalurkan dengan baik."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Hindari Penghambat Pertumbuhan Tinggi Badan"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="Tips yang terakhir adalah menghindari penghambat perkembangan tinggi badan anak. Anda dapat menghindarkan anak Anda dari minuman cola, asap rokok, dan obat berbahaya seperti narkoba atau alkohol. Bahkan sebagai orang tua Anda wajib menjaga lingkungan sekitar tumbuh kembang anak Anda bebas dari hal-hal tersebut."
+                android:textColor="@color/black2"
+                android:layout_marginBottom="50dp"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

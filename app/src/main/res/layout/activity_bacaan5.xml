@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.bunda.bacaan.Bacaan5Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.AppCompat.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@color/purple_500"
+        android:elevation="6dp"
+        app:theme="@style/ToolbarTheme"
+        app:title="Bacaan"
+        app:titleTextColor="@color/purple_200" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="casual"
+                android:text="Pemberian Nutrisi Tepat Agar Bayi Prematur Memiliki Tinggi Badan Normal"
+                android:textColor="@color/purple_200"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  Kelahiran prematur terjadi saat usia kandungan belum memasuki umur 37 bulan. Kontraksi terjadi secara teratur sehingga leher rahim terbuka. Bayi yang lahir secara prematur memiliki organ yang belum bisa bekerja secara maksimal sehingga membutuhkan perawatan yang intensif. \n Bayi prematur harus diberikan perhatian khusus agar bisa tumbuh normal dan cerdas. Pemberian gizi yang tepat serta perawatan yang benar akan didapatkan berat badan dan tinggi badan ideal balita."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Pemberian Nutrisi pada Bayi Prematur"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  Bayi dengan persalinan prematur membutuhkan nutrisi yang harus dipenuhi untuk mencegah bayi tumbuh dengan berat dan tinggi badan yang tidak ideal. Ada beberapa cara menambah tinggi badan bayi prematur dengan memperhatikan metode, waktu, dan frekuensi pemberian nutrisi."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:text="1. Metode Pemberian Nutrisi"
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="Karena bayi prematur belum bisa menghisap, bernapas, dan menelan secara aktif maka akan sulit bagi bayi untuk menyusu ASI pada ibu secara langsung. Bayi juga bisa tersedak saat menyusu langsung kepada ibu. Caranya adalah dengan memberi nutrisi melalui jalur enteral dengan menggunakan pipa nasogastrik melalui mulut atau hidung dan langsung masuk ke perut. Jika kondisi bayi lebih kuat, pemberian nutrisi bisa dilakukan dengan menyusu langsung kepada ibu."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:text="2. Waktu Pemberian Nutrisi"
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="Pemberian nutrisi pada bayi lebih baik dilakukan sedini mungkin. Peningkatan volume asupan nutrisi yang diberikan disarankan untuk dilakukan lebih cepat. Hal ini bertujuan untuk mencegah tertundanya pemenuhan nutrisi melalui jalur enteral dan untuk mencegah risiko infeksi."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:text="3. Frekuensi Pemberian Nutrisi"
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:layout_marginBottom="50dp"
+                android:text="Beberapa penelitian menunjukkan bahwa pemberian nutrisi secara berkelanjutan akan mempercepat pertumbuhan secara signifikan dan waktu yang dibutuhkan lebih singkat. Dengan tercapainya nutrisi yang diperlukan maka durasi rawat inap menjadi lebih singkat. Metode berkelanjutan ini dianjurkan sampai bayi menguasai gerakan menghisap dan menelan."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.bunda.bacaan.Bacaan4Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.AppCompat.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@color/purple_500"
+        android:elevation="6dp"
+        app:theme="@style/ToolbarTheme"
+        app:title="Bacaan"
+        app:titleTextColor="@color/purple_200" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="casual"
+                android:text="Orang Tua Wajib Memahami Penggunaan Kartu Menuju Sehat"
+                android:textColor="@color/purple_200"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  Sebagai orang tua Anda pasti ingin selalu merekam tumbuh dan kembang anak. Dengan mengetahui tumbuh dan kembang anak, Anda akan mengetahui apakah anak Anda sudah tumbuh dan berkembang dengan normal atau terdapat masalah, sehingga Anda mengetahuinya sejak dini. Anda sudah bisa memantau pertumbuhan dan perkembangan anak, mulai dari usia 0 tahun atau usia bayi baru lahir. Cara paling sederhana untuk mengetahui tumbuh dan kembang anak adalah dengan menggunakan Kartu Menuju Sehat (KMS)."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Definisi Kartu Menuju Sehat (KMS)"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="casual"
+                android:text="  Kartu Menuju Sehat (KMS) merupakan catatan yang berisi grafik pertumbuhan dan perkembangan anak. Beberapa contoh catatan yang bisa Anda pantau didasarkan pada jenis kelamin, usia, dan berat badan. Secara umum, alat yang digunakan untuk mengukur perkembangan dan pertumbuhan anak, di antaranya adalah Kartu Menuju Sehat (KMS). Informasi yang bisa Anda dapatkan di antaranya adalah pemantauan ASI eksklusif pada bayi, imunisasi, dan juga tips untuk kesehatan ibu hamil hingga menyusui. Ada pula informasi mengenai kesehatan dan perawatan pada anak-anak. \n  Demi tersedianya informasi yang akurat, orang tua dianjurkan untuk selalu memperbaharui data pada kartu-kartu tersebut  hal ini dimaksudkan untuk mengetahui apakah anak Anda tumbuh dan berkembang dengan normal ataupun tidak sesuai dengan usianya. Anda bisa melakukannya dengan membawa anak Anda pada dokter anak yang terdekat dengan Anda ataupun membawanya pada posyandu."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="casual"
+                android:text="Pentingnya KMS"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:text="  Pada usia balita dan anak-anak, masalah pertumbuhan masih menjadi permasalahan yang utama. Untuk mengetahui apakah anak-anak terhindar dari masalah mengenai tumbuh kembang mereka, maka deteksi secara dini perlu dilakukan. \n    Mengetahui tingkat pertumbuhan dan perkembangan anak bisa dilakukan sedini mungkin dengan rutin mendatangi posyandu dan puskesmas terdekat untuk melakukan pengukuran dan penimbangan badan. Ini akan memudahkan tenaga medis untuk mengetahui masalah apa yang ada pada pertumbuhan anak, sehingga bisa mengambil langkah yang cepat untuk mengatasi permasalahan tersebut. \n Manfaat kartu menuju sehat adalah untuk memantau tumbuh kembang anak setiap bulannya. Tidak hanya berupa data penimbangan dan ukuran saja, namun pada suatu grafik yang akan memudahkan pembaca untuk menganalisisnya, termasuk kedua orang tua anak. Informasi ini berupa kenaikan ataupun penurunan yang terjadi pada tumbuh kembang anak. \n Apabila tidak menggunakan kms tumbuh kembang anak, tentu pemantauan kenaikan ataupun penurunan sebagai bahan evaluasi ini tentu akan sulit dilakukan. Meskipun berisi data yang sederhana, namun ini akan memudahkan untuk mengetahui kelainan yang terjadi."
+                android:textColor="@color/black2"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
