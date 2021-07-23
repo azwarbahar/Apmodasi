@@ -3,6 +3,7 @@ package com.skripsi.apmodasi.ui.activity.kader;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.skripsi.apmodasi.data.model.Bayi;
 import com.skripsi.apmodasi.data.model.BeratBadan;
 import com.skripsi.apmodasi.data.model.Imunisasi;
 import com.skripsi.apmodasi.data.model.TinggiBadan;
+import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
 import com.skripsi.apmodasi.ui.activity.bunda.DetailBayiActivity;
 
 import java.text.ParseException;
@@ -69,6 +71,7 @@ public class DetailBayiKaderActivity extends AppCompatActivity {
     private LineChartView chart_bb;
 
     private String id_bayi_intent;
+    private String foto;
 
     private List yAxisValuesBerat = new ArrayList();
     private List axisValuesBerat = new ArrayList();
@@ -107,6 +110,17 @@ public class DetailBayiKaderActivity extends AppCompatActivity {
 
         chart_tb = findViewById(R.id.chart_tb);
         chart_bb = findViewById(R.id.chart_bb);
+
+        img_foto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(DetailBayiKaderActivity.this, ImageViewActivity.class);
+                intent.putExtra("nama_foto", foto);
+                intent.putExtra("role_foto", "Bayi");
+                startActivity(intent);
+            }
+        });
 
         loadDataBayi(id_bayi_intent);
         loadBeratBadanBayi(id_bayi_intent);
@@ -187,7 +201,7 @@ public class DetailBayiKaderActivity extends AppCompatActivity {
 
         chart_tb.setLineChartData(data);
 
-        if (tinggiBadans.size() < 5){
+        if (tinggiBadans.size() < 5) {
             Viewport viewport_bb = new Viewport(0, 110, 6, 0);
             viewport_bb.top = 120;
             chart_tb.setMaximumViewport(viewport_bb);
@@ -287,7 +301,7 @@ public class DetailBayiKaderActivity extends AppCompatActivity {
 
         chart_bb.setLineChartData(data);
 
-        if (beratBadans.size() < 5){
+        if (beratBadans.size() < 5) {
             Viewport viewport_bb = new Viewport(0, 110, 6, 0);
             viewport_bb.top = 15;
             chart_bb.setMaximumViewport(viewport_bb);
@@ -404,16 +418,10 @@ public class DetailBayiKaderActivity extends AppCompatActivity {
         tv_nama_bayi.setText(bayi.getNamaBayi());
         tv_jenis_kelamin.setText(bayi.getJenisKelaminBayi());
         tv_tanggal_lahir.setText(parseDateToddMMyyyy(bayi.getTanggalLahirBayi()));
-        String bayi_foto = bayi.getFotoBayi();
-        if (bayi_foto.equals("-")) {
-            Glide.with(this)
-                    .load(R.drawable.img_baby)
-                    .into(img_foto);
-        } else {
-            Glide.with(this)
-                    .load(Constanta.URL_IMG_BAYI + bayi_foto)
-                    .into(img_foto);
-        }
+        foto = bayi.getFotoBayi();
+        Glide.with(this)
+                .load(Constanta.URL_IMG_BAYI + foto)
+                .into(img_foto);
 
     }
 

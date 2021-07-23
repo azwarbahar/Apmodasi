@@ -39,7 +39,7 @@
                 android:layout_marginBottom="@dimen/activity_padding"
                 android:background="@color/transparan"
                 android:scaleType="centerInside"
-                android:src="@drawable/adinda"
+                tools:src="@drawable/adinda"
                 app:civ_border_color="@android:color/white"
                 app:civ_border_width="2dp" />
 
@@ -101,7 +101,7 @@
                     android:fontFamily="casual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/indah"
+                    tools:text="@string/indah"
                     android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -140,7 +140,7 @@
                     android:id="@+id/tv_telpon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="095456789"
+                    tools:text="095456789"
                     android:fontFamily="casual"
                     android:textColor="@color/black"
                     android:textSize="16dp"
@@ -180,7 +180,7 @@
                     android:id="@+id/tv_alamat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jl. Adhyaksa Baru Lr. 5"
+                    tools:text="Jl. Adhyaksa Baru Lr. 5"
                     android:textColor="@color/black"
                     android:textSize="16dp"
                     android:fontFamily="casual"

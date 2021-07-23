@@ -70,6 +70,7 @@ public class AkunActivity extends AppCompatActivity {
     private RelativeLayout rl_edit_password;
     private RelativeLayout rl_logout;
 
+    private String foto;
     private Bitmap bitmap_foto;
 
     private static final String TAG = AkunActivity.class.getSimpleName();
@@ -271,7 +272,8 @@ public class AkunActivity extends AppCompatActivity {
     private void launchViewImage() {
 //        Toast.makeText(getActivity(), "Lihat Gambar!!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AkunActivity.this, ImageViewActivity.class);
-        intent.putExtra("data_image", "Bunda");
+        intent.putExtra("nama_foto", foto);
+        intent.putExtra("role_foto", "Bunda");
         startActivity(intent);
     }
 
@@ -348,8 +350,9 @@ public class AkunActivity extends AppCompatActivity {
         tv_nama.setText(bunda.getNamaBunda());
         tv_telpon.setText(bunda.getKontakBunda());
         tv_alamat.setText(bunda.getAlamatBunda());
+        foto = bunda.getFotoBunda();
         Glide.with(this)
-                .load(Constanta.URL_IMG_BUNDA + bunda.getFotoBunda())
+                .load(Constanta.URL_IMG_BUNDA + foto)
                 .into(img_profile);
     }
 

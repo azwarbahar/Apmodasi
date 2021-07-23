@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.skripsi.apmodasi.R;
+import com.skripsi.apmodasi.app.util.Constanta;
 
 public class ImageViewActivity extends AppCompatActivity {
 
@@ -19,16 +20,21 @@ public class ImageViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_view);
 
-        String data = getIntent().getStringExtra("data_image");
+        String nama_foto = getIntent().getStringExtra("nama_foto");
+        String role_foto = getIntent().getStringExtra("role_foto");
         PhotoView img_zoom = findViewById(R.id.img_zoom);
 
-        if (data.equals("Bayi")){
+        if (role_foto.equals("Bayi")){
             Glide.with(this)
-                    .load(R.drawable.img_baby)
+                    .load(Constanta.URL_IMG_BAYI + nama_foto)
+                    .into(img_zoom);
+        } else if (role_foto.equals("Bunda")) {
+            Glide.with(this)
+                    .load(Constanta.URL_IMG_BUNDA + nama_foto)
                     .into(img_zoom);
         } else {
             Glide.with(this)
-                    .load(R.drawable.adinda)
+                    .load(Constanta.URL_IMG_KADER + nama_foto)
                     .into(img_zoom);
         }
 

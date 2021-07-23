@@ -78,6 +78,7 @@ public class MenuActivity extends AppCompatActivity {
     private String hari;
 
     private String user_id;
+    private String foto;
     private Bunda bunda;
     private ArrayList<Bayi> bayiArrayList;
 
@@ -222,6 +223,7 @@ public class MenuActivity extends AppCompatActivity {
         String kontak_bunda = bunda.getKontakBunda();
         String alamat_bunda = bunda.getAlamatBunda();
         String foto_bunda = bunda.getFotoBunda();
+        foto = bunda.getFotoBunda();
 
         tv_nama.setText(nama_bunda);
         tv_telpon.setText(kontak_bunda);
@@ -405,7 +407,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private void clickPhoto(View view) {
         Intent intent = new Intent(MenuActivity.this, ImageViewActivity.class);
-        intent.putExtra("data_image", "Bunda");
+        intent.putExtra("nama_foto", foto);
+        intent.putExtra("role_foto", "Bunda");
         startActivity(intent);
     }
 }

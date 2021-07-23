@@ -67,6 +67,8 @@ public class InputDataBayiActivity extends AppCompatActivity {
     private ImageView foto_bayi;
     private CardView cv_foto_bayi;
 
+    private String foto;
+
     private String[] no_imunisasiArray = null;
     private String[] nama_imunisasiArray = null;
 
@@ -131,7 +133,8 @@ public class InputDataBayiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InputDataBayiActivity.this, ImageViewActivity.class);
-                intent.putExtra("data_image", "Bayi");
+                intent.putExtra("nama_foto", foto);
+                intent.putExtra("role_foto", "Bayi");
                 startActivity(intent);
             }
         });
@@ -427,6 +430,7 @@ public class InputDataBayiActivity extends AppCompatActivity {
         tv_usia.setText(settingDate(bayi.getTanggalLahirBayi()));
         tv_nama_bayi.setText(bayi.getNamaBayi());
         tv_nama_bunda.setText(bayi.getBundaId());
+        foto = bayi.getFotoBayi();
         Glide.with(this)
                 .load(Constanta.URL_IMG_BAYI + bayi.getFotoBayi())
                 .into(foto_bayi);

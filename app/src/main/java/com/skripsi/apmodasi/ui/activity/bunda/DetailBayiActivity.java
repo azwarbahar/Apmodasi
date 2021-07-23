@@ -108,6 +108,7 @@ public class DetailBayiActivity extends AppCompatActivity {
 
     private String id_bayi_intent;
 
+    private String foto;
     private Bitmap bitmap_foto;
 
     private static final String TAG = DetailBayiActivity.class.getSimpleName();
@@ -342,7 +343,8 @@ public class DetailBayiActivity extends AppCompatActivity {
     private void launchViewImage() {
 //        Toast.makeText(getActivity(), "Lihat Gambar!!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(DetailBayiActivity.this, ImageViewActivity.class);
-        intent.putExtra("data_image", "Bayi");
+        intent.putExtra("nama_foto", foto);
+        intent.putExtra("role_foto", "Bayi");
         startActivity(intent);
     }
 
@@ -746,6 +748,7 @@ public class DetailBayiActivity extends AppCompatActivity {
         tv_jenis_kelamin.setText(bayi.getJenisKelaminBayi());
         tv_tanggal_lahir.setText(parseDateToddMMyyyy(bayi.getTanggalLahirBayi()));
         String bayi_foto = bayi.getFotoBayi();
+        foto = bayi.getFotoBayi();
         if (bayi_foto.equals("-")) {
             Glide.with(this)
                     .load(R.drawable.img_baby)

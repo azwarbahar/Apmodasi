@@ -36,6 +36,7 @@ import com.skripsi.apmodasi.app.network.ApiInterface;
 import com.skripsi.apmodasi.app.response.ResponseKader;
 import com.skripsi.apmodasi.app.util.Constanta;
 import com.skripsi.apmodasi.data.model.Kader;
+import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
 import com.skripsi.apmodasi.ui.activity.bunda.MenuActivity;
 import com.skripsi.apmodasi.ui.activity.intro.LoginActivity;
 import com.skripsi.apmodasi.ui.activity.intro.SplashScreenActivity;
@@ -68,6 +69,8 @@ public class MenuKaderActivity extends AppCompatActivity {
     private TextView tv_nama;
     private TextView tv_telpon;
 
+    private String foto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +89,16 @@ public class MenuKaderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuKaderActivity.this, AkunKaderActivity.class));
+            }
+        });
+
+        foto_profil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuKaderActivity.this, ImageViewActivity.class);
+                intent.putExtra("nama_foto", foto);
+                intent.putExtra("role_foto", "Kader");
+                startActivity(intent);
             }
         });
 
@@ -163,6 +176,7 @@ public class MenuKaderActivity extends AppCompatActivity {
     private void initKader(Kader kader) {
         tv_nama.setText(kader.getNama_kader());
         tv_telpon.setText("NIP: "+kader.getNip_kader());
+        foto = kader.getFoto_kader();
         Glide.with(this)
                 .load(Constanta.URL_IMG_KADER + kader.getFoto_kader())
                 .into(foto_profil);

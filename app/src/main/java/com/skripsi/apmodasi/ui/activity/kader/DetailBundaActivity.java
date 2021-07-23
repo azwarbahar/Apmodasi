@@ -1,5 +1,6 @@
 package com.skripsi.apmodasi.ui.activity.kader;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.skripsi.apmodasi.app.response.ResponseBunda;
 import com.skripsi.apmodasi.app.util.Constanta;
 import com.skripsi.apmodasi.data.model.Bayi;
 import com.skripsi.apmodasi.data.model.Bunda;
+import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
 import com.skripsi.apmodasi.ui.activity.bunda.MenuActivity;
 import com.skripsi.apmodasi.ui.adapter.BayiAdapter;
 import com.skripsi.apmodasi.ui.adapter.BayiKaderAdapter;
@@ -45,6 +47,8 @@ public class DetailBundaActivity extends AppCompatActivity implements SwipeRefre
     private TextView tv_alamat;
     private TextView tv_kosong;
     private ArrayList<Bayi> bayiArrayList;
+
+    private String foto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,16 @@ public class DetailBundaActivity extends AppCompatActivity implements SwipeRefre
             public void run() {
                 loadDataBunda(id_bunda_intent);
                 loadDataBayi(id_bunda_intent);
+            }
+        });
+
+        foto_profil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailBundaActivity.this, ImageViewActivity.class);
+                intent.putExtra("nama_foto", foto);
+                intent.putExtra("role_foto", "Bunda");
+                startActivity(intent);
             }
         });
 
@@ -118,6 +132,7 @@ public class DetailBundaActivity extends AppCompatActivity implements SwipeRefre
         tv_nama.setText(bunda.getNamaBunda());
         tv_telpon.setText(bunda.getKontakBunda());
         tv_alamat.setText(bunda.getAlamatBunda());
+        foto = bunda.getFotoBunda();
         Glide.with(this)
                 .load(Constanta.URL_IMG_BUNDA + bunda.getFotoBunda())
                 .into(foto_profil);
