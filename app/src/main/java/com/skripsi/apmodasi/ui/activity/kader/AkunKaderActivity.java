@@ -39,7 +39,9 @@ public class AkunKaderActivity extends AppCompatActivity {
     private TextView tv_nama;
     private TextView tv_telpon;
     private TextView tv_alamat;
+    private TextView tv_edit_profile;
 
+    private RelativeLayout rl_edit_password;
     private RelativeLayout rl_logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,22 @@ public class AkunKaderActivity extends AppCompatActivity {
         tv_nama = findViewById(R.id.tv_nama);
         tv_telpon = findViewById(R.id.tv_telpon);
         tv_alamat = findViewById(R.id.tv_alamat);
+
+        tv_edit_profile = findViewById(R.id.tv_edit_profile);
+        tv_edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AkunKaderActivity.this, EditProfileKaderActivity.class));
+            }
+        });
+
+        rl_edit_password = findViewById(R.id.rl_edit_password);
+        rl_edit_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AkunKaderActivity.this, EditPasswordKaderActivity.class));
+            }
+        });
 
         rl_logout = findViewById(R.id.rl_logout);
         rl_logout.setOnClickListener(this::clickLogout);

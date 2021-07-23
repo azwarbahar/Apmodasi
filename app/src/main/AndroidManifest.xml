@@ -18,7 +18,8 @@
         android:theme="@style/Theme.Apmodasi"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.kader.EditPasswordKaderActivity"></activity>
+        <activity android:name=".ui.activity.kader.EditProfileKaderActivity"></activity>
+        <activity android:name=".ui.activity.kader.EditPasswordKaderActivity" />
         <activity android:name=".ui.activity.bunda.DataImunisasiBayiActivity" />
         <activity android:name=".ui.activity.bunda.bacaan.Bacaan6Activity" />
         <activity android:name=".ui.activity.bunda.bacaan.Bacaan5Activity" />

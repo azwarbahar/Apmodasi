@@ -14,6 +14,7 @@ import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.app.network.ApiClient;
 import com.skripsi.apmodasi.app.network.ApiInterface;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
+import com.skripsi.apmodasi.app.response.ResponseKader;
 import com.skripsi.apmodasi.app.util.Constanta;
 import com.skripsi.apmodasi.ui.activity.bunda.EditPasswordActivity;
 
@@ -97,10 +98,10 @@ public class EditPasswordKaderActivity extends AppCompatActivity {
         pDialog.show();
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponseBunda> responseBundaCall = apiInterface.editPasswordKader(user_id, old_password, new_password);
-        responseBundaCall.enqueue(new Callback<ResponseBunda>() {
+        Call<ResponseKader> responseBundaCall = apiInterface.editPasswordKader(user_id, old_password, new_password);
+        responseBundaCall.enqueue(new Callback<ResponseKader>() {
             @Override
-            public void onResponse(Call<ResponseBunda> call, Response<ResponseBunda> response) {
+            public void onResponse(Call<ResponseKader> call, Response<ResponseKader> response) {
                 pDialog.dismiss();
                 if (response.isSuccessful()) {
                     String kode = response.body().getKode();
@@ -137,7 +138,7 @@ public class EditPasswordKaderActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseBunda> call, Throwable t) {
+            public void onFailure(Call<ResponseKader> call, Throwable t) {
                 pDialog.dismiss();
                 new SweetAlertDialog(EditPasswordKaderActivity.this, SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Oops...")

@@ -39,13 +39,13 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("kader/editKader.php")
-    Call<ResponseBunda> editKader(@Field("id_kader") String id_kader,
+    Call<ResponseKader> editKader(@Field("id_kader") String id_kader,
                                   @Field("nama_kader") String nama_kader,
                                   @Field("kontak_kader") String kontak_kader,
                                   @Field("alamat_kader") String alamat_kader);
 
     @GET("kader/editPasswordKader.php")
-    Call<ResponseBunda> editPasswordKader(@Query("id_kader") String id_kader,
+    Call<ResponseKader> editPasswordKader(@Query("id_kader") String id_kader,
                                           @Query("password_lama") String password_lama,
                                           @Query("password_baru") String password_baru);
 
