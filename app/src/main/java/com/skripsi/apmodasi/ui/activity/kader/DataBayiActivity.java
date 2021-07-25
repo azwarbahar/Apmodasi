@@ -1,17 +1,22 @@
 package com.skripsi.apmodasi.ui.activity.kader;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.app.network.ApiClient;
@@ -34,7 +39,10 @@ public class DataBayiActivity extends AppCompatActivity implements SwipeRefreshL
     private BayiKaderAdapter bayiKaderAdapter;
     private ArrayList<Bayi> bayis;
     private TextView tv_kosong;
+    private EditText et_cari;
+    private RelativeLayout rl_continer;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +52,8 @@ public class DataBayiActivity extends AppCompatActivity implements SwipeRefreshL
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        et_cari = findViewById(R.id.et_cari);
+        rl_continer = findViewById(R.id.rl_continer);
 
 
         tv_kosong = findViewById(R.id.tv_kosong);
@@ -61,6 +71,73 @@ public class DataBayiActivity extends AppCompatActivity implements SwipeRefreshL
                 loadDataBayi();
             }
         });
+
+        et_cari.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.toString().isEmpty() || editable.toString().equals("")) {
+//                    changeDrawableEdittextDefault();
+                } else {
+                    filter(editable.toString());
+                    changeDrawableEdittext();
+                }
+            }
+        });
+
+        et_cari.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    if (motionEvent.getRawX() >= (et_cari.getRight() - et_cari.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        et_cari.setText("");
+                        rl_continer.requestFocus();
+                        changeDrawableEdittextDefault();
+                        loadDataBayi();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    private void filter(String text) {
+        ArrayList<Bayi> filteredList = new ArrayList<>();
+        for (Bayi item : bayis) {
+            if (item.getNamaBayi().toLowerCase().contains(text.toLowerCase()) ||
+                    item.getNomorBayi().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+        bayiKaderAdapter.filterList(filteredList);
+    }
+
+    private void changeDrawableEdittext() {
+        et_cari.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                ContextCompat.getDrawable(DataBayiActivity.this, R.drawable.ic_baseline_close_24), null);
+
+    }
+
+    private void changeDrawableEdittextDefault() {
+        et_cari.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                ContextCompat.getDrawable(DataBayiActivity.this, R.drawable.ic_baseline_search_24), null);
+
     }
 
     @Override
@@ -69,7 +146,7 @@ public class DataBayiActivity extends AppCompatActivity implements SwipeRefreshL
         return true;
     }
 
-    private void loadDataBayi(){
+    private void loadDataBayi() {
 
         mSwipeRefreshLayout.setRefreshing(false);
         SweetAlertDialog pDialog = new SweetAlertDialog(DataBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
@@ -84,24 +161,28 @@ public class DataBayiActivity extends AppCompatActivity implements SwipeRefreshL
             @Override
             public void onResponse(Call<ResponseBayi> call, Response<ResponseBayi> response) {
                 pDialog.dismiss();
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     String kode = response.body().getKode();
-                    if (kode.equals("1")){
+                    if (kode.equals("1")) {
                         bayis = (ArrayList<Bayi>) response.body().getBayi();
-                        if (bayis.size() < 1){
+                        if (bayis.size() < 1) {
                             rv_bayi.setVisibility(View.GONE);
                             tv_kosong.setVisibility(View.VISIBLE);
+                            et_cari.setEnabled(false);
                         } else {
+                            et_cari.setEnabled(true);
                             rv_bayi.setVisibility(View.VISIBLE);
                             tv_kosong.setVisibility(View.GONE);
                             initdataBayi(bayis);
                         }
 
                     } else {
+                        et_cari.setEnabled(false);
                         rv_bayi.setVisibility(View.GONE);
                         tv_kosong.setVisibility(View.VISIBLE);
                     }
                 } else {
+                    et_cari.setEnabled(false);
                     rv_bayi.setVisibility(View.GONE);
                     tv_kosong.setVisibility(View.VISIBLE);
                 }
@@ -110,6 +191,7 @@ public class DataBayiActivity extends AppCompatActivity implements SwipeRefreshL
             @Override
             public void onFailure(Call<ResponseBayi> call, Throwable t) {
                 pDialog.dismiss();
+                et_cari.setEnabled(false);
                 rv_bayi.setVisibility(View.GONE);
                 tv_kosong.setVisibility(View.VISIBLE);
             }

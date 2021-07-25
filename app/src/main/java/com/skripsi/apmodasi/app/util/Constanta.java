@@ -3,18 +3,18 @@ package com.skripsi.apmodasi.app.util;
 public class Constanta {
 
     // IP
-    public static final String IP = "192.168.43.188";
+    public static final String IP = "apmodasi.tryapp.my.id";
 
     // URL API
-    public static final String BASE_URL = "http://" + IP + "/apmodasi/api/";
+    public static final String BASE_URL = "http://" + IP + "/api/";
 
-    public static final String URL_IMG_BUNDA = "http://" + IP + "/apmodasi/assets/" +
+    public static final String URL_IMG_BUNDA = "http://" + IP + "/assets/" +
             "dist/img/bunda/";
 
-    public static final String URL_IMG_BAYI = "http://" + IP + "/apmodasi/assets/" +
+    public static final String URL_IMG_BAYI = "http://" + IP + "/assets/" +
             "dist/img/bayi/";
 
-    public static final String URL_IMG_KADER = "http://" + IP + "/apmodasi/assets/" +
+    public static final String URL_IMG_KADER = "http://" + IP + "/assets/" +
             "dist/img/kader/";
 
 

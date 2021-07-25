@@ -747,17 +747,11 @@ public class DetailBayiActivity extends AppCompatActivity {
         tv_nama_bayi.setText(bayi.getNamaBayi());
         tv_jenis_kelamin.setText(bayi.getJenisKelaminBayi());
         tv_tanggal_lahir.setText(parseDateToddMMyyyy(bayi.getTanggalLahirBayi()));
-        String bayi_foto = bayi.getFotoBayi();
         foto = bayi.getFotoBayi();
-        if (bayi_foto.equals("-")) {
-            Glide.with(this)
-                    .load(R.drawable.img_baby)
-                    .into(img_foto);
-        } else {
-            Glide.with(this)
+        String bayi_foto = bayi.getFotoBayi();
+        Glide.with(DetailBayiActivity.this)
                     .load(Constanta.URL_IMG_BAYI + bayi_foto)
                     .into(img_foto);
-        }
 
     }
 

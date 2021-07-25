@@ -18,6 +18,7 @@ import com.skripsi.apmodasi.app.network.ApiInterface;
 import com.skripsi.apmodasi.app.response.ResponseImunisasi;
 import com.skripsi.apmodasi.app.util.Constanta;
 import com.skripsi.apmodasi.data.model.Bayi;
+import com.skripsi.apmodasi.data.model.Bunda;
 import com.skripsi.apmodasi.data.model.Imunisasi;
 import com.skripsi.apmodasi.ui.activity.kader.DetailBayiKaderActivity;
 
@@ -40,6 +41,11 @@ public class BayiKaderAdapter extends RecyclerView.Adapter<BayiKaderAdapter.MyHo
     public BayiKaderAdapter(Context context, ArrayList<Bayi> bayis) {
         this.context = context;
         this.bayis = bayis;
+    }
+
+    public void filterList(ArrayList<Bayi> bayi) {
+        bayis = bayi;
+        notifyDataSetChanged();
     }
 
     @NonNull

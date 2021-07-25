@@ -50,10 +50,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:adjustViewBounds="true"
-                            android:contentDescription="@null"
                             android:fitsSystemWindows="true"
                             android:scaleType="fitXY"
-                            tools:src="@drawable/img_baby" />
+                            android:src="@drawable/img_baby" />
 
                     </LinearLayout>
 

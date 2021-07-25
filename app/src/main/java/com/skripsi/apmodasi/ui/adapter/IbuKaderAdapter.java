@@ -81,4 +81,8 @@ public class IbuKaderAdapter extends RecyclerView.Adapter<IbuKaderAdapter.MyHold
 
         }
     }
+    public void filterList(ArrayList<Bunda> bunda) {
+        bundas = bunda;
+        notifyDataSetChanged();
+    }
 }
