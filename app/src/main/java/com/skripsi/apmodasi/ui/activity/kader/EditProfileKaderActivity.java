@@ -175,6 +175,12 @@ public class EditProfileKaderActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void initDataKader(Kader bunda) {
         et_nama_lengkap.setText(bunda.getNama_kader());
         et_kontak.setText(bunda.getKontak_kader());

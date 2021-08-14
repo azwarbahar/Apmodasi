@@ -148,4 +148,10 @@ public class EditPasswordKaderActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }
