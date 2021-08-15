@@ -254,7 +254,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="casual"
-                                android:text="Berat Badan (Kg)"
+                                android:text="Tinggi Badan (Cm)"
                                 android:textColor="@color/purple_200"
                                 android:textSize="12sp" />
 

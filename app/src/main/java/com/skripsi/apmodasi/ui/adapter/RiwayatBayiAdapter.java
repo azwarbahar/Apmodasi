@@ -53,6 +53,7 @@ public class RiwayatBayiAdapter extends RecyclerView.Adapter<RiwayatBayiAdapter.
     public void onBindViewHolder(@NonNull RiwayatBayiAdapter.MyHolderView holder, int position) {
 
         String jenis = riwayatKaders.get(position).getJenis_input();
+//        holder.tv_title.setText(jenis);
         String value = riwayatKaders.get(position).getValue_input();
         if (jenis.equals("Tinggi")){
             holder.tv1.setText("Mengukur Tinggi");
