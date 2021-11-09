@@ -32,9 +32,11 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.app.network.ApiClient;
 import com.skripsi.apmodasi.app.network.ApiInterface;
+import com.skripsi.apmodasi.app.response.ResponseAuth;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
 import com.skripsi.apmodasi.app.response.ResponsePhoto;
 import com.skripsi.apmodasi.app.util.Constanta;
+import com.skripsi.apmodasi.data.model.AuthResult;
 import com.skripsi.apmodasi.data.model.Bunda;
 import com.skripsi.apmodasi.ui.activity.ImagePickerActivity;
 import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
@@ -62,6 +64,7 @@ public class AkunActivity extends AppCompatActivity {
     private Bunda bunda;
 
     private CircularImageView img_profile;
+    private TextView tv_nik;
     private TextView tv_nama;
     private TextView tv_telpon;
     private TextView tv_alamat;
@@ -76,6 +79,11 @@ public class AkunActivity extends AppCompatActivity {
     private static final String TAG = AkunActivity.class.getSimpleName();
     public static final int REQUEST_IMAGE = 100;
 
+    private AuthResult authResult;
+    private boolean akun_aktif;
+    private RelativeLayout rl_warning;
+    private String status_auth;
+    private TextView tv_warning;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +97,12 @@ public class AkunActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
+        tv_warning = findViewById(R.id.tv_warning);
+        rl_warning = findViewById(R.id.rl_warning);
+        rl_warning.setVisibility(View.GONE);
         img_profile = findViewById(R.id.img_profile);
+        tv_nik = findViewById(R.id.tv_nik);
         tv_nama = findViewById(R.id.tv_nama);
         tv_telpon = findViewById(R.id.tv_telpon);
         tv_alamat = findViewById(R.id.tv_alamat);
@@ -118,8 +131,57 @@ public class AkunActivity extends AppCompatActivity {
         img_profile.setOnClickListener(this::clickFoto);
 
         loadDataAkun(user_id);
+        loadDataAuth(user_id);
 
         ImagePickerActivity.clearCache(this);
+
+    }
+
+    private void loadDataAuth(String user_id) {
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(AkunActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseAuth> responseAuthCall = apiInterface.getAuth(user_id, "Bunda");
+        responseAuthCall.enqueue(new Callback<ResponseAuth>() {
+            @Override
+            public void onResponse(Call<ResponseAuth> call, Response<ResponseAuth> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()){
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")){
+                        authResult = response.body().getAuthResult();
+                        initAuth(authResult);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseAuth> call, Throwable t) {
+                pDialog.dismiss();
+            }
+        });
+
+    }
+
+    private void initAuth(AuthResult authResult) {
+
+        status_auth = authResult.getStatus();
+        if (status_auth.equals("Inactive")){
+            akun_aktif = false;
+            rl_warning.setVisibility(View.VISIBLE);
+        } else if (status_auth.equals("Suspend")){
+            akun_aktif = false;
+            tv_warning.setText("Akun anda telah disuspend, segera hubungi admin jika akun anda ingin kembali!");
+            rl_warning.setVisibility(View.VISIBLE);
+        } else {
+            akun_aktif = true;
+            rl_warning.setVisibility(View.GONE);
+        }
 
     }
 
@@ -330,7 +392,7 @@ public class AkunActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String kode = response.body().getKode();
                     if (kode.equals("1")) {
-                        initDataBunda(response.body().getBunda());
+                        initDataBunda(response.body().getResult_bunda());
                     }
                 }
 
@@ -347,10 +409,11 @@ public class AkunActivity extends AppCompatActivity {
     }
 
     private void initDataBunda(Bunda bunda) {
-        tv_nama.setText(bunda.getNamaBunda());
-        tv_telpon.setText(bunda.getKontakBunda());
-        tv_alamat.setText(bunda.getAlamatBunda());
-        foto = bunda.getFotoBunda();
+        tv_nik.setText(bunda.getNik_bunda());
+        tv_nama.setText(bunda.getNama_bunda());
+        tv_telpon.setText(bunda.getKontak_bunda());
+        tv_alamat.setText(bunda.getAlamat_bunda());
+        foto = bunda.getFoto_bunda();
         Glide.with(this)
                 .load(Constanta.URL_IMG_BUNDA + foto)
                 .into(img_profile);

@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,8 +69,11 @@ public class MenuKaderActivity extends AppCompatActivity {
     private ImageView foto_profil;
     private TextView tv_nama;
     private TextView tv_telpon;
+    private TextView tv_menu;
 
     private String foto;
+
+//    private NumberPicker number_bb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,16 @@ public class MenuKaderActivity extends AppCompatActivity {
         foto_profil = findViewById(R.id.foto_profil);
         tv_nama = findViewById(R.id.tv_nama);
         tv_telpon = findViewById(R.id.tv_telpon);
+        tv_menu = findViewById(R.id.tv_menu);
+//        number_bb = findViewById(R.id.number_bb);
+//        number_bb.setMinValue(0);
+//        number_bb.setMaxValue(10);
+//        number_bb.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+//            @Override
+//            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+//                Toast.makeText(MenuKaderActivity.this, String.valueOf(newVal), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         img_qr_code = findViewById(R.id.img_qr_code);
         img_user = findViewById(R.id.img_user);
@@ -99,6 +113,18 @@ public class MenuKaderActivity extends AppCompatActivity {
                 intent.putExtra("nama_foto", foto);
                 intent.putExtra("role_foto", "Kader");
                 startActivity(intent);
+            }
+        });
+
+        tv_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                NumberPicker picker = new NumberPicker(MenuKaderActivity.this);
+//                picker.setMinValue(0);
+//                picker.setMaxValue(100);
+//                picker.setDisplayedValues( new String[] { "0.0", "0.1", "10.0" } );
+//                double s = picker.getValue();
+//                Toast.makeText(MenuKaderActivity.this, String.valueOf(s), Toast.LENGTH_SHORT).show();
             }
         });
 

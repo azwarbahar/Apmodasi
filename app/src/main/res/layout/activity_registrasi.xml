@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.intro.LoginActivity">
+    tools:context=".ui.activity.intro.RegistrasiActivity">
 
     <ImageView
         android:id="@+id/img_top"
@@ -23,43 +23,43 @@
 
     <ImageView
         android:id="@+id/img_icon"
-        android:src="@drawable/icon_children"
-        android:layout_width="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="130dp"
+        android:layout_height="90dp"
         android:layout_centerHorizontal="true"
-        android:layout_height="110dp"/>
+        android:layout_marginTop="30dp"
+        android:src="@drawable/icon_children" />
 
     <TextView
         android:id="@+id/tv_app_name"
-        android:layout_marginTop="-5dp"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="casual"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="@color/purple_200"
-        android:layout_below="@id/img_icon"
-        android:text="Apmodasi"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-5dp"
+        android:fontFamily="casual"
+        android:text="Apmodasi"
+        android:textColor="@color/purple_200"
+        android:textSize="22dp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_signin"
+        android:id="@+id/tv_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_app_name"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="casual"
-        android:text="Sign in"
+        android:text="Sign Up"
         android:textColor="@color/purple_700"
         android:textSize="18dp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/et_username"
+        android:id="@+id/et_nik"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_signin"
+        android:layout_below="@id/tv_signup"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_strok_rectangle_primary"
@@ -71,10 +71,73 @@
         android:paddingVertical="4dp" />
 
     <EditText
+        android:id="@+id/et_nama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_nik"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_strok_rectangle_primary"
+        android:fontFamily="casual"
+        android:gravity="center_horizontal"
+        android:hint="Nama Lengkap"
+        android:inputType="text"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="4dp" />
+
+    <EditText
+        android:id="@+id/et_telpon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_nama"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_strok_rectangle_primary"
+        android:fontFamily="casual"
+        android:gravity="center_horizontal"
+        android:hint="Telpon"
+        android:inputType="phone"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="4dp" />
+
+    <EditText
+        android:id="@+id/et_alamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_telpon"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_strok_rectangle_primary"
+        android:fontFamily="casual"
+        android:gravity="center_horizontal"
+        android:hint="Alamat"
+        android:inputType="text"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="4dp" />
+
+    <TextView
+        android:id="@+id/et_kelurahan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_alamat"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_strok_rectangle_primary"
+        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:fontFamily="casual"
+        android:gravity="center_horizontal"
+        android:inputType="text"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="4dp"
+        android:text="Kelurahan"
+        android:textColor="@color/grey"
+        android:textSize="16dp" />
+
+    <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_username"
+        android:layout_below="@id/et_kelurahan"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/bg_strok_rectangle_primary"
@@ -86,12 +149,12 @@
         android:paddingVertical="4dp" />
 
     <RelativeLayout
-        android:id="@+id/rl_login"
+        android:id="@+id/rl_regist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_password"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_gradien_primary"
         android:paddingVertical="8dp">
 
@@ -100,7 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="casual"
-            android:text="Login"
+            android:text="Daftar"
             android:textColor="@color/white"
             android:textSize="16dp"
             android:textStyle="bold" />
@@ -108,18 +171,17 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/tv_regist"
+        android:id="@+id/tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rl_login"
+        android:layout_below="@id/rl_regist"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:fontFamily="casual"
-        android:text="Belum punya akun ? ( Untuk Bunda )"
+        android:text="Sudah punya akun ? ( Untuk Bunda )"
         android:textColor="@color/purple_200"
         android:textSize="12sp"
         android:textStyle="italic" />
-
 
 
 </RelativeLayout>

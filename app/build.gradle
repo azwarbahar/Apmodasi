@@ -79,5 +79,7 @@ dependencies {
 
     implementation 'com.github.ismaeltoe:flowlayout:1.0'
 
-    implementation 'com.github.lecho:hellocharts-android:v1.5.8'
+//    implementation 'com.github.lecho:hellocharts-android:v1.5.8'
+
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 }

@@ -1,5 +1,6 @@
 package com.skripsi.apmodasi.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -41,20 +42,21 @@ public class IbuKaderAdapter extends RecyclerView.Adapter<IbuKaderAdapter.MyHold
         return myHolderView;
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull IbuKaderAdapter.MyHolderView holder, int position) {
 
-        holder.tv_nama.setText(bundas.get(position).getNamaBunda());
-        holder.tv_telpon.setText(bundas.get(position).getKontakBunda());
+        holder.tv_nama.setText(bundas.get(position).getNama_bunda());
+        holder.tv_telpon.setText(bundas.get(position).getKontak_bunda());
         Glide.with(context)
-                .load(Constanta.URL_IMG_BUNDA + bundas.get(position).getFotoBunda())
+                .load(Constanta.URL_IMG_BUNDA + bundas.get(position).getFoto_bunda())
                 .into(holder.foto_bayi);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailBundaActivity.class);
-                intent.putExtra("ID_BUNDA", bundas.get(position).getIdBunda());
+                intent.putExtra("ID_BUNDA", bundas.get(position).getNik_bunda());
                 context.startActivity(intent);
             }
         });

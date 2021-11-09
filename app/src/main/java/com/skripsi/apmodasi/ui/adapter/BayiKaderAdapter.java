@@ -88,7 +88,7 @@ public class BayiKaderAdapter extends RecyclerView.Adapter<BayiKaderAdapter.MyHo
                     if (kode.equals("1")) {
                         imunisasis = (ArrayList<Imunisasi>) response.body().getImunisasi_bayi();
                         if (imunisasis.size() < 1) {
-                            holder.tv_jumlah_imunisasi.setText("0/11");
+                            holder.tv_jumlah_imunisasi.setText("0/9");
                         } else {
                             int jumlah_sudah = 0;
                             for (int a = 0; a < imunisasis.size(); a++) {
@@ -98,7 +98,7 @@ public class BayiKaderAdapter extends RecyclerView.Adapter<BayiKaderAdapter.MyHo
                                     jumlah_sudah = jumlah_sudah + 1;
                                 }
                             }
-                            holder.tv_jumlah_imunisasi.setText(jumlah_sudah + "/11");
+                            holder.tv_jumlah_imunisasi.setText(jumlah_sudah + "/9");
                         }
                     }
                 }

@@ -1,14 +1,21 @@
 package com.skripsi.apmodasi.ui.activity.bunda;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.skripsi.apmodasi.R;
@@ -17,6 +24,9 @@ import com.skripsi.apmodasi.app.network.ApiInterface;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
 import com.skripsi.apmodasi.app.util.Constanta;
 import com.skripsi.apmodasi.data.model.Bunda;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
@@ -32,9 +42,9 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText et_nama_lengkap;
     private EditText et_kontak;
     private EditText et_alamat;
+    private TextView et_kelurahan;
     private RelativeLayout rl_batal;
     private RelativeLayout rl_simpan;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +61,32 @@ public class EditProfileActivity extends AppCompatActivity {
         et_nama_lengkap = findViewById(R.id.et_nama_lengkap);
         et_kontak = findViewById(R.id.et_kontak);
         et_alamat = findViewById(R.id.et_alamat);
+        et_kelurahan = findViewById(R.id.et_kelurahan);
         rl_batal = findViewById(R.id.rl_batal);
         rl_simpan = findViewById(R.id.rl_simpan);
 
         loadDataAkun(user_id);
+
+        et_kelurahan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder b = new AlertDialog.Builder(EditProfileActivity.this);
+                b.setTitle("Kelurahan");
+                String[] types = {"Tetebatu", "Parangbanoa", "Pangkabinanga", "Jenetallasa", "Bontoala",
+                                    "Panakukang", "Taeng", "Mangalli"};
+                b.setItems(types, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        et_kelurahan.setText(types[which]);
+                    }
+
+                });
+
+                b.show();
+            }
+        });
 
         rl_batal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +196,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String kode = response.body().getKode();
                     if (kode.equals("1")) {
-                        initDataBunda(response.body().getBunda());
+                        initDataBunda(response.body().getResult_bunda());
                     }
                 }
 
@@ -181,8 +213,9 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void initDataBunda(Bunda bunda) {
-        et_nama_lengkap.setText(bunda.getNamaBunda());
-        et_kontak.setText(bunda.getKontakBunda());
-        et_alamat.setText(bunda.getAlamatBunda());
+        et_nama_lengkap.setText(bunda.getNama_bunda());
+        et_kontak.setText(bunda.getKontak_bunda());
+        et_alamat.setText(bunda.getAlamat_bunda());
+        et_kelurahan.setText(bunda.getKelurahan_bunda());
     }
 }

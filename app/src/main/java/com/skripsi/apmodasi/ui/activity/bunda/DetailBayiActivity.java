@@ -124,9 +124,9 @@ public class DetailBayiActivity extends AppCompatActivity {
     private ArrayList<Integer> tinggi_nilai = new ArrayList<Integer>();
 
     String[] axisDataBerat = null;
-    int[] yAxisDataBerat = null;
+    String[] yAxisDataBerat = null;
     String[] axisDataTinggi = null;
-    int[] yAxisDataTinggi = null;
+    String[] yAxisDataTinggi = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -396,11 +396,11 @@ public class DetailBayiActivity extends AppCompatActivity {
     private void iniTinggiBayi(ArrayList<TinggiBadan> tinggiBadans) {
 
         axisDataTinggi = new String[tinggiBadans.size()];
-        yAxisDataTinggi = new int[tinggiBadans.size()];
+        yAxisDataTinggi = new String[tinggiBadans.size()];
         for (int a = 0; a < tinggiBadans.size(); a++) {
             Log.e("DATABERAT", tinggiBadans.get(a).getTanggal_tb());
             axisDataTinggi[a] = parseDateGrafik(tinggiBadans.get(a).getTanggal_tb());
-            yAxisDataTinggi[a] = Integer.parseInt(tinggiBadans.get(a).getNilai_tb());
+            yAxisDataTinggi[a] = tinggiBadans.get(a).getNilai_tb();
         }
 
         lineTinggi = new Line(yAxisValuesTinggi).setColor(Color.parseColor("#9C27B0"));
@@ -410,7 +410,7 @@ public class DetailBayiActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < yAxisDataTinggi.length; i++) {
-            yAxisValuesTinggi.add(new PointValue(i, yAxisDataTinggi[i]));
+            yAxisValuesTinggi.add(new PointValue(i, (float) Float.parseFloat(yAxisDataTinggi[i])));
         }
 
         List lines = new ArrayList();
@@ -496,11 +496,11 @@ public class DetailBayiActivity extends AppCompatActivity {
     private void iniBeratBayi(ArrayList<BeratBadan> beratBadans) {
 
         axisDataBerat = new String[beratBadans.size()];
-        yAxisDataBerat = new int[beratBadans.size()];
+        yAxisDataBerat = new String[beratBadans.size()];
         for (int a = 0; a < beratBadans.size(); a++) {
             Log.e("DATABERAT", beratBadans.get(a).getTanggal_bb());
             axisDataBerat[a] = parseDateGrafik(beratBadans.get(a).getTanggal_bb());
-            yAxisDataBerat[a] = Integer.parseInt(beratBadans.get(a).getNilai_bb());
+            yAxisDataBerat[a] = beratBadans.get(a).getNilai_bb();
         }
 
         lineBerat = new Line(yAxisValuesBerat).setColor(Color.parseColor("#9C27B0"));
@@ -510,7 +510,7 @@ public class DetailBayiActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < yAxisDataBerat.length; i++) {
-            yAxisValuesBerat.add(new PointValue(i, yAxisDataBerat[i]));
+            yAxisValuesBerat.add(new PointValue(i, (float) Float.parseFloat(yAxisDataBerat[i])));
         }
 
         List lines = new ArrayList();

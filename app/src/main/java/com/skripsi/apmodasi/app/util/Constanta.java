@@ -6,7 +6,7 @@ public class Constanta {
     public static final String IP = "apmodasi.tryapp.my.id";
 
     // URL API
-    public static final String BASE_URL = "http://" + IP + "/api/";
+    public static final String BASE_URL = "https://" + IP + "/api-v2/";
 
     public static final String URL_IMG_BUNDA = "http://" + IP + "/assets/" +
             "dist/img/bunda/";

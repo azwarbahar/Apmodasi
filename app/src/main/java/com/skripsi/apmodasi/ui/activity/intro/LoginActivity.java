@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.app.network.ApiClient;
@@ -37,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private AuthResult authResult;
 
+    private TextView tv_regist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                     break;
             }
         }
+
+        tv_regist = findViewById(R.id.tv_regist);
+        tv_regist.setOnClickListener(this::clickRegist);
 
         et_password = findViewById(R.id.et_password);
         et_username = findViewById(R.id.et_username);
@@ -83,6 +89,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void clickRegist(View view) {
+        startActivity(new Intent(LoginActivity.this, RegistrasiActivity.class));
+    }
+
     private void clickLogin(String username, String password) {
 
         SweetAlertDialog pDialog = new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.PROGRESS_TYPE);
@@ -98,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseAuth> call, Response<ResponseAuth> response) {
                 pDialog.dismiss();
                 if (response.isSuccessful()) {
-                    String kode = String.valueOf(response.body().getKode());
+                    String kode = response.body().getKode();
                     String pesan = response.body().getPesan();
                     switch (kode) {
                         case "0":
@@ -151,11 +161,11 @@ public class LoginActivity extends AppCompatActivity {
     private void initAuth(AuthResult authResult) {
 
         String status = authResult.getStatus();
-        String id_auth = authResult.getIdAuth();
-        String user_id = authResult.getUserId();
+        String id_auth = authResult.getId_auth();
+        String user_id = authResult.getUser_kode();
         String role = authResult.getRole();
 
-        if (status.equals("Active")) {
+        if (status.equals("Active") || status.equals("Inactive")) {
             if (!role.isEmpty()) {
                 switch (role) {
                     case "Bunda":

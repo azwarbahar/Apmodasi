@@ -17,7 +17,14 @@
         android:theme="@style/Theme.Apmodasi"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.kader.EditProfileKaderActivity"/>
+        <activity
+            android:name=".ui.activity.kader.InputTinggiActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activity.kader.InputBeratActivity"
+            android:exported="true" />
+        <activity android:name=".ui.activity.intro.RegistrasiActivity" />
+        <activity android:name=".ui.activity.kader.EditProfileKaderActivity" />
         <activity android:name=".ui.activity.kader.EditPasswordKaderActivity" />
         <activity android:name=".ui.activity.bunda.DataImunisasiBayiActivity" />
         <activity android:name=".ui.activity.bunda.bacaan.Bacaan6Activity" />

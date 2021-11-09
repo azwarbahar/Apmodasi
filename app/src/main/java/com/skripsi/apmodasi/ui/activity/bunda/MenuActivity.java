@@ -30,13 +30,16 @@ import com.bumptech.glide.Glide;
 import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.app.network.ApiClient;
 import com.skripsi.apmodasi.app.network.ApiInterface;
+import com.skripsi.apmodasi.app.response.ResponseAuth;
 import com.skripsi.apmodasi.app.response.ResponseBayi;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
 import com.skripsi.apmodasi.app.util.Constanta;
+import com.skripsi.apmodasi.data.model.AuthResult;
 import com.skripsi.apmodasi.data.model.Bayi;
 import com.skripsi.apmodasi.data.model.Bunda;
 import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
 import com.skripsi.apmodasi.ui.activity.intro.LoginActivity;
+import com.skripsi.apmodasi.ui.activity.intro.RegistrasiActivity;
 import com.skripsi.apmodasi.ui.activity.kader.InputDataBayiActivity;
 import com.skripsi.apmodasi.ui.adapter.BayiAdapter;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -76,11 +79,19 @@ public class MenuActivity extends AppCompatActivity {
     private String tahun;
     private String bulan;
     private String hari;
+    private String kelurahan_bunda;
+    private int count_baby;
 
     private String user_id;
     private String foto;
     private Bunda bunda;
     private ArrayList<Bayi> bayiArrayList;
+
+    private AuthResult authResult;
+    private boolean akun_aktif;
+    private RelativeLayout rl_warning;
+    private String status_auth;
+    private TextView tv_warning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +110,15 @@ public class MenuActivity extends AppCompatActivity {
         et_tanggal_lahir = findViewById(R.id.et_tanggal_lahir);
         rl_simpan = findViewById(R.id.rl_simpan);
 
+        rl_warning = findViewById(R.id.rl_warning);
+        tv_warning = findViewById(R.id.tv_warning);
         tv_nama = findViewById(R.id.tv_nama);
         tv_telpon = findViewById(R.id.tv_telpon);
         foto_profil = findViewById(R.id.foto_profil);
         img_refresh = findViewById(R.id.img_refresh);
         cv_bacaan = findViewById(R.id.cv_bacaan);
 
+        rl_warning.setVisibility(View.GONE);
 
         rv_bayi = findViewById(R.id.rv_bayi);
         tv_bayi_kosong = findViewById(R.id.tv_bayi_kosong);
@@ -119,15 +133,68 @@ public class MenuActivity extends AppCompatActivity {
         rl_simpan.setOnClickListener(this::clickSimpan);
         cv_bacaan.setOnClickListener(this::clickBacaan);
 
+//        Toast.makeText(this, user_id, Toast.LENGTH_SHORT).show();
+
         loadDataBayi(user_id);
         loadDataBunda(user_id);
+        loadDataAuth(user_id);
 
         img_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadDataBayi(user_id);
+                loadDataBunda(user_id);
+                loadDataAuth(user_id);
             }
         });
+
+    }
+
+    private void loadDataAuth(String user_id) {
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseAuth> responseAuthCall = apiInterface.getAuth(user_id, "Bunda");
+        responseAuthCall.enqueue(new Callback<ResponseAuth>() {
+            @Override
+            public void onResponse(Call<ResponseAuth> call, Response<ResponseAuth> response) {
+                pDialog.dismiss();
+                if (response.isSuccessful()){
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")){
+                        authResult = response.body().getAuthResult();
+                        initAuth(authResult);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseAuth> call, Throwable t) {
+                pDialog.dismiss();
+            }
+        });
+
+    }
+
+    private void initAuth(AuthResult authResult) {
+
+        status_auth = authResult.getStatus();
+        if (status_auth.equals("Inactive")){
+            akun_aktif = false;
+            rl_warning.setVisibility(View.VISIBLE);
+        } else if (status_auth.equals("Suspend")){
+            akun_aktif = false;
+            tv_warning.setText("Akun anda telah disuspend, segera hubungi admin jika akun anda ingin kembali!");
+            rl_warning.setVisibility(View.VISIBLE);
+        } else {
+            akun_aktif = true;
+            rl_warning.setVisibility(View.GONE);
+        }
 
     }
 
@@ -153,6 +220,7 @@ public class MenuActivity extends AppCompatActivity {
                     String kode = response.body().getKode();
                     if (kode.equals("1")) {
                         bayiArrayList = (ArrayList<Bayi>) response.body().getBayiData();
+                        count_baby = bayiArrayList.size();
                         if (bayiArrayList == null || bayiArrayList.size() <= 0 || bayiArrayList.isEmpty()) {
                             tv_bayi_kosong.setVisibility(View.VISIBLE);
                             rv_bayi.setVisibility(View.GONE);
@@ -201,8 +269,13 @@ public class MenuActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String kode = response.body().getKode();
                     if (kode.equals("1")) {
-                        initDataBunda(response.body().getBunda());
+                        initDataBunda(response.body().getResult_bunda());
+                    } else {
+                        Toast.makeText(MenuActivity.this, "gagal1", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+
+                    Toast.makeText(MenuActivity.this, "gagal2", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -210,6 +283,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBunda> call, Throwable t) {
                 pDialog.dismiss();
+                Toast.makeText(MenuActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -218,12 +292,13 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void initDataBunda(Bunda bunda) {
-        String id_bunda = bunda.getIdBunda();
-        String nama_bunda = bunda.getNamaBunda();
-        String kontak_bunda = bunda.getKontakBunda();
-        String alamat_bunda = bunda.getAlamatBunda();
-        String foto_bunda = bunda.getFotoBunda();
-        foto = bunda.getFotoBunda();
+        String id_bunda = bunda.getNik_bunda();
+        String nama_bunda = bunda.getNama_bunda();
+        String kontak_bunda = bunda.getKontak_bunda();
+        String alamat_bunda = bunda.getAlamat_bunda();
+        kelurahan_bunda = bunda.getKelurahan_bunda();
+        String foto_bunda = bunda.getFoto_bunda();
+        foto = bunda.getFoto_bunda();
 
         tv_nama.setText(nama_bunda);
         tv_telpon.setText(kontak_bunda);
@@ -238,16 +313,40 @@ public class MenuActivity extends AppCompatActivity {
         String nama_lenglap = et_nama_lengkap.getText().toString();
         String tanggal_lahir = tanggal_lahir_send;
         String jenis_kelamin;
+        String jekel_singkat;
         if (radio_laki.isChecked()) {
             jenis_kelamin = radio_laki.getText().toString();
+            jekel_singkat = "L";
         } else {
             jenis_kelamin = radio_perempuan.getText().toString();
+            jekel_singkat = "P";
         }
+
+        String kelurahan;
+
+        if (kelurahan_bunda.equals("Tetebatu")){
+            kelurahan = "A1";
+        } else if (kelurahan_bunda.equals("Parangbanoa")){
+            kelurahan = "A2";
+        } else if (kelurahan_bunda.equals("Pangkabinanga")){
+            kelurahan = "A3";
+        } else if (kelurahan_bunda.equals("Jenetallasa")){
+            kelurahan = "A4";
+        } else if (kelurahan_bunda.equals("Bontoala")){
+            kelurahan = "A5";
+        } else if (kelurahan_bunda.equals("Panakukang")){
+            kelurahan = "A6";
+        } else if (kelurahan_bunda.equals("Taeng")){
+            kelurahan = "A7";
+        } else {
+            kelurahan = "A8";
+        }
+
         String gambar_qr = "-";
         String foto_bayi = "img_baby.png";
         String status_bayi = "Menunggu";
         String bunda_id = user_id;
-        String nomor_bayi = "00" + bunda_id + hari + bulan + tahun + "0" + (bayiArrayList.size() + 1);
+        String nomor_bayi = kelurahan+"-"+bunda_id+"-"+(bayiArrayList.size() + 1) +"-"+ jekel_singkat;
 
         if (nama_lenglap.equals("")) {
             new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.ERROR_TYPE)
@@ -398,7 +497,14 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void clickTambahAnak(View view) {
-        showPanel();
+        if (akun_aktif){
+            showPanel();
+        } else {
+            new SweetAlertDialog(MenuActivity.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Maaf..")
+                    .setContentText("Akun anda belum diverifikasi")
+                    .show();
+        }
     }
 
     private void clickProfile(View view) {

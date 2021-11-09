@@ -95,10 +95,37 @@
         android:paddingHorizontal="18dp"
         android:paddingVertical="4dp" />
 
+    <TextView
+        android:id="@+id/tv8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_alamat"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="casual"
+        android:text="Kelurahan"
+        android:textColor="@color/grey" />
+
+    <TextView
+        android:id="@+id/et_kelurahan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv8"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_strok_rectangle_primary"
+        android:fontFamily="casual"
+        android:gravity="center_vertical"
+        android:text="Lengkapi"
+        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:inputType="text"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="4dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_alamat"
+        android:layout_below="@id/et_kelurahan"
         android:layout_marginTop="50dp"
         android:orientation="horizontal"
         android:weightSum="2">

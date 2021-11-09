@@ -7,8 +7,8 @@ public class Kader {
     @SerializedName("id_kader")
     private String id_kader;
 
-    @SerializedName("nip_kader")
-    private String nip_kader;
+    @SerializedName("nik_kader")
+    private String nik_kader;
 
     @SerializedName("nama_kader")
     private String nama_kader;
@@ -34,12 +34,12 @@ public class Kader {
     @SerializedName("update_at")
     private String update_at;
 
-    public String getId_kader() {
-        return id_kader;
+    public String getNik_kader() {
+        return nik_kader;
     }
 
-    public String getNip_kader() {
-        return nip_kader;
+    public String getId_kader() {
+        return id_kader;
     }
 
     public String getNama_kader() {

@@ -1,55 +1,53 @@
 package com.skripsi.apmodasi.data.model;
 
-import com.google.gson.annotations.SerializedName;
 
 public class Bunda {
 
-	@SerializedName("nama_bunda")
-	private String namaBunda;
+	private String nik_bunda;
 
-	@SerializedName("kontak_bunda")
-	private String kontakBunda;
+	private String nama_bunda;
 
-	@SerializedName("id_bunda")
-	private String idBunda;
+	private String kontak_bunda;
 
-	@SerializedName("update_at")
-	private String updateAt;
+	private String alamat_bunda;
 
-	@SerializedName("alamat_bunda")
-	private String alamatBunda;
+	private String kelurahan_bunda;
 
-	@SerializedName("foto_bunda")
-	private String fotoBunda;
+	private String foto_bunda;
 
-	@SerializedName("creatde_at")
-	private String creatdeAt;
+	private String creatde_at;
 
-	public String getNamaBunda(){
-		return namaBunda;
+	private String update_at;
+
+	public String getNik_bunda() {
+		return nik_bunda;
 	}
 
-	public String getKontakBunda(){
-		return kontakBunda;
+	public String getNama_bunda() {
+		return nama_bunda;
 	}
 
-	public String getIdBunda(){
-		return idBunda;
+	public String getKontak_bunda() {
+		return kontak_bunda;
 	}
 
-	public String getUpdateAt(){
-		return updateAt;
+	public String getAlamat_bunda() {
+		return alamat_bunda;
 	}
 
-	public String getAlamatBunda(){
-		return alamatBunda;
+	public String getKelurahan_bunda() {
+		return kelurahan_bunda;
 	}
 
-	public String getFotoBunda(){
-		return fotoBunda;
+	public String getFoto_bunda() {
+		return foto_bunda;
 	}
 
-	public String getCreatdeAt(){
-		return creatdeAt;
+	public String getCreatde_at() {
+		return creatde_at;
+	}
+
+	public String getUpdate_at() {
+		return update_at;
 	}
 }

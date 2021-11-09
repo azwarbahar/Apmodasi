@@ -112,7 +112,7 @@ public class DetailBundaActivity extends AppCompatActivity implements SwipeRefre
                 if (response.isSuccessful()) {
                     String kode = response.body().getKode();
                     if (kode.equals("1")) {
-                        initDataBunda(response.body().getBunda());
+                        initDataBunda(response.body().getResult_bunda());
                     }
                 }
 
@@ -129,12 +129,12 @@ public class DetailBundaActivity extends AppCompatActivity implements SwipeRefre
     }
 
     private void initDataBunda(Bunda bunda) {
-        tv_nama.setText(bunda.getNamaBunda());
-        tv_telpon.setText(bunda.getKontakBunda());
-        tv_alamat.setText(bunda.getAlamatBunda());
-        foto = bunda.getFotoBunda();
+        tv_nama.setText(bunda.getNama_bunda());
+        tv_telpon.setText(bunda.getKontak_bunda());
+        tv_alamat.setText(bunda.getAlamat_bunda());
+        foto = bunda.getFoto_bunda();
         Glide.with(this)
-                .load(Constanta.URL_IMG_BUNDA + bunda.getFotoBunda())
+                .load(Constanta.URL_IMG_BUNDA + bunda.getFoto_bunda())
                 .into(foto_profil);
     }
 

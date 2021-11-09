@@ -5,24 +5,32 @@ import com.skripsi.apmodasi.app.response.ResponseBayi;
 import com.skripsi.apmodasi.app.response.ResponseBunda;
 import com.skripsi.apmodasi.app.response.ResponseImunisasi;
 import com.skripsi.apmodasi.app.response.ResponseKader;
-import com.skripsi.apmodasi.app.response.ResponsePhoto;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
 
+    @GET("login/getAuth.php")
+    Call<ResponseAuth> getAuth(@Query("user_id") String user_id,
+                               @Query("role") String role);
+
     @GET("login/auth.php")
     Call<ResponseAuth> authLogin(@Query("username") String username,
                                  @Query("password") String password);
+
+    @FormUrlEncoded
+    @POST("login/registrasi_akun.php")
+    Call<ResponseAuth> registrasi_akun(@Field("nik_bunda") String nik_bunda,
+                                       @Field("nama_bunda") String nama_bunda,
+                                       @Field("kontak_bunda") String kontak_bunda,
+                                       @Field("alamat_bunda") String alamat_bunda,
+                                       @Field("kelurahan_bunda") String kelurahan_bunda,
+                                       @Field("password_bunda") String password_bunda);
 
 
     // KADER
@@ -48,7 +56,6 @@ public interface ApiInterface {
     Call<ResponseKader> editPasswordKader(@Query("id_kader") String id_kader,
                                           @Query("password_lama") String password_lama,
                                           @Query("password_baru") String password_baru);
-
 
 
     // BUNDA

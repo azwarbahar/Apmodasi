@@ -30,9 +30,9 @@
             app:titleTextColor="@color/purple_200" />
 
         <androidx.core.widget.NestedScrollView
-            android:layout_below="@id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -60,9 +60,9 @@
                     app:cardElevation="6dp">
 
                     <RelativeLayout
-                        android:background="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:paddingVertical="12dp">
 
                         <androidx.cardview.widget.CardView
@@ -121,11 +121,43 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <RelativeLayout
+                    android:id="@+id/rl_warning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv_profile"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_info_radius"
+                    android:paddingVertical="8dp">
+
+                    <ImageView
+                        android:id="@+id/img_warning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="16dp"
+                        android:src="@drawable/ic_baseline_warning_24"
+                        app:tint="@color/purple_200" />
+
+                    <TextView
+                        android:layout_marginRight="12dp"
+                        android:id="@+id/tv_warning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/img_warning"
+                        android:text="Akun anda belum diverifikasi, segera hubungi admin!"
+                        android:textColor="@color/purple_200"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/tv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/cv_profile"
+                    android:layout_below="@+id/rl_warning"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="22dp"
                     android:fontFamily="casual"
@@ -165,12 +197,12 @@
 
                         <ImageView
                             android:id="@+id/img_refresh"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_marginVertical="10dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@drawable/ic_baseline_refresh_24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginVertical="10dp"
+                            android:src="@drawable/ic_baseline_refresh_24"
                             app:tint="@color/purple_200" />
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -199,49 +231,49 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:text="Info"
                     android:id="@+id/tv11"
-                    android:layout_below="@id/cv_anak"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_anak"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="casual"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_height="wrap_content"/>
+                    android:text="Info" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_bacaan"
-                    android:layout_below="@id/tv11"
-                    app:cardElevation="8dp"
-                    android:layout_marginBottom="100dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="8dp"
-                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv11"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="100dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp">
 
                     <RelativeLayout
-                        android:background="@drawable/bg_info_radius"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_info_radius">
 
                         <ImageView
-                            android:src="@drawable/mother_reading"
                             android:layout_width="60dp"
-                            android:layout_marginVertical="5dp"
+                            android:layout_height="60dp"
                             android:layout_marginHorizontal="16dp"
-                            android:layout_height="60dp"/>
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/mother_reading" />
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:layout_marginHorizontal="16dp"
                             android:fontFamily="casual"
-                            android:textStyle="bold"
-                            android:textSize="16sp"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
                             android:text="Bacaan"
                             android:textColor="@color/purple_200"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
                     </RelativeLayout>
 

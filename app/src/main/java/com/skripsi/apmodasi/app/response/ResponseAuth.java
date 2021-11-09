@@ -1,21 +1,17 @@
 package com.skripsi.apmodasi.app.response;
 
-import com.google.gson.annotations.SerializedName;
 import com.skripsi.apmodasi.data.model.AuthResult;
 
 public class ResponseAuth{
 
-	@SerializedName("auth_result")
-	private AuthResult authResult;
+	private AuthResult auth_result;
 
-	@SerializedName("kode")
 	private String kode;
 
-	@SerializedName("pesan")
 	private String pesan;
 
 	public AuthResult getAuthResult(){
-		return authResult;
+		return auth_result;
 	}
 
 	public String getKode() {

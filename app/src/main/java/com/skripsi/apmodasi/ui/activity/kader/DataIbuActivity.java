@@ -132,8 +132,8 @@ public class DataIbuActivity extends AppCompatActivity implements SwipeRefreshLa
     private void filter(String text) {
         ArrayList<Bunda> filteredList = new ArrayList<>();
         for (Bunda item : bundas) {
-            if (item.getNamaBunda().toLowerCase().contains(text.toLowerCase()) ||
-                    item.getKontakBunda().toLowerCase().contains(text.toLowerCase())) {
+            if (item.getNama_bunda().toLowerCase().contains(text.toLowerCase()) ||
+                    item.getKontak_bunda().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
         }

@@ -1,62 +1,46 @@
 package com.skripsi.apmodasi.data.model;
 
-import com.google.gson.annotations.SerializedName;
 
 public class AuthResult{
 
-	@SerializedName("password")
-	private String password;
-
-	@SerializedName("role")
-	private String role;
-
-	@SerializedName("user_id")
-	private String userId;
-
-	@SerializedName("id_auth")
-	private String idAuth;
-
-	@SerializedName("update_at")
-	private String updateAt;
-
-	@SerializedName("created_at")
-	private String createdAt;
-
-	@SerializedName("username")
+	private String id_auth;
+	private String user_kode;
 	private String username;
-
-	@SerializedName("status")
+	private String password;
 	private String status;
+	private String role;
+	private String created_at;
+	private String update_at;
 
-	public String getPassword(){
-		return password;
+	public String getId_auth() {
+		return id_auth;
 	}
 
-	public String getRole(){
-		return role;
+	public String getUser_kode() {
+		return user_kode;
 	}
 
-	public String getUserId(){
-		return userId;
-	}
-
-	public String getIdAuth(){
-		return idAuth;
-	}
-
-	public String getUpdateAt(){
-		return updateAt;
-	}
-
-	public String getCreatedAt(){
-		return createdAt;
-	}
-
-	public String getUsername(){
+	public String getUsername() {
 		return username;
 	}
 
-	public String getStatus(){
+	public String getPassword() {
+		return password;
+	}
+
+	public String getStatus() {
 		return status;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public String getCreated_at() {
+		return created_at;
+	}
+
+	public String getUpdate_at() {
+		return update_at;
 	}
 }

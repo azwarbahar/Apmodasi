@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,10 +26,12 @@ import com.skripsi.apmodasi.R;
 import com.skripsi.apmodasi.app.network.ApiClient;
 import com.skripsi.apmodasi.app.network.ApiInterface;
 import com.skripsi.apmodasi.app.response.ResponseBayi;
+import com.skripsi.apmodasi.app.response.ResponseBunda;
 import com.skripsi.apmodasi.app.response.ResponseImunisasi;
 import com.skripsi.apmodasi.app.util.Constanta;
 import com.skripsi.apmodasi.data.model.Bayi;
 import com.skripsi.apmodasi.data.model.BeratBadan;
+import com.skripsi.apmodasi.data.model.Bunda;
 import com.skripsi.apmodasi.data.model.Imunisasi;
 import com.skripsi.apmodasi.data.model.TinggiBadan;
 import com.skripsi.apmodasi.ui.activity.ImageViewActivity;
@@ -145,6 +148,16 @@ public class InputDataBayiActivity extends AppCompatActivity {
 
         cv_detail_bayi.setOnClickListener(this::clickDetail);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        loadBeratBadanBayi(bayi_id);
+        loadTinggiBadanBayi(bayi_id);
+        loadImunisasiBayi(bayi_id);
+        loadImunisasiBayiToday(bayi_id);
     }
 
     private void clickDetail(View view) {
@@ -426,14 +439,45 @@ public class InputDataBayiActivity extends AppCompatActivity {
         loadTinggiBadanBayi(bayi_id);
         loadImunisasiBayi(bayi_id);
         loadImunisasiBayiToday(bayi_id);
-        bunda_id = bayi.getBundaId();
+        bunda_id = bayi.getNik_bunda();
         tv_usia.setText(settingDate(bayi.getTanggalLahirBayi()));
         tv_nama_bayi.setText(bayi.getNamaBayi());
-        tv_nama_bunda.setText(bayi.getBundaId());
         foto = bayi.getFotoBayi();
         Glide.with(this)
                 .load(Constanta.URL_IMG_BAYI + bayi.getFotoBayi())
                 .into(foto_bayi);
+
+        loadDataBunda(bunda_id);
+    }
+
+    private void loadDataBunda(String bunda_id) {
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponseBunda> responseBundaCall = apiInterface.getBundaId(bunda_id);
+        responseBundaCall.enqueue(new Callback<ResponseBunda>() {
+            @Override
+            public void onResponse(Call<ResponseBunda> call, Response<ResponseBunda> response) {
+//                pDialog.dismiss();
+                if (response.isSuccessful()) {
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")) {
+                        initDataBunda(response.body().getResult_bunda());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBunda> call, Throwable t) {
+//                pDialog.dismiss();
+
+            }
+        });
+
+    }
+
+    private void initDataBunda(Bunda result_bunda) {
+        tv_nama_bunda.setText(result_bunda.getNama_bunda());
     }
 
     private String settingDate(String tanggalLahirBayi) {
@@ -452,7 +496,7 @@ public class InputDataBayiActivity extends AppCompatActivity {
         if (years > 0) {
             tanggal = years + " Tahun, " + months + " Bulan";
         } else {
-            tanggal = months + " Bulan";
+            tanggal = String.valueOf(months);
         }
         return tanggal;
     }
@@ -588,89 +632,11 @@ public class InputDataBayiActivity extends AppCompatActivity {
     private void clickBerat(View view) {
 
         if (berat_is_ready) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(InputDataBayiActivity.this);
-            LayoutInflater inflater = getLayoutInflater();
-            dialogView = inflater.inflate(R.layout.input_dialog_berat_bayi, null);
-            dialog.setView(dialogView);
-            dialog.setCancelable(false);
-            dialog.setTitle("Berat Bayi");
-            dialog.setPositiveButton("Simpan", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    EditText et_berat = dialogView.findViewById(R.id.et_berat);
-                    EditText et_catatan_berat = dialogView.findViewById(R.id.et_catatan_berat);
-                    if (et_berat.getText().toString().equals("")) {
-                        et_berat.setError("Lengkapi");
-                    } else {
-                        SweetAlertDialog pDialog = new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-                        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                        pDialog.setTitleText("Loading");
-                        pDialog.setCancelable(false);
-                        pDialog.show();
+            Intent intent = new Intent(InputDataBayiActivity.this, InputBeratActivity.class);
+            intent.putExtra("bayi", bayi_id);
+            intent.putExtra("kader", user_id);
+            startActivity(intent);
 
-                        String bayi_id_send = bayi_id;
-                        String berat_send = et_berat.getText().toString();
-                        String catatan_send = et_catatan_berat.getText().toString();
-                        String kader_id_send = user_id;
-                        String tanggal_send = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-
-                        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-                        Call<ResponseImunisasi> responseImunisasiCall = apiInterface.addBeratBayi(bayi_id_send, berat_send,
-                                catatan_send, kader_id_send, tanggal_send);
-                        responseImunisasiCall.enqueue(new Callback<ResponseImunisasi>() {
-                            @Override
-                            public void onResponse(Call<ResponseImunisasi> call, Response<ResponseImunisasi> response) {
-                                pDialog.dismiss();
-                                if (response.isSuccessful()) {
-                                    String kode = response.body().getKode();
-                                    if (kode.equals("1")) {
-                                        new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                                .setTitleText("Success..")
-                                                .setContentText("Berhasil Mengisi Berat Bayi..")
-                                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
-                                                    @Override
-                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                                        sweetAlertDialog.dismiss();
-                                                        loadBeratBadanBayi(bayi_id);
-                                                        dialog.dismiss();
-                                                    }
-                                                })
-                                                .show();
-                                    } else {
-                                        new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                                .setTitleText("Gagal..")
-                                                .setContentText("Terjadi kesalahan!, Kode : " + kode)
-                                                .show();
-                                    }
-                                } else {
-                                    new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                            .setTitleText("Gagal..")
-                                            .setContentText("Terjadi kesalahan!")
-                                            .show();
-                                }
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
-                                pDialog.dismiss();
-                                new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                        .setTitleText("Gagal..")
-                                        .setContentText("Terjadi kesalahan Sistem!")
-                                        .show();
-
-                            }
-                        });
-                    }
-                }
-            });
-            dialog.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            dialog.show();
         } else {
             new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Sorry")
@@ -682,90 +648,12 @@ public class InputDataBayiActivity extends AppCompatActivity {
     private void clickTinggi(View view) {
 
         if (tinggi_is_ready) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(InputDataBayiActivity.this);
-            LayoutInflater inflater = getLayoutInflater();
-            dialogView = inflater.inflate(R.layout.input_dialog_tinggi_bayi, null);
-            dialog.setView(dialogView);
-            dialog.setCancelable(false);
-            dialog.setTitle("Tinggi Bayi");
-            dialog.setPositiveButton("Simpan", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    EditText et_tinggi = dialogView.findViewById(R.id.et_tinggi);
-                    EditText et_catatan_tinggi = dialogView.findViewById(R.id.et_catatan_tinggi);
-                    if (et_tinggi.getText().toString().equals("")) {
-                        et_tinggi.setError("Lengkapi");
-                    } else {
-                        SweetAlertDialog pDialog = new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-                        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                        pDialog.setTitleText("Loading");
-                        pDialog.setCancelable(false);
-                        pDialog.show();
 
-                        String bayi_id_send = bayi_id;
-                        String berat_send = et_tinggi.getText().toString();
-                        String catatan_send = et_catatan_tinggi.getText().toString();
-                        String kader_id_send = user_id;
-                        String tanggal_send = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            Intent intent = new Intent(InputDataBayiActivity.this, InputTinggiActivity.class);
+            intent.putExtra("bayi", bayi_id);
+            intent.putExtra("kader", user_id);
+            startActivity(intent);
 
-                        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-                        Call<ResponseImunisasi> responseImunisasiCall = apiInterface.addTinggiBayi(bayi_id_send, berat_send,
-                                catatan_send, kader_id_send, tanggal_send);
-                        responseImunisasiCall.enqueue(new Callback<ResponseImunisasi>() {
-                            @Override
-                            public void onResponse(Call<ResponseImunisasi> call, Response<ResponseImunisasi> response) {
-                                pDialog.dismiss();
-                                if (response.isSuccessful()) {
-                                    String kode = response.body().getKode();
-                                    if (kode.equals("1")) {
-                                        new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                                .setTitleText("Success..")
-                                                .setContentText("Berhasil Mengisi Tinggi Bayi..")
-                                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
-                                                    @Override
-                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                                        sweetAlertDialog.dismiss();
-                                                        loadTinggiBadanBayi(bayi_id);
-                                                        dialog.dismiss();
-                                                    }
-                                                })
-                                                .show();
-                                    } else {
-                                        new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                                .setTitleText("Gagal..")
-                                                .setContentText("Terjadi kesalahan!, Kode : " + kode)
-                                                .show();
-                                    }
-                                } else {
-                                    new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                            .setTitleText("Gagal..")
-                                            .setContentText("Terjadi kesalahan!")
-                                            .show();
-                                }
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<ResponseImunisasi> call, Throwable t) {
-                                pDialog.dismiss();
-                                new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                        .setTitleText("Gagal..")
-                                        .setContentText("Terjadi kesalahan Sistem!")
-                                        .show();
-
-                            }
-                        });
-                    }
-                }
-            });
-            dialog.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-
-            dialog.show();
         } else {
             new SweetAlertDialog(InputDataBayiActivity.this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Sorry")

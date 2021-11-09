@@ -58,6 +58,7 @@ public class AkunKaderActivity extends AppCompatActivity {
     private Kader kader;
 
     private CircularImageView img_profile;
+    private TextView tv_nip;
     private TextView tv_nama;
     private TextView tv_telpon;
     private TextView tv_alamat;
@@ -86,6 +87,7 @@ public class AkunKaderActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         img_profile = findViewById(R.id.img_profile);
+        tv_nip = findViewById(R.id.tv_nip);
         tv_nama = findViewById(R.id.tv_nama);
         tv_telpon = findViewById(R.id.tv_telpon);
         tv_alamat = findViewById(R.id.tv_alamat);
@@ -337,6 +339,7 @@ public class AkunKaderActivity extends AppCompatActivity {
     }
 
     private void initKader(Kader kader) {
+        tv_nip.setText(kader.getNik_kader());
         tv_nama.setText(kader.getNama_kader());
         tv_telpon.setText(kader.getKontak_kader());
         tv_alamat.setText(kader.getAlamat_kader());
