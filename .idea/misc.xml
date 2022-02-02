@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/drawable/bg_info_radius.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/drawable/bg_menu.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/drawable/bg_pannel_radius_top.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/drawable/ic_baseline_edit.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_akun.xml" value="0.22" />
         <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_akun_kader.xml" value="0.22" />
         <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_detail_bayi.xml" value="0.19375" />
@@ -13,6 +20,7 @@
         <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_input_data_bayi.xml" value="0.19375" />
         <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_input_tinggi.xml" value="0.19375" />
         <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_login.xml" value="0.19375" />
+        <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_main.xml" value="0.19375" />
         <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_menu.xml" value="0.19375" />
         <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_menu_kader.xml" value="0.19375" />
         <entry key="..\:/Users/Hilda/Documents/Azwar/ProjectSkirpsi/Apmodasi/app/src/main/res/layout/activity_registrasi.xml" value="0.22" />

@@ -3,7 +3,7 @@ package com.skripsi.apmodasi.app.util;
 public class Constanta {
 
     // IP
-    public static final String IP = "apmodasi.tryapp.my.id";
+    public static final String IP = "apmodasi.cfg.my.id";
 
     // URL API
     public static final String BASE_URL = "https://" + IP + "/api-v2/";
